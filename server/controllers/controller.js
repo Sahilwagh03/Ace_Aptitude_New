@@ -1,11 +1,24 @@
+import Questions from "../models/questionSchema.js";
+import questions, { answers } from "../database/data.js";
+
 /** get all questions */
 export async function getQuestions(req, res) {
-  res.json("questions api get request");
+  try {
+    const q = await Questions.find();
+    res.json(q);
+  } catch (error) {
+    res.json({ error });
+  }
 }
 
 /** insert all questions */
 export async function insertQuestions(req, res) {
-  res.json("questions api post request");
+  try {
+    await Questions.insertMany([{ questions, answers }]);
+    res.json({ msg: "Data Saved Successfully...!" });
+  } catch (error) {
+    res.json({ error });
+  }
 }
 
 /** Delete all Questions */
