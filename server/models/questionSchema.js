@@ -9,7 +9,8 @@ const questionModel = new Schema({
     { type: String, required: true },
     { type: String, required: true },
   ],
-  correctOptionIndex: { type: Number, required: true },
+  correctAnswer: { type: String, required: true },
+  difficulty: { type: String, required: true },
 });
 
 // Create the model from the schema

@@ -29,7 +29,25 @@ const filterQuestions = async (req, res) => {
   }
 };
 
+const getQuestionsLevel = async (req, res) => {
+  try {
+    const filteredData = await Question.find(
+      {
+        "$or":[
+            {'difficulty':{$regex:req.params.level}},
+        ]
+    }
+    );
+    res.send(filteredData);
+  } catch (error) {
+    console.error("Error fetching all questions:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+
 module.exports = {
   getAllQuestions,
   filterQuestions,
+  getQuestionsLevel
 };
