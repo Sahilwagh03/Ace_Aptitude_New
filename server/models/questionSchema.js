@@ -9,7 +9,7 @@ const questionModel = new Schema({
     { type: String, required: true },
     { type: String, required: true },
   ],
-  correctAnswer: { type: String, required: true },
+  correctOption: { type: String, required: true },
   difficulty: { type: String, required: true },
 });
 
