@@ -8,5 +8,6 @@ const router = express.Router();
 
 router.get("/Allquestions", getAllQuestions);
 router.get("/Filterquestions", filterQuestions); // Add this route for filtering
-router.get('/Difficulty/:level' , getQuestionsLevel)
+router.get('/Difficulty/:level' , getQuestionsLevel);
+router.get('/Category/:category' , getQuestionsLevel);
 module.exports = router;

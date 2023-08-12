@@ -45,9 +45,28 @@ const getQuestionsLevel = async (req, res) => {
   }
 };
 
+const getQuestionCategory = async (req, res) => {
+  try {
+    const filteredData = await Question.find(
+      {
+        "$or":[
+            {'category':{$regex:req.params.category}},
+        ]
+    }
+    );
+    res.send(filteredData);
+  } catch (error) {
+    console.error("Error fetching all questions:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
+
+
 
 module.exports = {
   getAllQuestions,
   filterQuestions,
-  getQuestionsLevel
+  getQuestionsLevel,
+  getQuestionCategory
 };

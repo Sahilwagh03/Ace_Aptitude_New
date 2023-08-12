@@ -11,6 +11,7 @@ const questionModel = new Schema({
   ],
   correctOption: { type: String, required: true },
   difficulty: { type: String, required: true },
+  category: { type: String, required: true }
 });
 
 // Create the model from the schema
