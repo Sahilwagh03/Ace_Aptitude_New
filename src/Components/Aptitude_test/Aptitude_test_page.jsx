@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import './Aptitude_test_page.css'
+import { useNavigate } from 'react-router-dom'
+
 const Aptitude_test_page = () => {
+
+    const navigate = useNavigate()
 
     const [MainData, setMainData] = useState([])
     const [SelectedCategory , setSelectedCategory] = useState("All")
@@ -22,33 +26,6 @@ const Aptitude_test_page = () => {
         handleCategoriesAndLevel(SelectedCategory,lowerCaseOption)
     }
 
-    const difficultyApi = async (option) => {
-        try {
-            const response = await fetch(`http://localhost:5000/api/Difficulty/${option}`);
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const jsonData = await response.json();
-            setMainData(jsonData);
-            console.log(jsonData)
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    const categoryApi = async (category) => {
-        try {
-            const response = await fetch(`http://localhost:5000/api/Category/${category}`);
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const jsonData = await response.json();
-            setMainData(jsonData);
-            console.log(jsonData)
-        } catch (error) {
-            console.log(error);
-        }
-    }
 
     const handleCategoriesAndLevel = async (category, difficulty) => {
         let url = `http://localhost:5000/api/FilterData/`;
@@ -91,7 +68,7 @@ const Aptitude_test_page = () => {
 
 
     useEffect(() => {
-        const getAllquestion = async () => {
+        const getAllcategory = async () => {
             try {
                 const response = await fetch(`http://localhost:5000/api/Allcategory`);
                 if (!response.ok) {
@@ -104,8 +81,12 @@ const Aptitude_test_page = () => {
                 console.log(error);
             }
         }
-        getAllquestion()
+        getAllcategory()
     }, [])
+
+    const handleQuestionRoute = (category,level)=>{
+        navigate(`/aptitude/${category}/${level}`)
+    }
 
     return (
         <>
@@ -151,7 +132,7 @@ const Aptitude_test_page = () => {
                             <div className='problem_main'>
                                 {
                                     MainData.map((data, index) =>
-                                        <div className="problem_card" key={index}>
+                                        <div onClick={()=> handleQuestionRoute(data.category , data.difficulty)} className="problem_card" key={index}>
                                             <div className="problem_category"><span>{data.category}</span></div>
                                             <div className="problem_level"><span style={data.difficulty=='easy'? {background:'rgb(158 255 158)'} : {background:'#f0f0f0'} && data.difficulty=='medium'? {background:'rgb(253 235 100)'} : {background:'#f0f0f0'} && data.difficulty=="hard" ? {background:'#ff6f6f'}: {background:'#f0f0f0'}}>{data.difficulty}</span></div>
                                         </div>
