@@ -82,6 +82,26 @@ const getQuestionCategory = async (req, res) => {
   }
 };
 
+const getFilteredData = async (req, res) => {
+  try {
+    let filter = {};
+
+    if (req.params.category && req.params.category !== "All") {
+      filter['category'] = { $regex: req.params.category };
+    }
+
+    if (req.params.level && req.params.level !== "All") {
+      filter['difficulty'] = { $regex: req.params.level };
+    }
+
+    const filteredData = await Category.find(filter);
+    res.send(filteredData);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+};
+
 
 
 
@@ -91,4 +111,5 @@ module.exports = {
   filterQuestions,
   getCategoryLevel,
   getQuestionCategory,
+  getFilteredData
 };

@@ -3,6 +3,7 @@ import './Aptitude_test_page.css'
 const Aptitude_test_page = () => {
 
     const [MainData, setMainData] = useState([])
+    const [SelectedCategory , setSelectedCategory] = useState("All")
 
     const [selectedDifficulty, setSelectedDifficulty] = useState('')
     const [isDifficultOpen, setIsDifficultOpen] = useState(false)
@@ -17,7 +18,8 @@ const Aptitude_test_page = () => {
         setSelectedDifficulty(option)
         setIsDifficultOpen(false)
         const lowerCaseOption = option.toLowerCase();
-        difficultyApi(lowerCaseOption)
+        // difficultyApi(lowerCaseOption)
+        handleCategoriesAndLevel(SelectedCategory,lowerCaseOption)
     }
 
     const difficultyApi = async (option) => {
@@ -36,7 +38,7 @@ const Aptitude_test_page = () => {
 
     const categoryApi = async (category) => {
         try {
-            const response = await fetch(`http://localhost:5000/api//Category/${category}`);
+            const response = await fetch(`http://localhost:5000/api/Category/${category}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -48,8 +50,40 @@ const Aptitude_test_page = () => {
         }
     }
 
+    const handleCategoriesAndLevel = async (category, difficulty) => {
+        let url = `http://localhost:5000/api/FilterData/`;
+        
+        if (category) {
+            url += category + '/';
+        } else {
+            url += 'All/';
+        }
+    
+        if (difficulty) {
+            url += difficulty;
+        } else {
+            url += 'All';
+        }
+    
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const jsonData = await response.json();
+            setMainData(jsonData);
+            console.log(jsonData);
+        } catch (error) {
+            console.log(error);
+        } 
+    };
+
+
     const handleCategory = (category) =>{
-        categoryApi(category)
+        // categoryApi(category)
+        setSelectedCategory(category)
+        const lowerCasesDifficulty = selectedDifficulty.toLowerCase();
+        handleCategoriesAndLevel(category, lowerCasesDifficulty)
     }
 
 
