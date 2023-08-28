@@ -61,9 +61,6 @@ const Aptitude_test_page = () => {
         setIsSortByOpen(!isSortByOpen)
     }
 
-    // const handleDropDownofSubTopic= () =>{
-    //     setdropdownOption(!dropdownOption)
-    // }
 
     const handleSelectedOption = (option) => {
         setSelectedDifficulty(option)

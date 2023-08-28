@@ -37,6 +37,7 @@
     padding-bottom: 1.5rem;
     column-gap: 1.5rem;
     row-gap: 4rem;
+    justify-items: center;
 }
 
 .bg_img{
