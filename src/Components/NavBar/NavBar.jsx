@@ -2,13 +2,36 @@ import React, { useState } from 'react'
 import './NavBar.css'
 import menu from '../../assets/menu.svg'
 import close from '../../assets/close.svg'
-import { Link } from 'react-router-dom'
+import { Link , useNavigate } from 'react-router-dom'
 import NavLogo from '../../assets/NavLogo.png'
+import {motion} from 'framer-motion'
+
 const NavBar = () => {
     const [toggle, setToggle] = useState(false)
+    const navigate = useNavigate();
+    const variants = {
+        initial: {
+          transform: "translateY(-100%)",
+          opacity: 0,
+        },
+        animate: {
+          transform: "translateY(0)",
+          opacity: 1,
+          transition: {
+            duration: 1.5,
+            ease: "easeInOut",
+          },
+        },
+      };
+
     return (
         <>
-            <div className='Nav_div loading '>
+            <motion.div className='Nav_div'
+                  initial="initial"
+                  animate="animate"
+                  variants={variants}
+                  viewport={{ once: true }}
+            >
                 <nav className='navbar'>
 
                     <div className='Navbar_logo_flex'>
@@ -25,8 +48,8 @@ const NavBar = () => {
                         </ul>
                     </div>
                     <div className='btn_div'>
-                        <button className='nav_btn_signup' >Sign up</button>
-                        <button className='nav_btn_login'>Login</button>
+                        <button className='nav_btn_signup' onClick={()=>navigate('/SignUp')}>Sign up</button>
+                        <button className='nav_btn_login'  onClick={()=>navigate('/Login')}>Login</button>
                     </div>
 
 
@@ -48,7 +71,7 @@ const NavBar = () => {
 
                     </div>
                 </nav>
-            </div>
+            </motion.div>
         </>
     )
 }
