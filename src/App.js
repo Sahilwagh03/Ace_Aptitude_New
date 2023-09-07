@@ -16,7 +16,7 @@ const App = () => {
       <Route path='/aptitude' element={<Aptitude_test_page/>}/>
       <Route path='/leadboard' element={<h1>Leadboard page</h1>}/>
       <Route path='/about' element={<h1>About page</h1>}/>
-      <Route path='/aptitude/:category/:level' element={<QuestionPage/>}/>
+      <Route path='/test/:category/:level' element={<QuestionPage/>}/>
       <Route path='*' element={<h1>Not Found</h1>}/>
     </Routes>
     <Footer/>

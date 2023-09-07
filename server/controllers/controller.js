@@ -71,6 +71,13 @@ const getFilteredData = async (req, res) => {
       filter['difficulty'] = { $regex: req.params.level };
     }
 
+    // if (req.params.subtopics) {
+    //   const subtopics = req.params.subtopics.split(',');
+    //   filter['$and'] = subtopics.map((subtopic) => ({
+    //     subtopic: subtopic,
+    //   }));
+    // }
+    
     const filteredData = await Category.find(filter);
     res.send(filteredData);
   } catch (error) {

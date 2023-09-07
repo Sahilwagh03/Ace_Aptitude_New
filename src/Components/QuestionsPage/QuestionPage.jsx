@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import'./QuestionPage.css'
 
 const QuestionPage = () => {
     const { category, level } = useParams()
@@ -22,28 +23,30 @@ const QuestionPage = () => {
     }, [])
     return (
         <>
-            <div className="question_Container">
-                {
-                    QuestionArray.map(({ questionText, options }, index) =>
-                    (
-                        <>
-                            <div className="question" key={index}>
-                                <h2>{questionText}</h2>
-                            </div>
-                            <div className="options">
-                                {
-                                    options.map((option , index) =>
-                                        <>
-                                            <ul key={index}>
-                                                <li>{option}</li>
-                                            </ul>
-                                        </>
-                                    )
-                                }
-                            </div>
-                        </>
-                    ))
-                }
+            <div className='question_main'>
+                <div className="question_Container">
+                    {
+                        QuestionArray.map(({ questionText, options }, index) =>
+                        (
+                            <>
+                                <div className="question" key={index}>
+                                    <h2>{questionText}</h2>
+                                </div>
+                                <div className="options">
+                                    {
+                                        options.map((option, index) =>
+                                            <>
+                                                <ul key={index}>
+                                                    <li>{option}</li>
+                                                </ul>
+                                            </>
+                                        )
+                                    }
+                                </div>
+                            </>
+                        ))
+                    }
+                </div>
             </div>
         </>
     )
