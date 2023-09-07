@@ -6,6 +6,7 @@ import { BrowserRouter , Route ,Routes } from 'react-router-dom'
 import Home from './Components/Home/Home'
 import Aptitude_test_page from './Components/Aptitude_test/Aptitude_test_page'
 import QuestionPage from './Components/QuestionsPage/QuestionPage'
+import ScorePage from './Components/ScorePage/ScorePage'
 const App = () => {
   return (
     <>
@@ -17,6 +18,7 @@ const App = () => {
       <Route path='/leadboard' element={<h1>Leadboard page</h1>}/>
       <Route path='/about' element={<h1>About page</h1>}/>
       <Route path='/test/:category/:level' element={<QuestionPage/>}/>
+      <Route path='/score' element={<ScorePage/>} />
       <Route path='*' element={<h1>Not Found</h1>}/>
     </Routes>
     <Footer/>
