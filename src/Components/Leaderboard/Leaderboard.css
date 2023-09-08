@@ -1,0 +1,114 @@
+.LeaderBoard_main_container{
+ padding:30px; 
+}
+
+.leaderboard_Top{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+.leaderboard_heading{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.leaderboard_list{
+  padding-top: 30px;
+} 
+
+/* Your existing CSS for .problem_card */
+.leaderboard_card_horizontal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 10px;
+    background: #fff;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 7px;
+  }
+  
+  .users_name,
+  .users_rank,
+  .users_coin {
+    display: flex;
+    align-items: center;
+  }
+  
+  .users_rank >span,
+  .users_coin >span {
+    display: inline-block;
+    margin-left: 5px;
+    padding: 3px 8px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+  }
+
+  .user_name_grid{
+    display: flex;
+    gap: 10px;
+  }
+  
+  .leaderboard_mobile_top{
+    display: none;
+  }
+  
+
+/*=============== BREAKPOINTS ===============*/
+/* For large devices */
+@media screen and (max-width: 992px) {
+  .leaderboard_Top{
+    display: none;
+  }
+  .leaderboard_mobile_top {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  
+  .profile_circle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+  }
+  
+  .profile_circle > img {
+    width: 70px; /* Adjust the image size as needed */
+    height: 70px; /* Adjust the image size as needed */
+    border-radius: 50%; /* Makes the image round */
+  }
+  
+  .empty_bar {
+    height: 70px; /* Adjust the height of the empty bar */
+    width: 100px; /* Adjust the width of the empty bar */
+    background-color: silver; /* Color of the empty bar */
+  }
+  
+  .tall_bar {
+    height: 100px; /* Adjust the height of the tall bar */
+    width: 100px; /* Adjust the width of the tall bar */
+    background-color: goldenrod; /* Color of the tall bar */
+  }
+  
+  .profile_circle > span{
+    font-weight: 600;
+  }
+  
+}
+
+
+/* For medium devices */
+@media screen and (max-width: 576px) {
+
+}
+
+/* For small devices */
+@media screen and (max-width: 475px) {
+
+}

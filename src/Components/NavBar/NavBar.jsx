@@ -43,7 +43,7 @@ const NavBar = () => {
                         <ul className='nav_lists'>
                             <Link to='/'><li className='nav_text'>Home</li></Link>
                             <Link to='/aptitude'><li className='nav_text'>Aptitude Tests</li></Link>
-                            <Link to='/leadboard'><li className='nav_text'>LeaderBoard</li></Link>
+                            <Link to='/LeaderBoard'><li className='nav_text'>LeaderBoard</li></Link>
                             <Link to='/about'><li className='nav_text'>About us</li></Link>
                         </ul>
                     </div>
@@ -60,7 +60,7 @@ const NavBar = () => {
                             <ul className='nav_lists_mobile'>
                                 <Link to='/'><li className='nav_text'>Home</li></Link>
                                 <Link to='/aptitude'><li className='nav_text'>Aptitude Tests</li></Link>
-                                <Link to='/leadboard'><li className='nav_text'>LeaderBoard</li></Link>
+                                <Link to='/LeaderBoard'><li className='nav_text'>LeaderBoard</li></Link>
                                 <Link to='/about'><li className='nav_text'>About us</li></Link>
                             </ul>
                             <div className='btn_div_mobile'>
