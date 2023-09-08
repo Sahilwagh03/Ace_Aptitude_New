@@ -87,12 +87,30 @@ const getFilteredData = async (req, res) => {
 };
 
 
-
+const getSearchTopic = async (req,res) => {
+  try {
+    const topic = req.params.topic; 
+    const searchResults = await Category.find(
+      {
+          "$or":[
+              {'category':{$regex:topic}}
+          ]
+      }
+  )
+  res.send(searchResults)
+}
+    
+   catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+}
 
 module.exports = {
   getAllQuestions,
   getAllCategories,
   getFilteredQuestions,
   filterQuestions,
-  getFilteredData
+  getFilteredData,
+  getSearchTopic
 };

@@ -180,6 +180,20 @@ const Aptitude_test_page = () => {
         navigate(`/test/${category}/${level}`)
     }
 
+    const handleSearchInput = async (topic) => {
+        try {
+            const response = await fetch(`http://localhost:5000/api/Search/${topic}`);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const jsonData = await response.json();
+            setMainData(jsonData);
+            console.log(jsonData)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <>
             <section>
@@ -187,7 +201,7 @@ const Aptitude_test_page = () => {
                     <h1 className='aptitude_heading'>APTITUDE QUESTIONS</h1>
                     <div className="filter_container">
                         <div className='search_div'>
-                            <input type="text" placeholder='Search Topics' className='searchbar' />
+                            <input onChange={(e) => handleSearchInput(e.target.value)} type="text" placeholder='Search Topics' className='searchbar' />
                         </div>
                         <div className="filter_input">
                             <div className='dropdown'>
