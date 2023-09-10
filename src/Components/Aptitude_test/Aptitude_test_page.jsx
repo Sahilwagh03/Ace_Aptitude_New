@@ -14,6 +14,7 @@ const Aptitude_test_page = () => {
     const [isDifficultOpen, setIsDifficultOpen] = useState(false)
     const [isSortByOpen, setIsSortByOpen] = useState(false)
     const [isFilterOpen, setisFilterOpen] = useState(false)
+    const [isLoading, setIsLoading] = useState(true)
 
     const [dropdownOption, setdropdownOption] = useState({
         "General Aptitude": false,
@@ -174,6 +175,7 @@ const Aptitude_test_page = () => {
             }
         }
         getAllcategory()
+        setIsLoading(false)
     }, [])
 
     const handleQuestionRoute = (category, level) => {
@@ -321,92 +323,92 @@ const Aptitude_test_page = () => {
                         </div>
                         {
 
-                                <div className={`filter-section ${isFilterOpen ? 'open' : ''}`}>
-                                    <div className="mobile_category_container">
-                                        <div className='mobile_heading_grid'>
-                                            <h3 className='category_heading'>Category</h3>
-                                            <img onClick={()=> setisFilterOpen(!isFilterOpen)} src="/static/media/close.6f8b0621c325d307e9d486f8740d96b4.svg" alt="" width="25"></img>
-                                        </div>
-                                        <ul className='category_ul'>
-                                            <li className='category_li' onClick={() => handleCategory("All")}>ALL</li>
-                                            <li className='category_li' onClick={() => handleCategory("General Aptitude")}>General Aptitude <i className={`bx bx-chevron-down ${dropdownOption["General Aptitude"] ? 'ArrowRotate' : ''}`} id="inputArrow"></i></li>
-                                            {
-                                                dropdownOption["General Aptitude"] ?
-                                                    <>
-                                                        <div className='dropdownContainer'>
-                                                            {
-                                                                generalAptitudeSubtopics.map((subtopic, index) => (
-                                                                    <>
-                                                                        <span className={`subtopic-btn  ${selectedSubtopic["General Aptitude"] === subtopic ? 'active' : ''}`}
-                                                                            onClick={() => handleActive(subtopic, 'General Aptitude')}
-                                                                            key={index}>{subtopic}</span>
-                                                                    </>
-                                                                ))
-                                                            }
-                                                        </div>
-                                                    </>
-                                                    :
-                                                    ""
-                                            }
-                                            <li className='category_li' onClick={() => handleCategory("Programming")}>Programming  <i className={`bx bx-chevron-down ${dropdownOption["Programming"] ? 'ArrowRotate' : ''}`} id="inputArrow"></i></li>
-                                            {
-                                                dropdownOption["Programming"] ?
-                                                    <>
-                                                        <div className='dropdownContainer'>
-                                                            {
-                                                                programmingSubtopics.map((subtopic, index) => (
-                                                                    <>
-                                                                        <span className={`subtopic-btn  ${selectedSubtopic["Programming"] === subtopic ? 'active' : ''}`}
-                                                                            onClick={() => handleActive(subtopic, 'Programming')} key={index}>{subtopic}</span>
-                                                                    </>
-                                                                ))
-                                                            }
-                                                        </div>
-                                                    </>
-                                                    :
-                                                    ""
-                                            }
-
-                                            <li className='category_li' onClick={() => handleCategory("Verbal")}>Verbal  <i className={`bx bx-chevron-down ${dropdownOption["Verbal"] ? 'ArrowRotate' : ''}`} id="inputArrow"></i></li>
-                                            {
-                                                dropdownOption["Verbal"] ?
-                                                    <>
-                                                        <div className='dropdownContainer'>
-                                                            {
-                                                                generalAptitudeSubtopics.map((subtopic, index) => (
-                                                                    <>
-                                                                        <span className={`subtopic-btn  ${selectedSubtopic["Verbal"] === subtopic ? 'active' : ''}`}
-                                                                            onClick={() => handleActive(subtopic, 'Verbal')} key={index}>{subtopic}</span>
-                                                                    </>
-                                                                ))
-                                                            }
-                                                        </div>
-                                                    </>
-                                                    :
-                                                    ""
-                                            }
-                                            <li className='category_li' onClick={() => handleCategory("Logical Reasoning")}>Logical Reasoning  <i className={`bx bx-chevron-down ${dropdownOption["Logical Reasoning"] ? 'ArrowRotate' : ''}`} id="inputArrow"></i></li>
-                                            {
-                                                dropdownOption["Logical Reasoning"] ?
-                                                    <>
-                                                        <div className='dropdownContainer'>
-                                                            {
-                                                                LogicalSubtopics.map((subtopic, index) => (
-                                                                    <>
-                                                                        <span className={`subtopic-btn  ${selectedSubtopic["Logical Reasoning"] === subtopic ? 'active' : ''}`}
-                                                                            onClick={() => handleActive(subtopic, 'Logical Reasoning')} key={index}>{subtopic}</span>
-                                                                    </>
-                                                                ))
-                                                            }
-                                                        </div>
-                                                    </>
-                                                    :
-                                                    ""
-                                            }
-                                        </ul>
+                            <div className={`filter-section ${isFilterOpen ? 'open' : ''}`}>
+                                <div className="mobile_category_container">
+                                    <div className='mobile_heading_grid'>
+                                        <h3 className='category_heading'>Category</h3>
+                                        <img onClick={() => setisFilterOpen(!isFilterOpen)} src="/static/media/close.6f8b0621c325d307e9d486f8740d96b4.svg" alt="" width="25"></img>
                                     </div>
+                                    <ul className='category_ul'>
+                                        <li className='category_li' onClick={() => handleCategory("All")}>ALL</li>
+                                        <li className='category_li' onClick={() => handleCategory("General Aptitude")}>General Aptitude <i className={`bx bx-chevron-down ${dropdownOption["General Aptitude"] ? 'ArrowRotate' : ''}`} id="inputArrow"></i></li>
+                                        {
+                                            dropdownOption["General Aptitude"] ?
+                                                <>
+                                                    <div className='dropdownContainer'>
+                                                        {
+                                                            generalAptitudeSubtopics.map((subtopic, index) => (
+                                                                <>
+                                                                    <span className={`subtopic-btn  ${selectedSubtopic["General Aptitude"] === subtopic ? 'active' : ''}`}
+                                                                        onClick={() => handleActive(subtopic, 'General Aptitude')}
+                                                                        key={index}>{subtopic}</span>
+                                                                </>
+                                                            ))
+                                                        }
+                                                    </div>
+                                                </>
+                                                :
+                                                ""
+                                        }
+                                        <li className='category_li' onClick={() => handleCategory("Programming")}>Programming  <i className={`bx bx-chevron-down ${dropdownOption["Programming"] ? 'ArrowRotate' : ''}`} id="inputArrow"></i></li>
+                                        {
+                                            dropdownOption["Programming"] ?
+                                                <>
+                                                    <div className='dropdownContainer'>
+                                                        {
+                                                            programmingSubtopics.map((subtopic, index) => (
+                                                                <>
+                                                                    <span className={`subtopic-btn  ${selectedSubtopic["Programming"] === subtopic ? 'active' : ''}`}
+                                                                        onClick={() => handleActive(subtopic, 'Programming')} key={index}>{subtopic}</span>
+                                                                </>
+                                                            ))
+                                                        }
+                                                    </div>
+                                                </>
+                                                :
+                                                ""
+                                        }
+
+                                        <li className='category_li' onClick={() => handleCategory("Verbal")}>Verbal  <i className={`bx bx-chevron-down ${dropdownOption["Verbal"] ? 'ArrowRotate' : ''}`} id="inputArrow"></i></li>
+                                        {
+                                            dropdownOption["Verbal"] ?
+                                                <>
+                                                    <div className='dropdownContainer'>
+                                                        {
+                                                            generalAptitudeSubtopics.map((subtopic, index) => (
+                                                                <>
+                                                                    <span className={`subtopic-btn  ${selectedSubtopic["Verbal"] === subtopic ? 'active' : ''}`}
+                                                                        onClick={() => handleActive(subtopic, 'Verbal')} key={index}>{subtopic}</span>
+                                                                </>
+                                                            ))
+                                                        }
+                                                    </div>
+                                                </>
+                                                :
+                                                ""
+                                        }
+                                        <li className='category_li' onClick={() => handleCategory("Logical Reasoning")}>Logical Reasoning  <i className={`bx bx-chevron-down ${dropdownOption["Logical Reasoning"] ? 'ArrowRotate' : ''}`} id="inputArrow"></i></li>
+                                        {
+                                            dropdownOption["Logical Reasoning"] ?
+                                                <>
+                                                    <div className='dropdownContainer'>
+                                                        {
+                                                            LogicalSubtopics.map((subtopic, index) => (
+                                                                <>
+                                                                    <span className={`subtopic-btn  ${selectedSubtopic["Logical Reasoning"] === subtopic ? 'active' : ''}`}
+                                                                        onClick={() => handleActive(subtopic, 'Logical Reasoning')} key={index}>{subtopic}</span>
+                                                                </>
+                                                            ))
+                                                        }
+                                                    </div>
+                                                </>
+                                                :
+                                                ""
+                                        }
+                                    </ul>
                                 </div>
-                            
+                            </div>
+
                         }
                         <div className="problem_container">
                             <div className="headline_problem_container">
@@ -417,19 +419,26 @@ const Aptitude_test_page = () => {
                                 <div className="problem_level"><span>Level</span></div>
                             </div>
                             <div className='problem_heading'></div>
-                            <div className='problem_main'>
-                                {
-                                    MainData.map((data, index) =>
-                                        <div onClick={() => handleQuestionRoute(data.category, data.difficulty)} className="problem_card" key={index}>
-                                            <div className="problem_category">
-                                                <span>{data.category}</span>
-                                                <span className='ml-2'>{selectedSubtopic[data.category]}</span>
-                                            </div>
-                                            <div className="problem_level"><span style={data.difficulty == 'easy' ? { background: 'rgb(158 255 158)' } : { background: '#f0f0f0' } && data.difficulty == 'medium' ? { background: 'rgb(253 235 100)' } : { background: '#f0f0f0' } && data.difficulty == "hard" ? { background: '#ff6f6f' } : { background: '#f0f0f0' }}>{data.difficulty}</span></div>
-                                        </div>
-                                    )
-                                }
-                            </div>
+                            {
+                                isLoading ?
+                                    <div className='loader_container'>
+                                        <span className="loader"></span>
+                                    </div>
+                                    :
+                                    <div className='problem_main'>
+                                        {
+                                            MainData.map((data, index) =>
+                                                <div onClick={() => handleQuestionRoute(data.category, data.difficulty)} className="problem_card" key={index}>
+                                                    <div className="problem_category">
+                                                        <span>{data.category}</span>
+                                                        <span className='ml-2'>{selectedSubtopic[data.category]}</span>
+                                                    </div>
+                                                    <div className="problem_level"><span style={data.difficulty == 'easy' ? { background: 'rgb(158 255 158)' } : { background: '#f0f0f0' } && data.difficulty == 'medium' ? { background: 'rgb(253 235 100)' } : { background: '#f0f0f0' } && data.difficulty == "hard" ? { background: '#ff6f6f' } : { background: '#f0f0f0' }}>{data.difficulty}</span></div>
+                                                </div>
+                                            )
+                                        }
+                                    </div>
+                            }
                         </div>
                     </div>
                 </div>
