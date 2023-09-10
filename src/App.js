@@ -10,6 +10,7 @@ import ScorePage from './Components/ScorePage/ScorePage'
 import LoginPage from './Components/LoginPage/LoginPage'
 import SignUp from './Components/SignUp/SignUp'
 import Leaderboard from './Components/Leaderboard/Leaderboard'
+import AboutUs from './Components/AboutUs/AboutUs'
 
 const App = () => {
   return (
@@ -20,7 +21,7 @@ const App = () => {
       <Route path='/' element={<Home/>}/>
       <Route path='/aptitude' element={<Aptitude_test_page/>}/>
       <Route path='/LeaderBoard' element={<Leaderboard/>}/>
-      <Route path='/about' element={<h1>About page</h1>}/>
+      <Route path='/about' element={<AboutUs/>}/>
       <Route path='/test/:category/:level' element={<QuestionPage/>}/>
       <Route path='/score' element={<ScorePage/>} />
       <Route path='/Login' element={<LoginPage/>} />
