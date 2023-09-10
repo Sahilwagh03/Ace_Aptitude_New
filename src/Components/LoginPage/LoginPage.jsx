@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom'; // Import the Link component
 import './LoginPage.css';
 
 const LoginPage = () => {
+
+  useEffect(()=>{
+    window.scrollTo(0, 0);
+  },[])
+  
   return (
     <section className="custom-container forms">
       <div className="custom-form login">

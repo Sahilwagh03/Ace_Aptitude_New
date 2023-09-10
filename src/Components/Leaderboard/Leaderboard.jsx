@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Leaderboard.css'
 import LeaderboardCard from './LeaderboardCard'
 
@@ -26,6 +26,10 @@ const Leaderboard = () => {
             coins: 600,
         },
     ];
+
+    useEffect(()=>{
+        window.scrollTo(0, 0);
+    },[])
 
     return (
         <>

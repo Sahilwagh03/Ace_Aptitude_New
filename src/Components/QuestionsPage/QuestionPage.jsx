@@ -28,6 +28,7 @@ const QuestionPage = () => {
             }
         };
         getAllcategory();
+        window.scrollTo(0, 0);
     }, []);
 
     // Set a 1-second interval timer to update the remaining time

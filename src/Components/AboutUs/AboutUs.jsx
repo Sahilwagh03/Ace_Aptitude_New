@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './AboutUs.css'
 import About_hero from '../../assets/AboutUs_hero.png'
 import { Link } from 'react-router-dom'
@@ -15,6 +15,10 @@ import Rocket from '../../assets/Rocket.png'
 import 'swiper/css';
 
 const AboutUs = () => {
+
+    useEffect(()=>{
+        window.scrollTo(0, 0);
+    },[])
     return (
         <section className='About_section'>
             <div className="About_Main_container">
