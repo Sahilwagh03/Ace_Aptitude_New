@@ -13,7 +13,7 @@ const QuestionPage = () => {
     useEffect(() => {
         const getAllcategory = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/filterQuestions/${category}/${level}`);
+                const response = await fetch(`https://ace-aptitude.onrender.com/api/filterQuestions/${category}/${level}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
