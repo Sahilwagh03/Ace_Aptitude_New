@@ -106,7 +106,7 @@ const Aptitude_test_page = () => {
 
 
     const handleCategoriesAndLevel = async (category, difficulty) => {
-        let url = `http://localhost:5000/api/FilterData/`;
+        let url = `https://ace-aptitude.onrender.com/api/FilterData/`;
 
         if (category) {
             url += category + '/';
@@ -162,7 +162,7 @@ const Aptitude_test_page = () => {
     useEffect(() => {
         const getAllcategory = async () => {
             try {
-                const response = await fetch(`http://localhost:5000/api/Allcategory`);
+                const response = await fetch(`https://ace-aptitude.onrender.com/api/Allcategory`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -182,7 +182,7 @@ const Aptitude_test_page = () => {
 
     const handleSearchInput = async (topic) => {
         try {
-            const response = await fetch(`http://localhost:5000/api/Search/${topic}`);
+            const response = await fetch(`https://ace-aptitude.onrender.com/api/Search/${topic}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -317,7 +317,7 @@ const Aptitude_test_page = () => {
                         </div>
 
                         <div className='filter'>
-                            <button onClick={() => setisFilterOpen(!isFilterOpen)}><i class='bx bx-menu-alt-right'></i></button>
+                            <button onClick={() => setisFilterOpen(!isFilterOpen)}><i className='bx bx-menu-alt-right'></i></button>
                         </div>
                         {
 
