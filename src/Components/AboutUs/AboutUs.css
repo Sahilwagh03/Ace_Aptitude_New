@@ -74,8 +74,8 @@
     grid-template-columns: repeat(2, 1fr);
     padding-left: 1rem;
     padding-right: 1rem;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
     justify-items: center;
     align-items: center;
     position: relative;
@@ -122,8 +122,8 @@
     filter: blur(100px);
     background-color: rgba(100, 82, 254, .1);
     border-radius: 999999px;
-    width: 300px;
-    height: 300px;
+    width: 490px;
+    height: 490px;
     position: absolute;
     right: -60px;
     top: -50px;
@@ -198,3 +198,62 @@
     left: -60px;
     top: -50px;
 }
+
+
+/*=============== BREAKPOINTS ===============*/
+/* For large devices */
+@media screen and (max-width: 992px) {}
+
+/* For medium devices */
+@media screen and (max-width: 576px) {
+    .AboutUS_hero_Container {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
+    }
+
+    .AboutUs_content_Container{
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
+    }
+
+    .AboutUs_hero_img>img {
+        width: 300px;
+        height: auto;
+    }
+
+    .gredient_ball_1{
+        width: 300px;
+        height: 300px;
+    }
+
+    .AboutUs_img>img{
+        width: 300px;
+    }
+
+    .gredient_ball{
+        width: 300px;
+    }
+
+    .AboutUs_team_card{
+        flex-direction: column;
+    }
+
+    .AboutUs_team_content{
+        padding: 5px;
+    }
+
+    .AboutUs_team_title>h1{
+        text-align: center;
+    }
+
+    .AboutUs_team_title>p{
+        text-align: center;
+    }
+
+    .AboutUs_team_header>p{
+        text-align: justify;
+    }
+}
+
+/* For small devices */
+@media screen and (max-width: 375px) {}

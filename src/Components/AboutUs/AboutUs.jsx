@@ -84,7 +84,7 @@ const AboutUs = () => {
                                                     <h1>Sahil Wagh</h1>
                                                     <p>FullStack Developer</p>
                                                 </div>
-                                                <p>Meet Sahil, our versatile developer who excels in both frontend and backend development. With a sharp eye for design and a strong grasp of server-side technologies, Sahil ensures our platform looks great and runs smoothly. Their expertise bridges the gap between user interface and functionality, making Ace Aptitude a seamless and efficient experience for you.</p>
+                                                <p>Introducing Sahil, our versatile developer proficient in both frontend and backend development. Sahil's keen design sense and mastery of server-side technologies ensure a visually appealing and high-performing platform. Bridging the gap between user interface and functionality, Sahil makes Ace Aptitude a seamless, efficient, and user-friendly experience for you.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -116,7 +116,7 @@ const AboutUs = () => {
                                                     <h1>Smit Vadhel</h1>
                                                     <p>FullStack Developer</p>
                                                 </div>
-                                                <p>Smit possesses the ability to create visually appealing designs that are not only aesthetically pleasing but also highly functional, perfectly aligned with the needs of the user. Moreover, Smit excels in project management, demonstrating the capability to oversee projects from inception to completion. This includes collaborating seamlessly with cross-functional teams and effectively communicating with stakeholders to ensure project success.</p>
+                                                <p>Smit excels in crafting visually stunning designs that seamlessly merge aesthetics and functionality, meeting user requirements impeccably. With strong project management skills, Smit adeptly oversees projects from start to finish, collaborating effortlessly with cross-functional teams, and ensuring effective stakeholder communication for project triumph.</p>
                                             </div>
                                         </div>
                                     </div>
@@ -132,7 +132,7 @@ const AboutUs = () => {
                                                     <h1>Vighnesh Bidaye</h1>
                                                     <p>UI Developer</p>
                                                 </div>
-                                                <p>Vighnesh, our talented UI designer, is the creative force behind the captivating visuals that enhance user experiences. With an artistic eye and a knack for aesthetics, Vighnesh crafts designs that seamlessly blend form and function. His meticulous attention to detail ensures that every element is visually pleasing and user-friendly. Vighnesh's contributions are instrumental in creating visually stunning and intuitive interfaces that leave a lasting impression on our users</p>
+                                                <p>Meet Vighnesh, our skilled UI designer, the creative genius behind captivating visuals that elevate user experiences. With an artistic eye and a flair for aesthetics, Vighnesh crafts designs harmonizing form and function. His meticulous attention to detail ensures every element is user-friendly and visually pleasing. Vighnesh's vital contributions create stunning, intuitive interfaces leaving lasting user impressions.</p>
                                             </div>
                                         </div>
                                     </div>
