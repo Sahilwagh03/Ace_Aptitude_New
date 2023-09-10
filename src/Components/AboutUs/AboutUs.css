@@ -1,0 +1,259 @@
+.AboutUS_hero_Container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    background-image: url('https://cdn.thecodehelp.in/njg1phfdmf2zh4qlzakg_cd084b6414.svg');
+    background-color: rgb(102 116 204);
+    padding: 10px;
+    background-size: cover;
+    background-blend-mode: overlay;
+}
+
+.AboutUs_hero_content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.AboutUs_title {
+    font-weight: 700;
+    font-size: 42px;
+    color: white;
+}
+
+.AboutUS_para {
+    font-size: 20px;
+    color: rgb(225 226 228);
+}
+
+.AboutUs_btn>button {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    border-color: rgb(102 116 204);
+    background: rgb(235 239 255);
+    border-radius: 0.375rem;
+    cursor: pointer;
+}
+
+
+.AboutUs_hero_img {
+    display: flex;
+    justify-content: center;
+}
+
+.AboutUs_hero_img>img {
+    height: 520px;
+}
+
+.AboutUs_img>img {
+    width: 400px;
+}
+
+.star_group>svg {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+}
+
+.AboutUS_rating {
+    display: flex;
+    gap: 20px;
+}
+
+.AboutUS_rating>span {
+    color: white;
+    font-size: 1.125rem;
+}
+
+.AboutUs_content_Container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    justify-items: center;
+    align-items: center;
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+
+.AboutUs_content {
+    display: flex;
+    gap: 30px;
+    flex-direction: column;
+}
+
+.AboutUs_content>h1 {
+    font-size: 42px;
+    font-weight: 700;
+}
+
+.AboutUs_content>p {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    text-align: start;
+    color: rgb(166 166 166);
+}
+
+.AboutUs_Team_container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.AboutUs_team_content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 30px;
+    border-bottom: 2px solid #e2e2e2;
+}
+
+.gredient_ball_1 {
+    filter: blur(100px);
+    background-color: rgba(100, 82, 254, .1);
+    border-radius: 999999px;
+    width: 490px;
+    height: 490px;
+    position: absolute;
+    right: -60px;
+    top: -50px;
+}
+
+.AboutUs_team_content>h1 {
+    font-size: 42px;
+    font-weight: 700;
+}
+
+.AboutUs_team_content>p {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    color: rgb(166 166 166);
+    max-width: 700px;
+    min-width: 300px;
+}
+
+.AboutUs_team_center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.AboutUs_team_card {
+    gap: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+}
+
+.AboutUs_team_img>img {
+    border-radius: 1rem;
+    width: 300px;
+}
+
+.AboutUs_team_header {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.AboutUs_team_title>h1 {
+    font-size: 42px;
+    font-weight: 700;
+}
+
+.AboutUs_team_title>p {
+    margin-top: 10px;
+    font-weight: 400;
+    font-size: 1.2rem;
+}
+
+.AboutUs_team_header>p {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    color: rgb(166 166 166);
+}
+
+.AboutUs_slider {
+    margin: 30px 0px;
+}
+
+.gredient_ball {
+    filter: blur(100px);
+    background-color: rgba(100, 82, 254, .1);
+    border-radius: 999999px;
+    width: 490px;
+    height: 490px;
+    position: absolute;
+    left: -60px;
+    top: -50px;
+}
+
+
+/*=============== BREAKPOINTS ===============*/
+/* For large devices */
+@media screen and (max-width: 992px) {}
+
+/* For medium devices */
+@media screen and (max-width: 576px) {
+    .AboutUS_hero_Container {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
+    }
+
+    .AboutUs_content_Container{
+        grid-template-columns: repeat(1, 1fr);
+        gap: 10px;
+    }
+
+    .AboutUs_hero_img>img {
+        width: 300px;
+        height: auto;
+    }
+
+    .gredient_ball_1{
+        width: 300px;
+        height: 300px;
+    }
+
+    .AboutUs_img>img{
+        width: 300px;
+    }
+
+    .gredient_ball{
+        width: 300px;
+    }
+
+    .AboutUs_team_card{
+        flex-direction: column;
+    }
+
+    .AboutUs_team_content{
+        padding: 5px;
+    }
+
+    .AboutUs_team_title>h1{
+        text-align: center;
+    }
+
+    .AboutUs_team_title>p{
+        text-align: center;
+    }
+
+    .AboutUs_team_header>p{
+        text-align: justify;
+    }
+}
+
+/* For small devices */
+@media screen and (max-width: 375px) {}

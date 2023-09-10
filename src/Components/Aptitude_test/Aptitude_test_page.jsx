@@ -132,13 +132,20 @@ const Aptitude_test_page = () => {
         } catch (error) {
             console.log(error);
         }
+        setTimeout(()=>{
+            setIsLoading(false)
+        },500)
     };
 
 
     const handleCategory = (category) => {
+
+        setIsLoading(true)
+
         setSelectedCategory(category)
         if (category == "All") {
             setSelectedDifficulty('')
+            setdropdownOption(false)
         }
 
         setdropdownOption(prevState => ({
@@ -175,7 +182,9 @@ const Aptitude_test_page = () => {
             }
         }
         getAllcategory()
-        setIsLoading(false)
+        setTimeout(()=>{
+            setIsLoading(false)
+        },3000)
     }, [])
 
     const handleQuestionRoute = (category, level) => {
