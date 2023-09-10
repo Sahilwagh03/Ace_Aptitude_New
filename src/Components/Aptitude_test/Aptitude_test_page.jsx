@@ -185,6 +185,7 @@ const Aptitude_test_page = () => {
         setTimeout(()=>{
             setIsLoading(false)
         },3000)
+        window.scrollTo(0, 0);
     }, [])
 
     const handleQuestionRoute = (category, level) => {
