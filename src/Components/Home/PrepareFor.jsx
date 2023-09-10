@@ -1,6 +1,7 @@
 import React from 'react'
 import './PrepareFor.css'
 import { motion } from 'framer-motion'
+import company from '../../assets/company.png'
 
 const PrepareFor = () => {
     return (
@@ -16,13 +17,7 @@ const PrepareFor = () => {
                     <p className='PrepareFor_slogan'>Unlock Your Potential, Excel with Aptitude Test Prep !</p>
                 </motion.div>
                 <div className="company_div">
-                    {/* <div className='circle_1'>
-                        <div className='circle_2'>
-                            <div className='circle_3'>
-
-                            </div>
-                        </div>
-                    </div> */}
+                    <img src={company} alt="company" className='company' />
                 </div>
             </div>
         </section>

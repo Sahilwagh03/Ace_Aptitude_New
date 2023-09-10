@@ -1,0 +1,90 @@
+.question_main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 30px;
+    min-height: 700px;
+}
+
+
+.question_Container {
+    padding: 30px;
+    margin: 30px 0px;
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    max-width: 600px;
+}
+
+
+.question {
+    padding: 10px;
+}
+
+.question>h2 {
+    font-size: 1.5rem;
+}
+
+.options {
+    padding: 10px;
+}
+
+.options>ul {
+    list-style: none;
+}
+
+.options>ul>li {
+    font-size: 1.5rem;
+    padding: 10px;
+}
+
+.options>ul>li:hover {
+    background-color: #f4f4f4;
+}
+
+.selected {
+    background-color: #f4f4f4;
+}
+
+.submit-button {
+    background-color: rgb(133 148 244);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 20px;
+    text-transform: uppercase;
+}
+
+.submit-button:hover {
+    background-color: rgb(102 116 204);
+}
+
+.timer {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.code-snippet {
+    background-color: #f0f0f0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    overflow-x: auto; /* Add horizontal scrollbar if code overflows */
+}
+
+/* Style for the code text */
+.code {
+    font-family: 'Courier New', monospace;
+    white-space: pre; /* Preserve whitespace and line breaks */
+    margin: 0;
+}

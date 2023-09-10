@@ -31,6 +31,10 @@
 
 }
 
+.company{
+    width: 600px;
+}
+
 .PrepareFor_slogan{
     font-size: 1.25rem;
     line-height: 1.75rem;
@@ -90,6 +94,10 @@
         width: 20rem;
         height: 20rem;
     }
+
+    .company{
+        width: 500px;
+    }
 }
 
 /* For medium devices */
@@ -101,6 +109,9 @@
     .circle_1{
         width: 20rem;
         height: 20rem;
+    }
+    .company{
+        width: 350px;
     }
 }
 

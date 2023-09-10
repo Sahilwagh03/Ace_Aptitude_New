@@ -1,0 +1,14 @@
+/* For WebKit-based browsers */
+::-webkit-scrollbar {
+    width: 12px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar-thumb-color, #ccc); /* Change to a lighter color */
+    border-radius: 6px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background-color: var(--scrollbar-track-color, #f1f1f1);
+  }
+  
