@@ -11,6 +11,7 @@ import LoginPage from './Components/LoginPage/LoginPage'
 import SignUp from './Components/SignUp/SignUp'
 import Leaderboard from './Components/Leaderboard/Leaderboard'
 import AboutUs from './Components/AboutUs/AboutUs'
+import ProfilePage from './Components/ProfilePage/ProfilePage'
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
       <Route path='/score' element={<ScorePage/>} />
       <Route path='/Login' element={<LoginPage/>} />
       <Route path='/SignUp' element={<SignUp/>} />
+      <Route path='/Profile/:id' element={<ProfilePage/>} />
       <Route path='*' element={<h1>Not Found</h1>}/>
     </Routes>
     <Footer/>
