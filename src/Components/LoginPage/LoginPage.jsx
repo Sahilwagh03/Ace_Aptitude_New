@@ -4,10 +4,10 @@ import './LoginPage.css';
 
 const LoginPage = () => {
 
-  useEffect(()=>{
+  useEffect(() => {
     window.scrollTo(0, 0);
-  },[])
-  
+  }, [])
+
   return (
     <section className="custom-container forms">
       <div className="custom-form login">
@@ -30,7 +30,7 @@ const LoginPage = () => {
               </Link>
             </div>
             <div className="field button-field login">
-              <button  className="login">Login</button>
+              <button className="login">Login</button>
             </div>
           </form>
           <div className="form-link login">
@@ -44,15 +44,15 @@ const LoginPage = () => {
         </div>
         <div className="line login"></div>
         <div className="media-options login">
-          <Link className="field facebook login">
-            <i className="bx bxl-facebook facebook-icon login"></i>
-            <span>Login with Facebook</span>
+          <Link className="field google login">
+            <i className='bx bxl-google'></i>
+            <span>Login with Google</span>
           </Link>
         </div>
         <div className="media-options login">
-          <Link  className="field google login">
-          <i className='bx bxl-google'></i>
-            <span>Login with Google</span>
+          <Link className="field facebook login">
+            <i className="bx bxl-github facebook-icon login"></i>
+            <span>Login with GitHub</span>
           </Link>
         </div>
       </div>
