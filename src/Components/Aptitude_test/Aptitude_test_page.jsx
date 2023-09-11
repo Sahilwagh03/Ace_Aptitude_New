@@ -182,9 +182,7 @@ const Aptitude_test_page = () => {
             }
         }
         getAllcategory()
-        setTimeout(()=>{
-            setIsLoading(false)
-        },3000)
+        setIsLoading(false)
         window.scrollTo(0, 0);
     }, [])
 
