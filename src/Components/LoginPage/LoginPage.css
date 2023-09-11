@@ -142,14 +142,14 @@ form {
 
 .facebook {
     color: #fff;
-    background-color: #4267b2;
+    background-color: #000;
     text-decoration: none;
 }
 
 .facebook .facebook-icon {
     height: 28px;
     width: 28px;
-    color: #0171d3;
+    color: #000;
     font-size: 20px;
     border-radius: 50%;
     display: flex;

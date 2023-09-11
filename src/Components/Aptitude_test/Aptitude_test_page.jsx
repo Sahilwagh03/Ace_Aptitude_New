@@ -177,12 +177,12 @@ const Aptitude_test_page = () => {
                 const jsonData = await response.json();
                 setMainData(jsonData);
                 console.log(jsonData)
+                setIsLoading(false)
             } catch (error) {
                 console.log(error);
             }
         }
         getAllcategory()
-        setIsLoading(false)
         window.scrollTo(0, 0);
     }, [])
 

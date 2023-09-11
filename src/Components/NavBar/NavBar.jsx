@@ -58,10 +58,10 @@ const NavBar = () => {
 
                         <div className={` ${toggle ? 'flex' : 'hidden'} nav_mobile_menu`} >
                             <ul className='nav_lists_mobile'>
-                                <Link to='/'><li className='nav_text'>Home</li></Link>
-                                <Link to='/aptitude'><li className='nav_text'>Aptitude Tests</li></Link>
-                                <Link to='/LeaderBoard'><li className='nav_text'>LeaderBoard</li></Link>
-                                <Link to='/about'><li className='nav_text'>About us</li></Link>
+                                <Link to='/'><li className='nav_text' onClick={()=>setToggle(!toggle)}>Home</li></Link>
+                                <Link to='/aptitude'><li className='nav_text' onClick={()=>setToggle(!toggle)}>Aptitude Tests</li></Link>
+                                <Link to='/LeaderBoard'><li className='nav_text' onClick={()=>setToggle(!toggle)}>LeaderBoard</li></Link>
+                                <Link to='/about'><li className='nav_text' onClick={()=>setToggle(!toggle)}>About us</li></Link>
                             </ul>
                             <div className='btn_div_mobile'>
                                 <button className='nav_btn_signup' onClick={() => navigate('/SignUp')}>Sign up</button>
