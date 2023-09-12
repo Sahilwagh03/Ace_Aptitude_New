@@ -123,7 +123,14 @@
     animation-iteration-count: 1
   } */
 
-
+  .profile-image{
+    margin-left: 210px;
+  }
+  .profile-image>img{
+    height: 42px;
+    width: 42px;
+    border-radius: 50%;
+  }
   
 
 
@@ -194,6 +201,14 @@
     }
 
     .nav_menu {
+        display: none;
+    }
+    .profile-image_mobile>img{
+        height: 46px;
+        width: 46px;
+        border-radius: 50%;
+    }
+    .profile-image{
         display: none;
     }
 }
