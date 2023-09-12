@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const Question = require("../models/questionSchema");
 const Category = require("../models/categorySchema")
+const User = require('../models/UserSchema')
+const bcrypt = require('bcrypt'); 
 
 const getAllQuestions = async (req, res) => {
   try {
@@ -106,11 +108,73 @@ const getSearchTopic = async (req,res) => {
   }
 }
 
+const postSignUp =  async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // Check if the email is already registered
+    const existingUser = await User.findOne({ email });
+
+    if (existingUser) {
+      return res.status(400).json({ message: 'Email already registered' });
+    }
+
+    // Hash the password before saving it to the database
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Create a new user document
+    const newUser = new User({ email, password: hashedPassword });
+
+    // Save the user to the database
+    await newUser.save();
+
+    res.status(201).json({ message: 'User registered successfully' , success:true});
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ error: 'Internal server error' });
+  }
+}
+
+const postLogin = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // Find the user by email
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(401).json({ message: 'Invalid email or password' });
+    }
+
+    // Compare the provided password with the hashed password in the database
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatch) {
+      return res.status(401).json({ message: 'Invalid email or password' });
+    }
+
+    // Here, we create a user object without the password field
+    const userWithoutPassword = {
+      _id: user._id,
+      email: user.email,
+      // Add any other user information fields you want to include
+    };
+
+    // You can generate a JWT token here and send it back to the client for authentication
+
+    res.status(200).json({ message: 'Login successful', user: userWithoutPassword });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal server error' });
+  }
+}
+
 module.exports = {
   getAllQuestions,
   getAllCategories,
   getFilteredQuestions,
   filterQuestions,
   getFilteredData,
-  getSearchTopic
+  getSearchTopic,
+  postSignUp,
+  postLogin
 };
