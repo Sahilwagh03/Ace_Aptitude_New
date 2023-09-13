@@ -435,8 +435,8 @@ const Aptitude_test_page = () => {
                                     :
                                     <div className='problem_main'>
                                         {
-                                            MainData.map((data, index) =>
-                                                <div onClick={() => handleQuestionRoute(data.category, data.difficulty)} className="problem_card" key={index}>
+                                            MainData.map((data) =>
+                                                <div onClick={() => handleQuestionRoute(data.category, data.difficulty)} className="problem_card" key={data._id}>
                                                     <div className="problem_category">
                                                         <span>{data.category}</span>
                                                         <span className='ml-2'>{selectedSubtopic[data.category]}</span>
