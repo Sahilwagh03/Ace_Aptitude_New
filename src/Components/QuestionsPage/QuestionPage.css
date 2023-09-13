@@ -74,17 +74,10 @@
     font-size: 16px;
 }
 
-.code-snippet {
-    background-color: #f0f0f0;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    overflow-x: auto; /* Add horizontal scrollbar if code overflows */
-}
 
-/* Style for the code text */
-.code {
-    font-family: 'Courier New', monospace;
-    white-space: pre; /* Preserve whitespace and line breaks */
-    margin: 0;
+.loader_container_questions{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 700px;
 }
