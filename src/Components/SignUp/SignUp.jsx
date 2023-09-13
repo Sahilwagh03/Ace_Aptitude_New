@@ -37,7 +37,9 @@ const SignUp = () => {
       if (response.ok) {
         // Registration was successful, you can redirect or show a success message
         toast.success('Registration successful');
-        navigate('/login');
+        setTimeout(()=>{
+          navigate('/login');
+        },500)
       } else {
         // Registration failed, handle the error
         toast.error('Registration failed');
