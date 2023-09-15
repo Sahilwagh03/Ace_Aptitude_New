@@ -105,12 +105,12 @@ const LoginPage = () => {
             <span>Login with Google</span>
           </Link>
         </div>
-        <div className="media-options login">
+        {/* <div className="media-options login">
           <Link className="field facebook login">
             <i className="bx bxl-github facebook-icon login"></i>
             <span>Login with GitHub</span>
           </Link>
-        </div>
+        </div> */}
       </div>
       <Toast />
     </section>

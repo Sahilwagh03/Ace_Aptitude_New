@@ -6,10 +6,12 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 import NavLogo from '../../assets/NavLogo.png'
 import { motion } from 'framer-motion'
 import Avatar_1 from '../../assets/Avatar (1).png'
+import Avatar_4 from '../../assets/Avatar (4).png'
 
 const NavBar = () => {
     const [toggle, setToggle] = useState(false)
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isPopProfile, setisPopProfile] = useState(false)
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -34,10 +36,28 @@ const NavBar = () => {
         if (userInfo) {
             setIsLoggedIn(true)
         }
-        else{
+        else {
             setIsLoggedIn(false)
         }
     }, [location])
+
+    const handleLogout = () => {
+        // Clear localStorage and update isLoggedIn
+        localStorage.removeItem('user');
+        setIsLoggedIn(false);
+        // Close the profile popup
+        setisPopProfile(false);
+        navigate('/')
+    }
+
+    const handleProfile = () => {
+        const userDataString = localStorage.getItem('user')
+        const userData = JSON.parse(userDataString);
+        // Access the _id property
+        const userId = userData._id;
+        navigate(`/Profile/${userId}`)
+        setisPopProfile(!isPopProfile)
+    }
 
     return (
         <>
@@ -64,14 +84,35 @@ const NavBar = () => {
                     </div>
                     {
                         isLoggedIn ?
-                            <div className='profile-image'>
-                                <img src={Avatar_1} alt='Profile' />
+                            <div className='profile-image' onClick={() => setisPopProfile(!isPopProfile)}>
+                                <img src={Avatar_4} alt='Profile' />
                             </div>
                             :
                             <div className='btn_div'>
                                 <button className='nav_btn_signup' onClick={() => navigate('/SignUp')}>Sign up</button>
                                 <button className='nav_btn_login' onClick={() => navigate('/Login')}>Login</button>
                             </div>
+                    }
+                    {
+                        isPopProfile ?
+                            <div className='profile_pop_container'>
+                                <ul>
+                                    <li className='Profile_pop_btn'>
+                                        <div className='Profile_pop_flex' onClick={handleProfile}>
+                                            <i class='bx bx-user'></i>
+                                            <div>Profile</div>
+                                        </div>
+                                    </li>
+                                    <li className='Profile_pop_logout_btn' onClick={handleLogout}>
+                                        <div className='Profile_pop_flex'>
+                                            <i class='bx bx-log-out-circle'></i>
+                                            <div>Logout</div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            :
+                            ""
                     }
 
                     <div className='mobile_size'>
@@ -87,13 +128,16 @@ const NavBar = () => {
                             <div className='btn_div_mobile'>
                                 {
                                     isLoggedIn ?
-                                        <div className='profile-image_mobile'>
-                                            <img src={Avatar_1} alt='Profile' />
-                                        </div>
+                                        <>
+                                            <div className='profile-image_mobile' onClick={() => { handleProfile(); setToggle(!toggle) }}>
+                                                <img src={Avatar_4} alt='Profile' />
+                                            </div>
+                                            <button className='nav_btn_login' onClick={() => { handleLogout() ; setToggle(!toggle) }}>Logout</button>
+                                        </>
                                         :
                                         <>
-                                            <button className='nav_btn_signup' onClick={() => navigate('/SignUp')}>Sign up</button>
-                                            <button className='nav_btn_login' onClick={() => navigate('/Login')}>Login</button>
+                                            <button className='nav_btn_signup' onClick={() => { navigate('/SignUp'); setToggle(!toggle) }}>Sign up</button>
+                                            <button className='nav_btn_login' onClick={() => { navigate('/Login'); setToggle(!toggle) }}>Login</button>
                                         </>
                                 }
                             </div>
