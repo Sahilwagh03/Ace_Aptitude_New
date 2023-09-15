@@ -13,6 +13,7 @@ import Leaderboard from './Components/Leaderboard/Leaderboard'
 import AboutUs from './Components/AboutUs/AboutUs'
 import ProfilePage from './Components/ProfilePage/ProfilePage'
 import { ProtectedComponent } from './Components/ProtectedComponent/ProtectedComponent'
+import Main_Test_Page from './Components/Main_Test_Page/Main_Test_Page'
 
 const App = () => {
 
@@ -37,6 +38,7 @@ const App = () => {
             <Route path='/aptitude' element={<Aptitude_test_page />} />
             <Route path='/LeaderBoard' element={<Leaderboard />} />
           </Route>
+          <Route path='/aptitude-test' element={<Main_Test_Page/>}/>
           <Route path='/about' element={<AboutUs />} />
           <Route path='/test/:category/:level' element={<QuestionPage />} />
           <Route path='/score' element={<ScorePage />} />

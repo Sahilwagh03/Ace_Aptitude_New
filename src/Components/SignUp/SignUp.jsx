@@ -102,12 +102,6 @@ const SignUp = () => {
         </div>
         <div className="line login"></div>
         <div className="media-options login">
-          <Link className="field facebook login">
-            <i className="bx bxl-facebook facebook-icon login"></i>
-            <span>Login with Facebook</span>
-          </Link>
-        </div>
-        <div className="media-options login">
           <Link className="field google login">
             <i className='bx bxl-google'></i>
             <span>Login with Google</span>
