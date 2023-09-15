@@ -1,8 +1,16 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './ProfilePage.css'
 import Member_1 from '../../assets/Member_1.jpg'
 
 const ProfilePage = () => {
+
+    const [userData,setUserData] = useState([])
+
+    useEffect(()=>{
+        const userLocalInfo = localStorage.getItem('user')
+        const data = JSON.parse(userLocalInfo)
+        setUserData(data)
+    },[])
     return (
         <section className='Profile_section'>
             <div className="Profile_Main_Container">
@@ -13,7 +21,7 @@ const ProfilePage = () => {
                             <div className="Profile_user_info_flex">
                                 <div className="Profile_username_name_flex">
                                     <h1>Sahil Wagh</h1>
-                                    <p>sahilwagh142</p>
+                                    <p>{userData.email}</p>
                                 </div>
                                 <div className="Profile_user_rank">
                                     <span>Rank 1</span>

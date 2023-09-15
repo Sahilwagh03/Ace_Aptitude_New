@@ -7,8 +7,11 @@ import Hero_character_2 from '../../assets/Hero_character_2.png'
 import Object_graph from '../../assets/Object_graph.png'
 import Object_Pc from '../../assets/Object_pc.png'
 import Object_cal  from '../../assets/Object_cal.png'
+import { useNavigate } from 'react-router-dom';
 
 const Hero = () => {
+
+    const navigate = useNavigate()
     return (
         <section className='hero_section'>
             <div className="hero_main">
@@ -29,7 +32,7 @@ const Hero = () => {
                     </div>
                     <p><span>The Platform to Master <br className='hero_br' /> Aptitude Skills</span></p>
                     <div className='get_started_div'>
-                        <button className='get_started_btn'>Get Started</button>
+                        <button className='get_started_btn' onClick={()=> navigate('/aptitude')}>Get Started</button>
                     </div>
                 </motion.div>
                 <div className="hero_img">
