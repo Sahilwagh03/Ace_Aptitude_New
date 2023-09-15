@@ -5,7 +5,6 @@ import close from '../../assets/close.svg'
 import { Link, useNavigate, useLocation } from 'react-router-dom'
 import NavLogo from '../../assets/NavLogo.png'
 import { motion } from 'framer-motion'
-import Avatar_1 from '../../assets/Avatar (1).png'
 import Avatar_4 from '../../assets/Avatar (4).png'
 
 const NavBar = () => {
@@ -77,7 +76,7 @@ const NavBar = () => {
                     <div className='nav_menu'>
                         <ul className='nav_lists'>
                             <Link to='/'><li className='nav_text'>Home</li></Link>
-                            <Link to='/aptitude'><li className='nav_text'>Aptitude Tests</li></Link>
+                            <Link to='/aptitude'><li className='nav_text'>Practice Tests</li></Link>
                             <Link to='/LeaderBoard'><li className='nav_text'>LeaderBoard</li></Link>
                             <Link to='/about'><li className='nav_text'>About us</li></Link>
                         </ul>
@@ -121,7 +120,7 @@ const NavBar = () => {
                         <div className={` ${toggle ? 'flex' : 'hidden'} nav_mobile_menu`} >
                             <ul className='nav_lists_mobile'>
                                 <Link to='/'><li className='nav_text' onClick={() => setToggle(!toggle)}>Home</li></Link>
-                                <Link to='/aptitude'><li className='nav_text' onClick={() => setToggle(!toggle)}>Aptitude Tests</li></Link>
+                                <Link to='/aptitude'><li className='nav_text' onClick={() => setToggle(!toggle)}>Practice Tests</li></Link>
                                 <Link to='/LeaderBoard'><li className='nav_text' onClick={() => setToggle(!toggle)}>LeaderBoard</li></Link>
                                 <Link to='/about'><li className='nav_text' onClick={() => setToggle(!toggle)}>About us</li></Link>
                             </ul>

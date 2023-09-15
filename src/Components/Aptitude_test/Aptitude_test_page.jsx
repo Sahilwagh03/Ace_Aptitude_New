@@ -208,7 +208,7 @@ const Aptitude_test_page = () => {
         <>
             <section>
                 <div className="aptitude_Main">
-                    <h1 className='aptitude_heading'>APTITUDE QUESTIONS</h1>
+                    <h1 className='aptitude_heading'>PRACTICE QUESTIONS</h1>
                     <div className="filter_container">
                         <div className='search_div'>
                             <input onChange={(e) => handleSearchInput(e.target.value)} type="text" placeholder='Search Topics' className='searchbar' />
