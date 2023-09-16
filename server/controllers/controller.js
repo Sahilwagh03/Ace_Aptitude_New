@@ -170,31 +170,53 @@ const postLogin = async (req, res) => {
   }
 }
 
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-})
-
-passport.deserializeUser((user, done) => {
-  done(null, user);
-})
 
 passport.use(new GoogleStrategy({
   clientID: '919740930128-phrohd0e30q770ueufj7nsg3hk3a1mff.apps.googleusercontent.com',
   clientSecret: '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',
-  callbackURL: "http://localhost:5000/api/auth/google/callback",
+  callbackURL: "https://ace-aptitude.onrender.com/api/auth/google/callback",
   scope: ['profile', 'email']
 },
-  function (accessToken, refreshToken, profile, done) {
+  async function (accessToken, refreshToken, profile, done) {
     // Register user here.
     console.log(profile);
-    const user = {
-      id: profile.id,
-      email: profile._json.email,
-      picture: profile._json.picture,
-    };
-    return done(null, user);
+    try {
+      // Check if the user exists in your database
+      const existingUser = await User.findOne({ googleId: profile.id });
+
+      if (existingUser) {
+        // User already exists, return the user
+        return done(null, profile);
+      }
+
+      // User doesn't exist, create a new one
+      const newUser = new User({
+        googleId: profile.id,
+        email: profile._json.email,
+      });
+
+      await newUser.save();
+      return done(null, profile);
+    } catch (err) {
+      return done(err);
+    }
   }
 ));
+
+passport.serializeUser((user, done) => {
+  // Serialize the user with only the desired fields
+  const serializedUser = {
+    googleId: user.id,
+    email: user._json.email,
+    picture: user._json.picture,
+    name: user._json.name,
+  };
+  done(null, serializedUser);
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, user);
+})
 
 module.exports = {
   getAllQuestions,

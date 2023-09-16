@@ -5,18 +5,45 @@ import Stats from './Stats'
 import Benefits from './Benefits'
 import PrepareFor from './PrepareFor'
 import JoinCommunity from './JoinCommunity'
+import { useNavigate } from 'react-router-dom'
 const Home = () => {
 
-  useEffect(()=>{
+  const navigate = useNavigate()
+  useEffect(() => {
     window.scrollTo(0, 0);
-  },[])
+    if(localStorage.length!=0){
+      const isgoogle = localStorage.getItem('isgoogleLogin')
+      const data = JSON.parse(isgoogle)
+      const handleLoginGoogle = async () => {
+        try {
+          const response = await fetch('https://ace-aptitude.onrender.com/api/login/success', {
+            method: 'GET',
+            credentials: 'include', // Include credentials (cookies or tokens)
+          });
+  
+          if (response.ok) {
+            const UserData = await response.json();
+            localStorage.setItem('user', JSON.stringify(UserData));
+            navigate('/')
+          } else {
+            console.warn('Done')
+          }
+        } catch (error) {
+         
+        }
+      }
+      if(data){
+        handleLoginGoogle()
+      }
+    }
+  }, [])
   return (
     <>
-    <Hero/>
-    <Stats/>
-    <Benefits/>
-    <PrepareFor/>
-    <JoinCommunity/>
+      <Hero />
+      <Stats />
+      <Benefits />
+      <PrepareFor />
+      <JoinCommunity />
     </>
   )
 }

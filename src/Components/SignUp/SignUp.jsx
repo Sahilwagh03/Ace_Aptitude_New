@@ -53,7 +53,11 @@ const SignUp = () => {
   
 
   const handleGoogleSignUP = ()=>{
-    window.location.href = "http://localhost:5000/api/auth/google";
+    window.location.href = "https://ace-aptitude.onrender.com/api/auth/google/callback";
+    const isgoogle={
+      google:true
+    }
+    localStorage.setItem('isgoogleLogin',JSON.stringify(isgoogle))
   }
 
   return (
