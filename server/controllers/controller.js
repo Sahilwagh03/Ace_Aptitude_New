@@ -2,7 +2,9 @@ const mongoose = require("mongoose");
 const Question = require("../models/questionSchema");
 const Category = require("../models/categorySchema")
 const User = require('../models/UserSchema')
-const bcrypt = require('bcrypt'); 
+const bcrypt = require('bcrypt');
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 const getAllQuestions = async (req, res) => {
   try {
@@ -79,7 +81,7 @@ const getFilteredData = async (req, res) => {
     //     subtopic: subtopic,
     //   }));
     // }
-    
+
     const filteredData = await Category.find(filter);
     res.send(filteredData);
   } catch (error) {
@@ -89,26 +91,26 @@ const getFilteredData = async (req, res) => {
 };
 
 
-const getSearchTopic = async (req,res) => {
+const getSearchTopic = async (req, res) => {
   try {
-    const topic = req.params.topic; 
+    const topic = req.params.topic;
     const searchResults = await Category.find(
       {
-          "$or":[
-              {'category':{$regex:topic}}
-          ]
+        "$or": [
+          { 'category': { $regex: topic } }
+        ]
       }
-  )
-  res.send(searchResults)
-}
-    
-   catch (error) {
+    )
+    res.send(searchResults)
+  }
+
+  catch (error) {
     console.error(error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 }
 
-const postSignUp =  async (req, res) => {
+const postSignUp = async (req, res) => {
   try {
     const { email, password } = req.body;
 
@@ -128,7 +130,7 @@ const postSignUp =  async (req, res) => {
     // Save the user to the database
     await newUser.save();
 
-    res.status(201).json({ message: 'User registered successfully' , success:true});
+    res.status(201).json({ message: 'User registered successfully', success: true });
   } catch (error) {
     console.log(error)
     res.status(500).json({ error: 'Internal server error' });
@@ -168,6 +170,54 @@ const postLogin = async (req, res) => {
   }
 }
 
+
+passport.use(new GoogleStrategy({
+  clientID: '919740930128-phrohd0e30q770ueufj7nsg3hk3a1mff.apps.googleusercontent.com',
+  clientSecret: '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',
+  callbackURL: "https://ace-aptitude.onrender.com/api/auth/google/callback",
+  scope: ['profile', 'email']
+},
+  async function (accessToken, refreshToken, profile, done) {
+    // Register user here.
+    console.log(profile);
+    try {
+      // Check if the user exists in your database
+      const existingUser = await User.findOne({ googleId: profile.id });
+
+      if (existingUser) {
+        // User already exists, return the user
+        return done(null, profile);
+      }
+
+      // User doesn't exist, create a new one
+      const newUser = new User({
+        googleId: profile.id,
+        email: profile._json.email,
+      });
+
+      await newUser.save();
+      return done(null, profile);
+    } catch (err) {
+      return done(err);
+    }
+  }
+));
+
+passport.serializeUser((user, done) => {
+  // Serialize the user with only the desired fields
+  const serializedUser = {
+    googleId: user.id,
+    email: user._json.email,
+    picture: user._json.picture,
+    name: user._json.name,
+  };
+  done(null, serializedUser);
+});
+
+passport.deserializeUser((user, done) => {
+  done(null, user);
+})
+
 module.exports = {
   getAllQuestions,
   getAllCategories,
@@ -176,5 +226,5 @@ module.exports = {
   getFilteredData,
   getSearchTopic,
   postSignUp,
-  postLogin
+  postLogin,
 };

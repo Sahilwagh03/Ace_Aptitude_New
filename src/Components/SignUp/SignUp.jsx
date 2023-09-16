@@ -52,6 +52,13 @@ const SignUp = () => {
   };
   
 
+  const handleGoogleSignUP = ()=>{
+    window.location.href = "https://ace-aptitude.onrender.com/api/auth/google/callback";
+    const isgoogle={
+      google:true
+    }
+    localStorage.setItem('isgoogleLogin',JSON.stringify(isgoogle))
+  }
 
   return (
     <section className="custom-container signUp-container forms">
@@ -101,7 +108,7 @@ const SignUp = () => {
           </div>
         </div>
         <div className="line login"></div>
-        <div className="media-options login">
+        <div className="media-options login" onClick={handleGoogleSignUP}>
           <Link className="field google login">
             <i className='bx bxl-google'></i>
             <span>Login with Google</span>

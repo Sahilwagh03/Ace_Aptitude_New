@@ -11,6 +11,7 @@ const NavBar = () => {
     const [toggle, setToggle] = useState(false)
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isPopProfile, setisPopProfile] = useState(false)
+    const [userProfile, setuserProfile] = useState('')
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -34,6 +35,9 @@ const NavBar = () => {
         const userInfo = localStorage.getItem('user');
         if (userInfo) {
             setIsLoggedIn(true)
+            const userProfile = localStorage.getItem('user')
+            const data = JSON.parse(userProfile)
+            setuserProfile(data.picture)
         }
         else {
             setIsLoggedIn(false)
@@ -43,6 +47,7 @@ const NavBar = () => {
     const handleLogout = () => {
         // Clear localStorage and update isLoggedIn
         localStorage.removeItem('user');
+        localStorage.removeItem('isgoogleLogin');
         setIsLoggedIn(false);
         // Close the profile popup
         setisPopProfile(false);
@@ -84,7 +89,7 @@ const NavBar = () => {
                     {
                         isLoggedIn ?
                             <div className='profile-image' onClick={() => setisPopProfile(!isPopProfile)}>
-                                <img src={Avatar_4} alt='Profile' />
+                                <img src={userProfile || Avatar_4} alt='Profile' />
                             </div>
                             :
                             <div className='btn_div'>
@@ -131,7 +136,7 @@ const NavBar = () => {
                                             <div className='profile-image_mobile' onClick={() => { handleProfile(); setToggle(!toggle) }}>
                                                 <img src={Avatar_4} alt='Profile' />
                                             </div>
-                                            <button className='nav_btn_login' onClick={() => { handleLogout() ; setToggle(!toggle) }}>Logout</button>
+                                            <button className='nav_btn_login' onClick={() => { handleLogout(); setToggle(!toggle) }}>Logout</button>
                                         </>
                                         :
                                         <>
