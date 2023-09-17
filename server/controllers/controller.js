@@ -214,18 +214,9 @@ passport.serializeUser((user, done) => {
   done(null, serializedUser);
 });
 
-passport.deserializeUser(async (serializedUser, done) => {
-  try {
-      // Deserialize the user based on the serialized data
-      const user = await User.findOne({ googleId: serializedUser.googleId });
-      if (!user) {
-          return done(new Error('User not found'), null);
-      }
-      done(null, user);
-  } catch (err) {
-      done(err, null);
-  }
-});
+passport.deserializeUser((user, done) => {
+  done(null, user);
+})
 
 module.exports = {
   getAllQuestions,
