@@ -27,7 +27,10 @@ router.get('/auth/google/callback', passport.authenticate('google', { failureRed
 router.get('/login/success', (req, res) => {
   if (req.user) {
     res.send(req.user)
-  } 
+  }
+  else{
+    res.send("not generated")
+  }
 });
 
 module.exports = router;
