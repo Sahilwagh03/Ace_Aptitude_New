@@ -21,11 +21,13 @@ app.use(session({
 }));
 app.use(express.json())
 //This is used to solve the issue of api when we fetch on browser reject the request becuase of differnt ports
-app.use(cors({
-    origin:'https://ace-aptitude-psi.vercel.app',
-    methods:'GET,POST,PUT,DELETE',
-    credentials:true
-})) 
+app.use(cors(
+    // {
+    //     origin: 'https://ace-aptitude-psi.vercel.app',
+    //     methods: 'GET,POST,PUT,DELETE',
+    //     credentials: true
+    // }
+))
 app.use(express.json())
 app.use(morgan('dev'))
 app.use(passport.initialize());
@@ -33,9 +35,9 @@ app.use(passport.session());
 
 
 //routes
-app.use('/api' , router)
+app.use('/api', router)
 
-app.get('/',(req,res)=>{
+app.get('/', (req, res) => {
     res.send("Hello")
 })
 
