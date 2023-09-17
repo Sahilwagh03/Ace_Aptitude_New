@@ -187,7 +187,7 @@ const Aptitude_test_page = () => {
     }, [])
 
     const handleQuestionRoute = (category, level) => {
-        navigate(`/test/${category}/${level}`)
+        navigate(`/Practice_test/${category}/${level}`)
     }
 
     const handleSearchInput = async (topic) => {
