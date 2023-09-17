@@ -20,13 +20,14 @@ const Home = () => {
             method: 'GET',
             credentials: 'include', // Include credentials (cookies or tokens)
           });
-  
+          const UserData = await response.json();
+          console.log(UserData)
           if (response.ok) {
             const UserData = await response.json();
             localStorage.setItem('user', JSON.stringify(UserData));
             navigate('/')
           } else {
-            console.warn('Done')
+            console.log('Done')
           }
         } catch (error) {
          
