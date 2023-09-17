@@ -32,7 +32,9 @@ const Home = () => {
          console.log(error)
         }
       }
-      handleLoginGoogle()
+      if(data){
+        handleLoginGoogle()
+      }
     }
   }, [])
   return (
