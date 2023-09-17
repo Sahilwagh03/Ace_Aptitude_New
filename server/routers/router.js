@@ -21,10 +21,11 @@ router.get("/Search/:topic", getSearchTopic);
 router.post('/signup', postSignUp);
 router.post('/login', postLogin);
 router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: 'https://ace-aptitude-psi.vercel.app/SignUp', successRedirect: 'https://ace-aptitude-psi.vercel.app' }), (req, res) => {
+router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: 'http://localhost:3000/SignUp', successRedirect: 'http://localhost:3000' }), (req, res) => {
   res.send('logged in!')
 })
 router.get('/login/success', (req, res) => {
+  console.log(req.user)
   if (req.user) {
     res.send(req.user)
   }
