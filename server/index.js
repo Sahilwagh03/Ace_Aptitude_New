@@ -22,7 +22,7 @@ app.use(session({
 app.use(express.json())
 //This is used to solve the issue of api when we fetch on browser reject the request becuase of differnt ports
 app.use(cors({
-    origin:'http://localhost:3000',
+    origin:'https://ace-aptitude-psi.vercel.app',
     methods:'GET,POST,PUT,DELETE',
     credentials:true
 })) 
