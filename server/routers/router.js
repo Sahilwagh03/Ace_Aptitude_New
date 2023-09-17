@@ -25,12 +25,15 @@ router.get('/auth/google/callback', passport.authenticate('google', { failureRed
   res.send('logged in!')
 })
 router.get('/login/success', (req, res) => {
-  console.log(req.user)
-  if (req.user) {
-    res.send(req.user)
-  }
-  else{
-    res.send("not generated")
+  try {
+    if (req.user) {
+      res.send(req.user)
+    }
+    else{
+      res.send("not generated")
+    } 
+  } catch (error) {
+    console.log(error)
   }
 });
 
