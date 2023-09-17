@@ -16,7 +16,7 @@ const Home = () => {
       const data = JSON.parse(isgoogle)
       const handleLoginGoogle = async () => {
         try {
-          const response = await fetch('https://ace-aptitude.onrender.com/api/auth/google/callback', {
+          const response = await fetch('https://ace-aptitude.onrender.com/api/login/success', {
             method: 'GET',
             credentials: 'include', // Include credentials (cookies or tokens)
           });
