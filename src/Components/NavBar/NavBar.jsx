@@ -47,7 +47,6 @@ const NavBar = () => {
     const handleLogout = () => {
         // Clear localStorage and update isLoggedIn
         localStorage.removeItem('user');
-        localStorage.removeItem('isgoogleLogin');
         setIsLoggedIn(false);
         // Close the profile popup
         setisPopProfile(false);
@@ -82,6 +81,7 @@ const NavBar = () => {
                         <ul className='nav_lists'>
                             <Link to='/'><li className='nav_text'>Home</li></Link>
                             <Link to='/aptitude'><li className='nav_text'>Practice Tests</li></Link>
+                            <Link to='/test'><li className='nav_text'>Test</li></Link>
                             <Link to='/LeaderBoard'><li className='nav_text'>LeaderBoard</li></Link>
                             <Link to='/about'><li className='nav_text'>About us</li></Link>
                         </ul>
@@ -126,6 +126,7 @@ const NavBar = () => {
                             <ul className='nav_lists_mobile'>
                                 <Link to='/'><li className='nav_text' onClick={() => setToggle(!toggle)}>Home</li></Link>
                                 <Link to='/aptitude'><li className='nav_text' onClick={() => setToggle(!toggle)}>Practice Tests</li></Link>
+                                <Link to='/test'><li className='nav_text' onClick={() => setToggle(!toggle)}>Test</li></Link>
                                 <Link to='/LeaderBoard'><li className='nav_text' onClick={() => setToggle(!toggle)}>LeaderBoard</li></Link>
                                 <Link to='/about'><li className='nav_text' onClick={() => setToggle(!toggle)}>About us</li></Link>
                             </ul>
