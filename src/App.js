@@ -36,9 +36,9 @@ const App = () => {
           <Route path='/' element={<Home />} />
           <Route element={<ProtectedComponent />}>
             <Route path='/aptitude' element={<Aptitude_test_page />} />
+            <Route path='/test' element={<Main_Test_Page/>}/>
             <Route path='/LeaderBoard' element={<Leaderboard />} />
           </Route>
-          <Route path='/aptitude-test' element={<Main_Test_Page/>}/>
           <Route path='/about' element={<AboutUs />} />
           <Route path='/Practice_test/:category/:level' element={<QuestionPage />} />
           <Route path='/score' element={<ScorePage />} />

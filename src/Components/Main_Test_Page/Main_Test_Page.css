@@ -1,0 +1,61 @@
+/* Main_Test_Page.css */
+
+.main-test-page {
+    padding: 20px;
+    min-height: 100vh;
+  }
+  
+  .main-test-heading {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .test-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .test-card {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .test-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .test-category {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .test-details {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .test-time,
+  .test-questions {
+    margin-right: 10px;
+  }
+  
+  .start-test-button {
+    background-color: rgba(102, 116, 204, 0.741);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .start-test-button:hover {
+    background-color: rgb(102 116 204);
+  }
+  
