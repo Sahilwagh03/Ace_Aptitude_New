@@ -32,7 +32,7 @@ const SignUp = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password , Name }), // Send only email and password
+        body: JSON.stringify({Name , email, password }), // Send only email and password
       });
 
       if (response.ok) {

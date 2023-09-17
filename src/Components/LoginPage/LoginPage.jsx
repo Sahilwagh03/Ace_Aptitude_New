@@ -34,7 +34,8 @@ const LoginPage = () => {
         const userInfo = {
           email: data.user.email,
           _id: data.user._id,
-          logined:true
+          logined:true,
+          Name:data.user.Name
         };
 
         // Store the user object as a JSON string in local storage

@@ -112,7 +112,7 @@ const getSearchTopic = async (req, res) => {
 
 const postSignUp = async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { Name, email, password } = req.body;
 
     // Check if the email is already registered
     const existingUser = await User.findOne({ email });
@@ -125,7 +125,7 @@ const postSignUp = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create a new user document
-    const newUser = new User({ Name , email, password: hashedPassword });
+    const newUser = new User({ Name, email, password: hashedPassword });
 
     // Save the user to the database
     await newUser.save();
@@ -157,7 +157,7 @@ const postLogin = async (req, res) => {
 
     // Here, we create a user object without the password field
     const userWithoutPassword = {
-      Name:user.Name,
+      Name: user.Name,
       _id: user._id,
       email: user.email,
       // Add any other user information fields you want to include
