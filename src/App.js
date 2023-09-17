@@ -40,7 +40,7 @@ const App = () => {
           </Route>
           <Route path='/aptitude-test' element={<Main_Test_Page/>}/>
           <Route path='/about' element={<AboutUs />} />
-          <Route path='/test/:category/:level' element={<QuestionPage />} />
+          <Route path='/Practice_test/:category/:level' element={<QuestionPage />} />
           <Route path='/score' element={<ScorePage />} />
           <Route path='/Login' element={islogin ? <Navigate to='/' /> : <LoginPage />} />
           <Route path='/SignUp' element={islogin ? <Navigate to='/' /> : <SignUp />} />
