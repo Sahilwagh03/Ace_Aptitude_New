@@ -30,7 +30,7 @@ const Home = () => {
             console.log('Done')
           }
         } catch (error) {
-         
+         console.log(error)
         }
       }
       if(data){
