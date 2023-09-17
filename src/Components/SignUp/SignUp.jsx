@@ -53,7 +53,7 @@ const SignUp = () => {
   
 
   const handleGoogleSignUP = ()=>{
-    window.location.href = "https://ace-aptitude.onrender.com/api/auth/google/callback";
+    window.location.href = "https://ace-aptitude.onrender.com/api/auth/google";
     const isgoogle={
       google:true
     }

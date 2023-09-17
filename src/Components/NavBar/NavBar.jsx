@@ -103,13 +103,13 @@ const NavBar = () => {
                                 <ul>
                                     <li className='Profile_pop_btn'>
                                         <div className='Profile_pop_flex' onClick={handleProfile}>
-                                            <i class='bx bx-user'></i>
+                                            <i className='bx bx-user'></i>
                                             <div>Profile</div>
                                         </div>
                                     </li>
                                     <li className='Profile_pop_logout_btn' onClick={handleLogout}>
                                         <div className='Profile_pop_flex'>
-                                            <i class='bx bx-log-out-circle'></i>
+                                            <i className='bx bx-log-out-circle'></i>
                                             <div>Logout</div>
                                         </div>
                                     </li>
