@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
+  Name:{
+    type: String,
+  },
   email: {
     type: String,
   },
@@ -8,9 +11,6 @@ const userSchema = new mongoose.Schema({
     type: String,
   },
   googleId: {
-    type: String,
-  },
-  githubId: {
     type: String,
   },
   // Add any other user information fields here as needed
