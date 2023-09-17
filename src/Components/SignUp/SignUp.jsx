@@ -54,10 +54,10 @@ const SignUp = () => {
 
   const handleGoogleSignUP = ()=>{
     window.location.href = "https://ace-aptitude.onrender.com/api/auth/google";
-    const isgoogle={
-      google:true
-    }
-    localStorage.setItem('isgoogleLogin',JSON.stringify(isgoogle))
+    // const isgoogle={
+    //   google:true
+    // }
+    // localStorage.setItem('isgoogleLogin',JSON.stringify(isgoogle))
   }
 
   return (
@@ -107,13 +107,13 @@ const SignUp = () => {
             </span>
           </div>
         </div>
-        <div className="line login"></div>
+        {/* <div className="line login"></div>
         <div className="media-options login" onClick={handleGoogleSignUP}>
           <Link className="field google login">
             <i className='bx bxl-google'></i>
             <span>Login with Google</span>
           </Link>
-        </div>
+        </div> */}
       </div>
       <Toast />
     </section>
