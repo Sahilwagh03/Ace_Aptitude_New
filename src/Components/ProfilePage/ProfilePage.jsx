@@ -20,7 +20,7 @@ const ProfilePage = () => {
                             <img src={Member_1} alt="" />
                             <div className="Profile_user_info_flex">
                                 <div className="Profile_username_name_flex">
-                                    <h1>Sahil Wagh</h1>
+                                    <h1>{userData.Name}</h1>
                                     <p>{userData.email}</p>
                                 </div>
                                 <div className="Profile_user_rank">
