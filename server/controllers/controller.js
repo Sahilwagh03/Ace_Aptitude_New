@@ -171,6 +171,42 @@ const postLogin = async (req, res) => {
   }
 }
 
+const getRandomQuestions = async(req,res)=>{
+  try {
+    const { numberOfQuestions, category } = req.params;
+    
+    // Calculate the number of easy, medium, and hard questions based on percentages
+    const totalQuestions = parseInt(numberOfQuestions, 10);
+    const easyCount = Math.ceil(totalQuestions * 0.3);
+    const mediumCount = Math.ceil(totalQuestions * 0.5);
+    const hardCount = Math.floor(totalQuestions * 0.2);
+
+    // Query the database to fetch random questions for each difficulty level and category
+    const easyQuestions = await Question.aggregate([
+      { $match: { difficulty: 'easy', category } },
+      { $sample: { size: easyCount } },
+    ]);
+
+    const mediumQuestions = await Question.aggregate([
+      { $match: { difficulty: 'medium', category } },
+      { $sample: { size: mediumCount } },
+    ]);
+
+    const hardQuestions = await Question.aggregate([
+      { $match: { difficulty: 'hard', category } },
+      { $sample: { size: hardCount } },
+    ]);
+
+    // Combine the questions from different difficulty levels
+    const allQuestions = [...easyQuestions, ...mediumQuestions, ...hardQuestions];
+
+    res.send(allQuestions);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred while fetching questions' });
+  }
+}
+
 
 passport.use(new GoogleStrategy({
   clientID: '919740930128-phrohd0e30q770ueufj7nsg3hk3a1mff.apps.googleusercontent.com',
@@ -228,4 +264,5 @@ module.exports = {
   getSearchTopic,
   postSignUp,
   postLogin,
+  getRandomQuestions
 };
