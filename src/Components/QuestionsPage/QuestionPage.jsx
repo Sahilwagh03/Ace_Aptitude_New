@@ -32,7 +32,7 @@ const QuestionPage = () => {
                     setroute('/aptitude')
                 }
                 else if (numberOfQuestions && time && category && !level) {
-                    apiUrl = `http://localhost:5000/api/getRandomQuestions/${numberOfQuestions}/${category}`
+                    apiUrl = `https://ace-aptitude.onrender.com/api/getRandomQuestions/${numberOfQuestions}/${category}`
                     setroute('/test')
                 }
                 const response = await fetch(apiUrl);
