@@ -211,18 +211,21 @@ const getRandomQuestions = async(req,res)=>{
 const postTestData = async (req, res) => {
   try {
     const { userId, test } = req.body;
+    console.log(req.body.tests)
 
     // Find the user's tests by userId
     const existingUserTests = await Test.findOne({ userId });
 
     if (!existingUserTests) {
       // If no tests exist for the user, create a new user and test
-      const newUserTests = new Test({ userId, tests: [test] });
+      const newUserTests = new Test(req.body);
       await newUserTests.save();
+      res.send({message:"Saved successfully"})
     } else {
       // If tests exist for the user, append the new test to the existing tests array
-      existingUserTests.tests.push(test);
+      existingUserTests.tests.push(...req.body.tests);
       await existingUserTests.save();
+      res.send({message:"Saved successfully"})
     }
   } catch (error) {
     console.error('Error creating/updating test:', error);

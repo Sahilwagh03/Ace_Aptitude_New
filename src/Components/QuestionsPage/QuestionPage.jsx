@@ -3,14 +3,14 @@ import { useParams, useNavigate } from 'react-router-dom';
 import './QuestionPage.css';
 
 const QuestionPage = () => {
-    const { numberOfQuestions, category, level, time } = useParams();
+    const { numberOfQuestions, category, level, time, testName } = useParams();
     const navigate = useNavigate(); // Initialize the navigate function
     const [QuestionArray, setQuestionArray] = useState([]);
     const [selectedAnswers, setSelectedAnswers] = useState([]); // State to store selected answers
     const [timeLeft, setTimeLeft] = useState(parseTimeToSeconds(time) || 10 * 60); // Parse and convert time to seconds
     const [correctAnswers, setCorrectAnswers] = useState([])
     const [isLoading, setIsLoading] = useState(true)
-    const [route,setroute]=useState('')
+    const [route, setroute] = useState('')
 
     // Utility function to convert a time string like '45 minutes' to seconds
     function parseTimeToSeconds(timeString) {
@@ -31,7 +31,7 @@ const QuestionPage = () => {
                     apiUrl = `https://ace-aptitude.onrender.com/api/filterQuestions/${category}/${level}`
                     setroute('/aptitude')
                 }
-                else if (numberOfQuestions && time && category && !level) {
+                else if (numberOfQuestions && time && category && testName && !level) {
                     apiUrl = `https://ace-aptitude.onrender.com/api/getRandomQuestions/${numberOfQuestions}/${category}`
                     setroute('/test')
                 }
@@ -53,7 +53,7 @@ const QuestionPage = () => {
         };
         getAllcategory();
         window.scrollTo(0, 0);
-    }, []);
+    }, [numberOfQuestions, category, level, time, testName]);
 
     // Set a 1-second interval timer to update the remaining time
     useEffect(() => {
@@ -117,7 +117,13 @@ const QuestionPage = () => {
                                 </div>
                             ))}
                         </div>
-                        <button className="submit-button" onClick={() => navigate('/score', { state: { selectedAnswers, correctAnswers, QuestionArray , route} })}>
+                        <button className="submit-button"
+                            onClick={() => {
+                                const timeTakenInSeconds = parseTimeToSeconds(time) - timeLeft;
+                                const timeTakenInMinutes = timeTakenInSeconds / 60;
+                                const timeTakenAsNumber = parseFloat(timeTakenInMinutes);
+                                navigate('/score', { state: { selectedAnswers, correctAnswers, QuestionArray, route, timeTaken: timeTakenAsNumber, testName } })
+                            }}>
                             Submit
                         </button>
                     </div>
