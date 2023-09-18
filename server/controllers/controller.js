@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Question = require("../models/questionSchema");
 const Category = require("../models/categorySchema")
+const Test = require("../models/testSchema")
 const User = require('../models/UserSchema')
 const bcrypt = require('bcrypt');
 const passport = require('passport');
@@ -207,6 +208,47 @@ const getRandomQuestions = async(req,res)=>{
   }
 }
 
+const postTestData = async (req, res) => {
+  try {
+    const { userId, test } = req.body;
+
+    // Find the user's tests by userId
+    const existingUserTests = await Test.findOne({ userId });
+
+    if (!existingUserTests) {
+      // If no tests exist for the user, create a new user and test
+      const newUserTests = new Test({ userId, tests: [test] });
+      await newUserTests.save();
+    } else {
+      // If tests exist for the user, append the new test to the existing tests array
+      existingUserTests.tests.push(test);
+      await existingUserTests.save();
+    }
+  } catch (error) {
+    console.error('Error creating/updating test:', error);
+    res.status(500).json({ message: 'Failed to create/update test' });
+  }
+};
+
+const getUserTestData = async (req, res) => {
+  try {
+    const userId = req.params.userId;
+
+    // Find the user's test data by userId
+    const userTests = await Test.findOne({ userId });
+
+    if (!userTests) {
+      // If no tests exist for the user, respond with a 404 Not Found status
+      return res.status(404).json({ message: 'No tests found for the user' });
+    }
+
+    // Respond with the user's test data
+    res.status(200).json(userTests);
+  } catch (error) {
+    console.error('Error fetching user test data:', error);
+    res.status(500).json({ message: 'Failed to fetch user test data' });
+  }
+}
 
 passport.use(new GoogleStrategy({
   clientID: '919740930128-phrohd0e30q770ueufj7nsg3hk3a1mff.apps.googleusercontent.com',
@@ -264,5 +306,7 @@ module.exports = {
   getSearchTopic,
   postSignUp,
   postLogin,
-  getRandomQuestions
+  getRandomQuestions,
+  postTestData,
+  getUserTestData,
 };
