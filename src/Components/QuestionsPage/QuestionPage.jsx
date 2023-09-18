@@ -3,23 +3,45 @@ import { useParams, useNavigate } from 'react-router-dom';
 import './QuestionPage.css';
 
 const QuestionPage = () => {
-    const { category, level } = useParams();
+    const { numberOfQuestions, category, level, time } = useParams();
     const navigate = useNavigate(); // Initialize the navigate function
     const [QuestionArray, setQuestionArray] = useState([]);
     const [selectedAnswers, setSelectedAnswers] = useState([]); // State to store selected answers
-    const [timeLeft, setTimeLeft] = useState(10 * 60); // Initial time in seconds (10 minutes)
+    const [timeLeft, setTimeLeft] = useState(parseTimeToSeconds(time) || 10 * 60); // Parse and convert time to seconds
     const [correctAnswers, setCorrectAnswers] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+    const [route,setroute]=useState('')
+
+    // Utility function to convert a time string like '45 minutes' to seconds
+    function parseTimeToSeconds(timeString) {
+        const match = timeString ? timeString.match(/(\d+) minutes/) : null;
+        if (match && match[1]) {
+            const minutes = parseInt(match[1], 10);
+            return minutes * 60; // Convert to seconds
+        }
+        return 30 * 60; // Default to 10 minutes (600 seconds) if the format is not as expected or time is not provided
+    }
 
     useEffect(() => {
         const getAllcategory = async () => {
             try {
-                const response = await fetch(`https://ace-aptitude.onrender.com/api/filterQuestions/${category}/${level}`);
+
+                let apiUrl = ''
+                if (category && level && (!numberOfQuestions && !time)) {
+                    apiUrl = `https://ace-aptitude.onrender.com/api/filterQuestions/${category}/${level}`
+                    setroute('/aptitude')
+                }
+                else if (numberOfQuestions && time && category && !level) {
+                    apiUrl = `http://localhost:5000/api/getRandomQuestions/${numberOfQuestions}/${category}`
+                    setroute('/test')
+                }
+                const response = await fetch(apiUrl);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
                 const jsonData = await response.json();
                 setQuestionArray(jsonData);
+                console.log(jsonData)
                 const answers = jsonData.map(({ correctOption }) => correctOption);
                 setCorrectAnswers(answers)
                 setIsLoading(false)
@@ -95,7 +117,7 @@ const QuestionPage = () => {
                                 </div>
                             ))}
                         </div>
-                        <button className="submit-button" onClick={() => navigate('/score', { state: { selectedAnswers, correctAnswers, QuestionArray } })}>
+                        <button className="submit-button" onClick={() => navigate('/score', { state: { selectedAnswers, correctAnswers, QuestionArray , route} })}>
                             Submit
                         </button>
                     </div>

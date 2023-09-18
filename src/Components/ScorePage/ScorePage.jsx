@@ -1,10 +1,11 @@
 import React , {useEffect} from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './ScorePage.css';
 
 const ScorePage = () => {
+    const navigate = useNavigate()
     const { state } = useLocation();
-    const { selectedAnswers, correctAnswers, QuestionArray } = state || {};
+    const { selectedAnswers, correctAnswers, QuestionArray ,route} = state || {};
 
     const score = selectedAnswers.reduce((acc, selected, index) => {
         return selected === correctAnswers[index] ? acc + 1 : acc;
@@ -13,6 +14,11 @@ const ScorePage = () => {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, []);
+
+    const handlePracticeMore = (e)=>{
+        e.preventDefault()
+        navigate(route)
+    }
 
     return (
         <>
@@ -53,6 +59,7 @@ const ScorePage = () => {
                 <div className="score">
                     Your Score: {score} out of {QuestionArray.length}
                 </div>
+                <button className='submit-button' onClick={(e)=>handlePracticeMore(e)}>Practice more</button>
             </div>
         </>
     );

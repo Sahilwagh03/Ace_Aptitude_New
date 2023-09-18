@@ -9,6 +9,7 @@ const {
   getSearchTopic,
   postSignUp,
   postLogin,
+  getRandomQuestions
 } = require("../controllers/controller"); // Import both controller functions
 const router = express.Router();
 
@@ -20,6 +21,8 @@ router.get('/FilterData/:category?/:level?', getFilteredData);
 router.get("/Search/:topic", getSearchTopic);
 router.post('/signup', postSignUp);
 router.post('/login', postLogin);
+router.get('/getRandomQuestions/:numberOfQuestions/:category',getRandomQuestions)
+
 router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: 'https://ace-aptitude-psi.vercel.app/SignUp', successRedirect: 'https://ace-aptitude-psi.vercel.app' }), (req, res) => {
   res.send('logged in!')

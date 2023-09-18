@@ -1,8 +1,9 @@
 import React from 'react'
 import './Main_Test_Page.css'
+import { useNavigate } from 'react-router-dom';
 
 const Main_Test_Page = () => {
-
+  const navigate = useNavigate()
   const testCards = [
     {
       category: 'General Aptitude',
@@ -15,12 +16,20 @@ const Main_Test_Page = () => {
       questions: 25,
     },
     {
-      category: 'Verbal Reasoning',
+      category: 'Verbal',
+      time: '40 minutes',
+      questions: 30,
+    },
+    {
+      category: 'Logical Reasoning',
       time: '40 minutes',
       questions: 30,
     },
   ];
 
+  const handleTest = (category,time,numberOfQuestions)=>{
+    navigate(`/test/${numberOfQuestions}/${category}/${time}`)
+  }
   return (
     <>
       <div className="main-test-page">
@@ -33,7 +42,7 @@ const Main_Test_Page = () => {
                 <span className="test-time">Time: {test.time}</span>
                 <span className="test-questions">Questions: {test.questions}</span>
               </div>
-              <button className="start-test-button">Start Test</button>
+              <button className="start-test-button" onClick={()=>handleTest(test.category,test.time,test.questions)}>Start Test</button>
             </div>
           ))}
         </div>

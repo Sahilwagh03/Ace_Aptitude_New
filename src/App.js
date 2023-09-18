@@ -24,7 +24,7 @@ const App = () => {
     if (userInfo) {
       const userObject = JSON.parse(userInfo); // Parse the JSON string
       setIslogin(userObject.logined); // Access the logined property
-    } else {
+    } else if(!userInfo) {
       setIslogin(false);
     }
   }, []);
@@ -41,6 +41,7 @@ const App = () => {
           </Route>
           <Route path='/about' element={<AboutUs />} />
           <Route path='/Practice_test/:category/:level' element={<QuestionPage />} />
+          <Route path='/test/:numberOfQuestions/:category/:time' element={<QuestionPage />} />
           <Route path='/score' element={<ScorePage />} />
           <Route path='/Login' element={islogin ? <Navigate to='/' /> : <LoginPage />} />
           <Route path='/SignUp' element={islogin ? <Navigate to='/' /> : <SignUp />} />
