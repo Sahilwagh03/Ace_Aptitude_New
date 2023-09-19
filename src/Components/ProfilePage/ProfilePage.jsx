@@ -10,6 +10,19 @@ const ProfilePage = () => {
         const userLocalInfo = localStorage.getItem('user')
         const data = JSON.parse(userLocalInfo)
         setUserData(data)
+        const getUserTestData = async () => {
+            try {
+                const response = await fetch(`https://ace-aptitude.onrender.com/api/user/tests/${data._id}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const jsonData = await response.json();
+                console.log(jsonData)
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getUserTestData()
     },[])
     return (
         <section className='Profile_section'>
