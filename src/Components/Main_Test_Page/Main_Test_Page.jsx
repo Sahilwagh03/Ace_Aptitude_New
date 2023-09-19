@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Main_Test_Page.css'
 import { useNavigate } from 'react-router-dom';
 
 const Main_Test_Page = () => {
   const navigate = useNavigate()
+  useEffect(()=>{
+    window.scrollTo(0, 0);
+  },[])
   const testCards = [
     {
       testName:'General Aptitude Test 1',
