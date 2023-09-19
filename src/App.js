@@ -17,17 +17,17 @@ import Main_Test_Page from './Components/Main_Test_Page/Main_Test_Page'
 
 const App = () => {
 
-  const [islogin, setIslogin] = useState(false)
+  // const [islogin, setIslogin] = useState(false)
 
-  useEffect(() => {
-    const userInfo = localStorage.getItem('user');
-    if (userInfo) {
-      const userObject = JSON.parse(userInfo); // Parse the JSON string
-      setIslogin(userObject.logined); // Access the logined property
-    } else if(!userInfo) {
-      setIslogin(false);
-    }
-  }, []);
+  // useEffect(() => {
+  //   const userInfo = localStorage.getItem('user');
+  //   if (userInfo) {
+  //     const userObject = JSON.parse(userInfo); // Parse the JSON string
+  //     setIslogin(userObject.logined); // Access the logined property
+  //   } else if(!userInfo) {
+  //     setIslogin(false);
+  //   }
+  // }, []);
   return (
     <>
       <BrowserRouter>
@@ -43,8 +43,8 @@ const App = () => {
           <Route path='/Practice_test/:category/:level' element={<QuestionPage />} />
           <Route path='/test/:numberOfQuestions/:category/:time/:testName' element={<QuestionPage />} />
           <Route path='/score' element={<ScorePage />} />
-          <Route path='/Login' element={islogin ? <Navigate to='/' /> : <LoginPage />} />
-          <Route path='/SignUp' element={islogin ? <Navigate to='/' /> : <SignUp />} />
+          <Route path='/Login' element={<LoginPage />} />
+          <Route path='/SignUp' element={<SignUp />} />
           <Route path='/Profile/:id' element={<ProfilePage />} />
           <Route path='*' element={<h1>Not Found</h1>} />
         </Routes>
