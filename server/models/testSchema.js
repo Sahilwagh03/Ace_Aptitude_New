@@ -28,6 +28,10 @@ const testSchema = new Schema({
     type: String,
     required: true,
   },
+  coins: {
+    type: Number,
+    default: 0,
+  },
 });
 
 const Test = mongoose.model('tests', testSchema);
