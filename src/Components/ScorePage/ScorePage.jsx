@@ -18,13 +18,37 @@ const ScorePage = () => {
 
     const handlePracticeMore = async (e) => {
         e.preventDefault()
-        if(route==='/test'){
+        if (route === '/test') {
             const user = localStorage.getItem('user')
             const userInfo = JSON.parse(user)
             const id = userInfo._id
             const questionCategory = QuestionArray[0].category
+
+            // Calculate the user's percentage score
+            const percentageScore = (score / QuestionArray.length) * 100;
+
+            // Calculate coinsEarned based on the percentage score
+            let coinsEarned = 0;
+
+            if (percentageScore == 0) {
+                coinsEarned = 0;
+            }
+            else if (percentageScore <= 50) {
+                coinsEarned = 1;
+            } else if (percentageScore <= 70) {
+                coinsEarned = 3;
+            } else if (percentageScore <= 100) {
+                coinsEarned = 5;
+            }
+
+            // Ensure coinsEarned is a positive integer
+            coinsEarned = Math.max(0, coinsEarned);
+
+            // Calculate the new coin count
+            const newCoinCount = coinsEarned;
+
             const requestData = {
-                userId:id,
+                userId: id,
                 tests: [
                     {
                         testName: testName,
@@ -33,7 +57,8 @@ const ScorePage = () => {
                         durationMinutes: timeTaken,
                         category: questionCategory,
                     },
-                ]
+                ],
+                coins: newCoinCount
             }
             try {
                 const response = await fetch(`https://ace-aptitude.onrender.com/api/tests`, {
@@ -43,14 +68,18 @@ const ScorePage = () => {
                     },
                     body: JSON.stringify(requestData),
                 })
-    
+
                 const data = await response.json()
-                navigate(route)
+                setTimeout(()=>{
+                    navigate(route)
+                },1000)
             } catch (error) {
                 console.log(error)
             }
         }
-        
+        else {
+            navigate(route)
+        }
     }
 
     return (

@@ -224,6 +224,7 @@ const postTestData = async (req, res) => {
     } else {
       // If tests exist for the user, append the new test to the existing tests array
       existingUserTests.tests.push(...req.body.tests);
+      existingUserTests.coins += req.body.coins;
       await existingUserTests.save();
       res.send({message:"Saved successfully"})
     }
