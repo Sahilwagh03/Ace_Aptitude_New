@@ -30,7 +30,7 @@ const ScorePage = () => {
             // Calculate coinsEarned based on the percentage score
             let coinsEarned = 0;
 
-            if(percentageScore==0){
+            if (percentageScore == 0) {
                 coinsEarned = 0;
             }
             else if (percentageScore <= 50) {
@@ -44,13 +44,8 @@ const ScorePage = () => {
             // Ensure coinsEarned is a positive integer
             coinsEarned = Math.max(0, coinsEarned);
 
-
-            // // Fetch the current user document
-            // const userResponse = await fetch(`http://localhost:5000/api/user/tests/${id}`);
-            // const userData = await userResponse.json();
-            // console.log(userData.coins)
-            // // Calculate the new coin count
-            // const newCoinCount = userData.coins + coinsEarned;
+            // Calculate the new coin count
+            const newCoinCount = coinsEarned;
 
             const requestData = {
                 userId: id,
@@ -63,10 +58,8 @@ const ScorePage = () => {
                         category: questionCategory,
                     },
                 ],
-                // coins: newCoinCount
+                coins: newCoinCount
             }
-
-
             try {
                 const response = await fetch(`https://ace-aptitude.onrender.com/api/tests`, {
                     method: 'POST',
@@ -77,7 +70,9 @@ const ScorePage = () => {
                 })
 
                 const data = await response.json()
-                // navigate(route)
+                setTimeout(()=>{
+                    navigate(route)
+                },1000)
             } catch (error) {
                 console.log(error)
             }
