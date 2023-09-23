@@ -29,6 +29,32 @@ const Leaderboard = () => {
 
     useEffect(()=>{
         window.scrollTo(0, 0);
+
+        const handleLeaderboard = async () => {
+            const response = await fetch('https://ace-aptitude.onrender.com/api/Alltests');
+            const AnalyzingData = await response.json();
+        
+            const userReponse = await fetch('https://ace-aptitude.onrender.com/api/Allusers');
+            const AllUserData = await userReponse.json();
+        
+            // Create a map to match user IDs to their corresponding coins
+            const coinsMap = {};
+            AnalyzingData.forEach(item => {
+              coinsMap[item.userId] = item.coins;
+            });
+        
+            // Sort AllUserData based on coins using the map
+            AllUserData.sort((a, b) => {
+              const coinsA = coinsMap[a._id] || 0; // Default to 0 if coins not found
+              const coinsB = coinsMap[b._id] || 0; // Default to 0 if coins not found
+              return coinsB - coinsA;
+            });
+        
+            // Now AllUserData is sorted according to the coins in AnalyzingData
+            // console.log(AllUserData);
+          };
+        
+          handleLeaderboard();
     },[])
 
     return (
