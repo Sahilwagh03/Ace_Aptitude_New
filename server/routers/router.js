@@ -1,6 +1,7 @@
 const express = require("express");
 const passport = require('passport')
 const {
+  getAllusers,
   getAllQuestions,
   getAllCategories,
   getFilteredQuestions,
@@ -11,11 +12,13 @@ const {
   postLogin,
   getRandomQuestions,
   postTestData,
+  getAlltestsData,
   getUserTestData,
 
 } = require("../controllers/controller"); // Import both controller functions
 const router = express.Router();
 
+router.get('/Allusers', getAllusers)
 router.get('/Allcategory', getAllCategories)
 router.get("/Allquestions", getAllQuestions);
 router.get("/filterQuestions/:category/:level", getFilteredQuestions);
@@ -26,6 +29,7 @@ router.post('/signup', postSignUp);
 router.post('/login', postLogin);
 router.get('/getRandomQuestions/:numberOfQuestions/:category',getRandomQuestions);
 router.post('/tests',postTestData);
+router.get('/Alltests',getAlltestsData);
 router.get('/user/tests/:userId',getUserTestData);
 
 router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));

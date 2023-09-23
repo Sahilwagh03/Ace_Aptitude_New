@@ -99,7 +99,9 @@
   .profile_circle > span{
     font-weight: 600;
   }
-  
+  .LeaderBoard_main_container{
+    padding:10px; 
+   }
 }
 
 

@@ -234,6 +234,30 @@ const postTestData = async (req, res) => {
   }
 };
 
+const getAlltestsData = async (req, res) => {
+  try {
+
+    const userTests = await Test.find();
+    // Respond with the user's test data
+    res.status(200).json(userTests);
+  } catch (error) {
+    console.error('Error fetching user test data:', error);
+    res.status(500).json({ message: 'Failed to fetch user test data' });
+  }
+}
+
+const getAllusers = async(req,res)=>{
+  try {
+    const UserData = await User.find();
+    const userIds = UserData.map(user => user._id);
+    // Respond with the user's test data
+    res.status(200).json(userIds);
+  } catch (error) {
+    console.error('Error fetching user test data:', error);
+    res.status(500).json({ message: 'Failed to fetch user test data' });
+  }
+}
+
 const getUserTestData = async (req, res) => {
   try {
     const userId = req.params.userId;
@@ -302,6 +326,7 @@ passport.deserializeUser((user, done) => {
 })
 
 module.exports = {
+  getAllusers,
   getAllQuestions,
   getAllCategories,
   getFilteredQuestions,
@@ -312,5 +337,6 @@ module.exports = {
   postLogin,
   getRandomQuestions,
   postTestData,
+  getAlltestsData,
   getUserTestData,
 };
