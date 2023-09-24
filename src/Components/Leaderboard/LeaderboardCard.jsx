@@ -8,10 +8,10 @@ const LeaderboardCard = ({ position, name, rank, coins, imageUrl }) => {
       <div className="profile_grid">
         <img src={imageUrl} alt={name} />
         <div className="name">
-          {name}
+          {name ||"User"}
         </div>
       </div>
-      <div className="rank">{`Rank: ${rank}`}</div>
+      <div className="rank">{`Rank: ${position}`}</div>
       <div className="coins">
         <img src={coin} alt="" />
         <span>{coins}</span>

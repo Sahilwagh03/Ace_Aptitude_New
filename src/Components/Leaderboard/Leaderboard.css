@@ -51,11 +51,17 @@
   .user_name_grid{
     display: flex;
     gap: 10px;
+    width: 300px;
   }
   
   .leaderboard_mobile_top{
     display: none;
   }
+
+  .w-300{
+    width: 300px;
+  }
+  
   
 
 /*=============== BREAKPOINTS ===============*/
@@ -102,6 +108,13 @@
   .LeaderBoard_main_container{
     padding:10px; 
    }
+   
+  .user_name_grid{
+    width: 150px;
+  }
+  .w-300{
+    width: 150px;
+  }
 }
 
 

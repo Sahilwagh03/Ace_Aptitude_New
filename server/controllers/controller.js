@@ -249,9 +249,12 @@ const getAlltestsData = async (req, res) => {
 const getAllusers = async(req,res)=>{
   try {
     const UserData = await User.find();
-    const userIds = UserData.map(user => user._id);
+    const users = UserData.map(user => ({
+      _id: user._id,
+      name: user.Name, // Assuming 'Name' is the field in your user schema
+    }));
     // Respond with the user's test data
-    res.status(200).json(userIds);
+    res.status(200).json(users);
   } catch (error) {
     console.error('Error fetching user test data:', error);
     res.status(500).json({ message: 'Failed to fetch user test data' });
