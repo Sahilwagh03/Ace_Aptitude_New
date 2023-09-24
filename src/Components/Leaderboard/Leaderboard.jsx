@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Leaderboard.css'
 import LeaderboardCard from './LeaderboardCard'
-
+import Rank_stand from '../../assets/Rank stand.png'
 const Leaderboard = () => {
 
     const [topLeaderboardData, setTopLeaderboardData] = useState([]);
@@ -83,7 +83,7 @@ const Leaderboard = () => {
                         {topLeaderboardData.map((data, index) => (
                             <LeaderboardCard
                                 key={index}
-                                position={index== 0 ? 2 : '' || index == 1 ? 1 : '' || index == 2 ? 3 : "" }
+                                position={index == 0 ? 2 : '' || index == 1 ? 1 : '' || index == 2 ? 3 : ""}
                                 name={data.name}
                                 coins={data.coins}
                                 imageUrl='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoPczo_vgoWlnlzBDeqS-pne-zeV3UZ3j0UA&usqp=CAU'
@@ -95,11 +95,14 @@ const Leaderboard = () => {
                             <div className="profile_circle" key={index}>
                                 <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoPczo_vgoWlnlzBDeqS-pne-zeV3UZ3j0UA&usqp=CAU' alt={`Profile ${index + 1}`} />
                                 <span>{data.name}</span>
-                                <span>{index== 0 ? 2 : '' || index == 1 ? 1 : '' || index == 2 ? 3 : "" }</span>
+                                <span>{index == 0 ? 2 : '' || index == 1 ? 1 : '' || index == 2 ? 3 : ""}</span>
                                 <div className={index === 1 ? "tall_bar" : "empty_bar"}></div>
                             </div>
                         ))}
                     </div>
+                    {/* <div>
+                        <img src={Rank_stand} alt="" />
+                    </div> */}
                     <div className="leaderboard_list">
                         <div className="leaderboard_heading">
                             <span className='w-300'>Name</span>
