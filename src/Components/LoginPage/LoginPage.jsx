@@ -3,6 +3,10 @@ import { Link, useNavigate } from 'react-router-dom'; // Import the Link compone
 import './LoginPage.css';
 import { toast } from 'react-toastify'; // Import toast
 import Toast from '../Toast/Toast';
+import Avatar_1 from '../../assets/Avatar (1).png'
+import Avatar_2 from '../../assets/Avatar (2).png'
+import Avatar_3 from '../../assets/Avatar (3).png'
+import Avatar_4 from '../../assets/Avatar (4).png'
 
 const LoginPage = () => {
 
@@ -30,12 +34,19 @@ const LoginPage = () => {
         // Login was successful
         const data = await response.json();
 
+        const avatars = [Avatar_1, Avatar_2, Avatar_3, Avatar_4];
+
+        // Randomly select an avatar from the array.
+        const randomAvatar = avatars[Math.floor(Math.random() * avatars.length)];
+
+
         // Create a user object with email and _id
         const userInfo = {
           email: data.user.email,
           _id: data.user._id,
           logined:true,
-          Name:data.user.Name
+          Name:data.user.Name,
+          ProfilePic:randomAvatar
         };
 
         // Store the user object as a JSON string in local storage
