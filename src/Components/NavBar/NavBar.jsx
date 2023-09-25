@@ -37,7 +37,7 @@ const NavBar = () => {
             setIsLoggedIn(true)
             const userProfile = localStorage.getItem('user')
             const data = JSON.parse(userProfile)
-            setuserProfile(data.picture)
+            setuserProfile(data.ProfilePic)
         }
         else {
             setIsLoggedIn(false)
