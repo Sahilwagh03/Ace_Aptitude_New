@@ -36,19 +36,23 @@
   }
   
   .coins {
-    font-weight: bold;
-    display: flex;
-    padding: 16px 24px;
-    justify-content: center;
     align-items: center;
-    gap: 8px;
-    background: rgb(102 116 204);
-    color: white;
+    background: aliceblue;
     border-radius: 10px;
+    color: #fff;
+    display: flex;
+    font-weight: 700;
+    gap: 8px;
+    justify-content: center;
+    padding: 11px 41px;
   }
-  
-  .crown-icon {
-    font-size: 24px;
-    margin-right: 5px;
+
+  .coins>img{
+    width: 23px;
   }
+
+  .coins>span{
+    color: #000;
+  }
+
   
