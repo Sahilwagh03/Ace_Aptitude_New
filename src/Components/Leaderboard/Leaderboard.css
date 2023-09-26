@@ -1,84 +1,105 @@
-.LeaderBoard_main_container{
- padding:30px; 
+.LeaderBoard_main_container {
+  padding: 30px;
 }
 
-.leaderboard_Top{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 30px;
+.leaderboard_Top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  padding-bottom: 60px;
 }
 
-.leaderboard_heading{
-    display: flex;
-    justify-content: space-between;
-    margin-left: 20px;
-    margin-right: 20px;
+.leaderboard_heading {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 20px;
+  margin-right: 20px;
 }
 
-.leaderboard_list{
+.leaderboard_list {
   padding-top: 30px;
-} 
+}
 
 /* Your existing CSS for .problem_card */
 .leaderboard_card_horizontal {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    margin: 10px;
-    background: #fff;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-    border-radius: 7px;
-  }
-  
-  .users_name,
-  .users_rank,
-  .users_coin {
-    display: flex;
-    align-items: center;
-  }
-  
-  .users_rank >span,
-  .users_coin >span {
-    display: inline-block;
-    margin-left: 5px;
-    padding: 3px 8px;
-    background-color: #f0f0f0;
-    border-radius: 4px;
-  }
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  margin: 10px;
+  background: #fff;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 7px;
+}
 
-  .user_name_grid{
-    display: flex;
-    gap: 10px;
-    width: 300px;
-  }
-  
-  .leaderboard_mobile_top{
-    display: none;
-  }
+.users_name,
+.users_rank,
+.users_coin {
+  display: flex;
+  align-items: center;
+}
 
-  .w-300{
-    width: 300px;
-  }
-  
-  .highlighted{
-    background-color: aliceblue;
-  }
-  
+.users_rank>span,
+.users_coin>span {
+  display: inline-block;
+  margin-left: 5px;
+  padding: 3px 8px;
+  background-color: #f0f0f0;
+  border-radius: 4px;
+}
+
+.user_name_grid {
+  display: flex;
+  gap: 10px;
+  width: 300px;
+}
+
+.leaderboard_mobile_top {
+  display: none;
+}
+
+.w-300 {
+  width: 300px;
+}
+
+.highlighted {
+  background-color: aliceblue;
+}
+
+.Leaderboard_img_coin_flex {
+  display: flex;
+  align-items: center;
+}
+
+.Leaderboard_coin_count {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.Rank_stand_img {
+  display: none;
+}
+
+.Leaderboard_loader_container{
+  height: 100vh;
+}
 
 /*=============== BREAKPOINTS ===============*/
 /* For large devices */
 @media screen and (max-width: 992px) {
-  .leaderboard_Top{
+  .leaderboard_Top {
     display: none;
   }
+
   .leaderboard_mobile_top {
     display: flex;
     align-items: flex-end;
     justify-content: center;
+    gap: 70px;
   }
-  
+
   .profile_circle {
     display: flex;
     flex-direction: column;
@@ -86,47 +107,79 @@
     text-align: center;
     gap: 20px;
   }
-  
-  .profile_circle > img {
-    width: 70px; /* Adjust the image size as needed */
-    height: 70px; /* Adjust the image size as needed */
-    border-radius: 50%; /* Makes the image round */
+
+  .profile_circle>img {
+    width: 70px;
+    /* Adjust the image size as needed */
+    height: 70px;
+    /* Adjust the image size as needed */
+    border-radius: 50%;
+    /* Makes the image round */
   }
-  
+
   .empty_bar {
-    height: 70px; /* Adjust the height of the empty bar */
-    width: 100px; /* Adjust the width of the empty bar */
-    background-color: silver; /* Color of the empty bar */
+    height: 70px;
+    /* Adjust the height of the empty bar */
+    width: 100px;
+    /* Adjust the width of the empty bar */
+    background-color: silver;
+    /* Color of the empty bar */
   }
-  
+
   .tall_bar {
-    height: 100px; /* Adjust the height of the tall bar */
-    width: 100px; /* Adjust the width of the tall bar */
-    background-color: goldenrod; /* Color of the tall bar */
+    height: 100px;
+    /* Adjust the height of the tall bar */
+    width: 100px;
+    /* Adjust the width of the tall bar */
+    background-color: goldenrod;
+    /* Color of the tall bar */
   }
-  
-  .profile_circle > span{
+
+  .profile_circle>span {
     font-weight: 600;
   }
-  .LeaderBoard_main_container{
-    padding:10px; 
-   }
-   
-  .user_name_grid{
+
+  .LeaderBoard_main_container {
+    padding: 10px;
+  }
+
+  .user_name_grid {
     width: 150px;
   }
-  .w-300{
+
+  .w-300 {
     width: 150px;
+  }
+
+  .profile_translate_2 {
+    translate: -20% 20%;
+  }
+
+  .profile_translate_3 {
+    translate: 20% 40%;
+  }
+
+  .Rank_stand_img {
+    display: flex;
+    justify-content: center;
+  }
+
+  .Rank_stand_img>img {
+    width: 500px;
   }
 }
 
 
 /* For medium devices */
 @media screen and (max-width: 576px) {
+  .leaderboard_mobile_top {
+    gap: 30px;
+  }
 
+  .Rank_stand_img>img {
+    width: 350px;
+  }
 }
 
 /* For small devices */
-@media screen and (max-width: 475px) {
-
-}
+@media screen and (max-width: 475px) {}
