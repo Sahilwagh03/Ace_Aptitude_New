@@ -30,7 +30,7 @@ const ProfilePage = () => {
                 <div className="Profile_Container">
                     <div className="Profile_sidebar">
                         <div className="Profile_user_info">
-                            <img src={Member_1} alt="" />
+                            <img src={userData.ProfilePic} alt="" />
                             <div className="Profile_user_info_flex">
                                 <div className="Profile_username_name_flex">
                                     <h1>{userData.Name}</h1>
