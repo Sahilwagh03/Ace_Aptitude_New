@@ -6,10 +6,15 @@ const Leaderboard = () => {
 
     const [topLeaderboardData, setTopLeaderboardData] = useState([]);
     const [remainingLeaderboardData, setRemainingLeaderboardData] = useState([]);
+    const [userId , setuserId]=useState('')
     const [isLoading, setisLoading] = useState(true)
 
     useEffect(() => {
         window.scrollTo(0, 0);
+
+        const userProfile = localStorage.getItem('user')
+        const userData = JSON.parse(userProfile)
+        setuserId(userData._id)
 
         const handleLeaderboard = async () => {
             const response = await fetch('https://ace-aptitude.onrender.com/api/Alltests');
@@ -102,7 +107,7 @@ const Leaderboard = () => {
                                 <div className='problem_heading'></div>
                                 <div className="leaderboard_list_container">
                                     {remainingLeaderboardData.map((data, index) => (
-                                        <div className="leaderboard_card_horizontal" key={index}>
+                                        <div className={`leaderboard_card_horizontal ${data._id == userId ? 'highlighted':'' }`} key={index}>
                                             <div className='user_name_grid'>
                                                 <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoPczo_vgoWlnlzBDeqS-pne-zeV3UZ3j0UA&usqp=CAU' alt={data.name} width='50' />
                                                 <div className="users_name">

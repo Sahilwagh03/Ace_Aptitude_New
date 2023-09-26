@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './ProfilePage.css'
 
 const ProfilePage = () => {
+    window.scrollTo(0, 0);
 
     const [userData,setUserData] = useState([])
 
