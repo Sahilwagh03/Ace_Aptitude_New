@@ -4,7 +4,7 @@ import CoinThender from '../../assets/coinThender.svg'
 
 const LeaderboardCard = ({ position, name, rank, coins, imageUrl }) => {
   return (
-    <div className="leaderboard-card">
+    <div className={`leaderboard-card ${position==2 ? "translate_down":"" || position==3 ? "translate_down":""}`}>
       <div className="profile_grid">
         <img src={imageUrl} alt={name} />
         <div className="name">

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import './Leaderboard.css'
 import LeaderboardCard from './LeaderboardCard'
-import Rank_stand from '../../assets/Rank stand.png'
+import Rank_stand from '../../assets/Rank stand 1.png'
+import CoinThender from '../../assets/coinThender.svg'
 const Leaderboard = () => {
 
     const [topLeaderboardData, setTopLeaderboardData] = useState([]);
     const [remainingLeaderboardData, setRemainingLeaderboardData] = useState([]);
-    const [userId , setuserId]=useState('')
-    const [userProfile , setuserProfile]=useState('')
+    const [userId, setuserId] = useState('')
+    const [userProfile, setuserProfile] = useState('')
     const [isLoading, setisLoading] = useState(true)
 
     useEffect(() => {
@@ -69,7 +70,7 @@ const Leaderboard = () => {
             {
                 isLoading ?
                     <>
-                        <div className='loader_container'>
+                        <div className='loader_container Leaderboard_loader_container'>
                             <span className="loader"></span>
                         </div>
                     </>
@@ -83,23 +84,22 @@ const Leaderboard = () => {
                                         position={index == 0 ? 2 : '' || index == 1 ? 1 : '' || index == 2 ? 3 : ""}
                                         name={data.name}
                                         coins={data.coins}
-                                        imageUrl='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoPczo_vgoWlnlzBDeqS-pne-zeV3UZ3j0UA&usqp=CAU'
+                                        imageUrl={data._id == userId ? userProfile : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoPczo_vgoWlnlzBDeqS-pne-zeV3UZ3j0UA&usqp=CAU'}
                                     />
                                 ))}
                             </div>
                             <div className="leaderboard_mobile_top">
                                 {topLeaderboardData.map((data, index) => (
-                                    <div className="profile_circle" key={index}>
-                                        <img src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoPczo_vgoWlnlzBDeqS-pne-zeV3UZ3j0UA&usqp=CAU' alt={`Profile ${index + 1}`} />
+                                    <div className={`profile_circle ${index == 0 ? "profile_translate_2":"" ||index == 2 ? "profile_translate_3":"" } `} key={index}>
+                                        <img src={data._id == userId ? userProfile : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoPczo_vgoWlnlzBDeqS-pne-zeV3UZ3j0UA&usqp=CAU'} alt={`Profile ${index + 1}`} />
                                         <span>{data.name}</span>
                                         <span>{index == 0 ? 2 : '' || index == 1 ? 1 : '' || index == 2 ? 3 : ""}</span>
-                                        <div className={index === 1 ? "tall_bar" : "empty_bar"}></div>
                                     </div>
                                 ))}
                             </div>
-                            {/* <div>
-                    <img src={Rank_stand} alt="" />
-                </div> */}
+                            <div className='Rank_stand_img'>
+                                <img src={Rank_stand} alt=""  />
+                            </div>
                             <div className="leaderboard_list">
                                 <div className="leaderboard_heading">
                                     <span className='w-300'>Name</span>
@@ -109,7 +109,7 @@ const Leaderboard = () => {
                                 <div className='problem_heading'></div>
                                 <div className="leaderboard_list_container">
                                     {remainingLeaderboardData.map((data, index) => (
-                                        <div className={`leaderboard_card_horizontal ${data._id == userId ? 'highlighted':'' }`} key={index}>
+                                        <div className={`leaderboard_card_horizontal ${data._id == userId ? 'highlighted' : ''}`} key={index}>
                                             <div className='user_name_grid'>
                                                 <img src={data._id == userId ? userProfile : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoPczo_vgoWlnlzBDeqS-pne-zeV3UZ3j0UA&usqp=CAU'} alt={data.name} width='50' />
                                                 <div className="users_name">
@@ -119,8 +119,11 @@ const Leaderboard = () => {
                                             <div className="users_rank">
                                                 <span>{index + 4}</span>
                                             </div>
-                                            <div className="users_coin">
-                                                <span>{data.coins}</span>
+                                            <div className='Leaderboard_img_coin_flex'>
+                                                <div className='Leaderboard_coin_count'>
+                                                    <img src={CoinThender} alt="coins" width={23} />
+                                                    <p>{data.coins}</p>
+                                                </div>
                                             </div>
                                         </div>
                                     ))}
