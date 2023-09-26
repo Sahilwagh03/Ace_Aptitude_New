@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import './ProfilePage.css'
-import Member_1 from '../../assets/Member_1.jpg'
 
 const ProfilePage = () => {
 

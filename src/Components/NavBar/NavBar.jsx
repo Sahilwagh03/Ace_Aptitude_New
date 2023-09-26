@@ -6,6 +6,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 import NavLogo from '../../assets/NavLogo.png'
 import { motion } from 'framer-motion'
 import Avatar_4 from '../../assets/Avatar (4).png'
+import CoinThender from '../../assets/coinThender.svg'
 
 const NavBar = () => {
     const [toggle, setToggle] = useState(false)
@@ -88,8 +89,14 @@ const NavBar = () => {
                     </div>
                     {
                         isLoggedIn ?
-                            <div className='profile-image' onClick={() => setisPopProfile(!isPopProfile)}>
-                                <img src={userProfile || Avatar_4} alt='Profile' />
+                            <div className='nav_user_info_flex'>
+                                <div className='user_coin_count'>
+                                    <img src={CoinThender} alt="coins" width={23} />
+                                    <p>{'0'|| ''}</p>
+                                </div>
+                                <div className='profile-image' onClick={() => setisPopProfile(!isPopProfile)}>
+                                    <img src={userProfile || Avatar_4} alt='Profile' />
+                                </div>
                             </div>
                             :
                             <div className='btn_div'>

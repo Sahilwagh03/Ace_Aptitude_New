@@ -1,6 +1,6 @@
 import React from 'react';
 import './LeaderboardCard.css'; // Import your CSS file
-import coin from '../../assets/coin.png'
+import CoinThender from '../../assets/coinThender.svg'
 
 const LeaderboardCard = ({ position, name, rank, coins, imageUrl }) => {
   return (
@@ -13,7 +13,7 @@ const LeaderboardCard = ({ position, name, rank, coins, imageUrl }) => {
       </div>
       <div className="rank">{`Rank: ${position}`}</div>
       <div className="coins">
-        <img src={coin} alt="" />
+        <img src={CoinThender} alt="" />
         <span>{coins}</span>
       </div>
     </div>

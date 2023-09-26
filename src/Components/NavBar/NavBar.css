@@ -124,7 +124,6 @@
   } */
 
   .profile-image{
-    margin-left: 210px;
     cursor: pointer;
   }
   .profile-image>img{
@@ -171,7 +170,18 @@
     font-size: 25px;
   }
   
-
+  .nav_user_info_flex{
+    display: flex;
+    align-items: center;
+    gap: 70px;
+  }
+  
+  .user_coin_count{
+    display: flex;
+    align-items: center;
+    margin-left: 86px;
+    gap: 10px;
+  }
 
 /*=============== BREAKPOINTS ===============*/
 /* For large devices */
@@ -251,6 +261,9 @@
         display: none;
     }
     .profile_pop_container{
+      display: none;
+    }
+    .user_coin_count{
       display: none;
     }
 }
