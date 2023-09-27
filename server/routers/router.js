@@ -14,6 +14,7 @@ const {
   postTestData,
   getAlltestsData,
   getUserTestData,
+  getUserCoins
 
 } = require("../controllers/controller"); // Import both controller functions
 const router = express.Router();
@@ -31,6 +32,7 @@ router.get('/getRandomQuestions/:numberOfQuestions/:category',getRandomQuestions
 router.post('/tests',postTestData);
 router.get('/Alltests',getAlltestsData);
 router.get('/user/tests/:userId',getUserTestData);
+router.get('/user/coins/:userId', getUserCoins)
 
 router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: 'https://ace-aptitude-psi.vercel.app/SignUp', successRedirect: 'https://ace-aptitude-psi.vercel.app' }), (req, res) => {
