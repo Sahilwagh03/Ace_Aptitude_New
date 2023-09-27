@@ -55,6 +55,10 @@
   width: 300px;
 }
 
+.user_name_grid>img{
+  border-radius: 50%;
+}
+
 .leaderboard_mobile_top {
   display: none;
 }
