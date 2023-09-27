@@ -51,7 +51,7 @@ const NavBar = () => {
         const data = JSON.parse(userProfile)
         const getuserCoin = async()=>{
             try {
-                const response = await fetch(`https://ace-aptitude-psi.vercel.app/api/user/coins/${data._id}`);
+                const response = await fetch(`https://ace-aptitude.onrender.com/api/user/coins/${data._id}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
