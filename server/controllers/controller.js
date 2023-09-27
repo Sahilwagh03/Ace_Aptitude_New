@@ -281,6 +281,26 @@ const getUserTestData = async (req, res) => {
   }
 }
 
+const getUserCoins = async(req,res)=>{
+  try {
+    const userId = req.params.userId;
+
+    // Find the user's test data by userId
+    const userTests = await Test.findOne({ userId });
+
+    if (!userTests) {
+      // If no tests exist for the user, respond with a 404 Not Found status
+      return res.status(404).json({ message: 'No tests found for the user' });
+    }
+
+    // Respond with the user's test data
+    res.status(200).json(userTests.coins);
+  } catch (error) {
+    console.error('Error fetching user test data:', error);
+    res.status(500).json({ message: 'Failed to fetch user test data' });
+  }
+}
+
 passport.use(new GoogleStrategy({
   clientID: '919740930128-phrohd0e30q770ueufj7nsg3hk3a1mff.apps.googleusercontent.com',
   clientSecret: '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',
@@ -342,4 +362,5 @@ module.exports = {
   postTestData,
   getAlltestsData,
   getUserTestData,
+  getUserCoins
 };

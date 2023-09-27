@@ -13,6 +13,7 @@ const NavBar = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isPopProfile, setisPopProfile] = useState(false)
     const [userProfile, setuserProfile] = useState('')
+    const [userCoins , setUserCoins] = useState('')
 
     const navigate = useNavigate();
     const location = useLocation();
@@ -44,6 +45,24 @@ const NavBar = () => {
             setIsLoggedIn(false)
         }
     }, [location])
+
+    useEffect(()=>{
+        const userProfile = localStorage.getItem('user')
+        const data = JSON.parse(userProfile)
+        const getuserCoin = async()=>{
+            try {
+                const response = await fetch(`https://ace-aptitude-psi.vercel.app/api/user/coins/${data._id}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const jsonData = await response.json();
+                setUserCoins(jsonData);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        getuserCoin()
+    })
 
     const handleLogout = () => {
         // Clear localStorage and update isLoggedIn
@@ -92,7 +111,7 @@ const NavBar = () => {
                             <div className='nav_user_info_flex'>
                                 <div className='user_coin_count'>
                                     <img src={CoinThender} alt="coins" width={23} />
-                                    <p>{'0'|| ''}</p>
+                                    <p>{userCoins || '0'}</p>
                                 </div>
                                 <div className='profile-image' onClick={() => setisPopProfile(!isPopProfile)}>
                                     <img src={userProfile || Avatar_4} alt='Profile' />
