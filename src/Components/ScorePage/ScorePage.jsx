@@ -61,7 +61,7 @@ const ScorePage = () => {
                 coins: newCoinCount
             }
             try {
-                const response = await fetch(`https://ace-aptitude.onrender.com/api/tests`, {
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/tests`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

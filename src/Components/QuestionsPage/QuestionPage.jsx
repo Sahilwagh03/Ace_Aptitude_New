@@ -28,11 +28,11 @@ const QuestionPage = () => {
 
                 let apiUrl = ''
                 if (category && level && (!numberOfQuestions && !time)) {
-                    apiUrl = `https://ace-aptitude.onrender.com/api/filterQuestions/${category}/${level}`
+                    apiUrl = `${process.env.REACT_APP_API_BASE_URL}/api/filterQuestions/${category}/${level}`
                     setroute('/aptitude')
                 }
                 else if (numberOfQuestions && time && category && testName && !level) {
-                    apiUrl = `https://ace-aptitude.onrender.com/api/getRandomQuestions/${numberOfQuestions}/${category}`
+                    apiUrl = `${process.env.REACT_APP_API_BASE_URL}/api/getRandomQuestions/${numberOfQuestions}/${category}`
                     setroute('/test')
                 }
                 const response = await fetch(apiUrl);

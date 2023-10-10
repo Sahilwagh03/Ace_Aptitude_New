@@ -27,7 +27,7 @@ const SignUp = () => {
     }
 
     try {
-      const response = await fetch('https://ace-aptitude.onrender.com/api/signup', {
+      const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ const SignUp = () => {
 
 
   const handleGoogleSignUP = () => {
-    window.location.href = "https://ace-aptitude.onrender.com/api/auth/google";
+    window.location.href = "${process.env.REACT_APP_API_BASE_URL}/api/auth/google";
     // const isgoogle={
     //   google:true
     // }

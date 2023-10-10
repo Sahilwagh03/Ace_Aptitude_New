@@ -20,10 +20,10 @@ const Leaderboard = () => {
         setuserProfile(userData.ProfilePic)
 
         const handleLeaderboard = async () => {
-            const response = await fetch('https://ace-aptitude.onrender.com/api/Alltests');
+            const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/Alltests`);
             const AnalyzingData = await response.json();
 
-            const userReponse = await fetch('https://ace-aptitude.onrender.com/api/Allusers');
+            const userReponse = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/Allusers`);
             const AllUserData = await userReponse.json();
 
             // Create a map to match user IDs to their corresponding coins
