@@ -107,7 +107,7 @@ const Aptitude_test_page = () => {
 
 
     const handleCategoriesAndLevel = async (category, difficulty) => {
-        let url = `https://ace-aptitude.onrender.com/api/FilterData/`;
+        let url = `${process.env.REACT_APP_API_BASE_URL}/api/FilterData/`;
 
         if (category) {
             url += category + '/';
@@ -170,7 +170,7 @@ const Aptitude_test_page = () => {
     useEffect(() => {
         const getAllcategory = async () => {
             try {
-                const response = await fetch(`https://ace-aptitude.onrender.com/api/Allcategory`);
+                const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/Allcategory`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -192,7 +192,7 @@ const Aptitude_test_page = () => {
 
     const handleSearchInput = async (topic) => {
         try {
-            const response = await fetch(`https://ace-aptitude.onrender.com/api/Search/${topic}`);
+            const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/Search/${topic}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
