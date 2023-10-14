@@ -69,6 +69,8 @@
 .Profile_dashboard_stats_container{
     background-color: #fff;
     height: 200px;
+    display: flex;
+    justify-content: center;
     border-radius: 0.5rem;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.02), 0px 6px 12px rgba(0, 0, 0, 0.02); 
 }
@@ -117,9 +119,14 @@
     .Profile_Main_Container{
         padding: 20px;
     }
+    .graph_performance_container{
+        width: 375px;
+    }
 }
 
 /* For small devices */
 @media screen and (max-width: 375px) {
-    
+    .graph_performance_container{
+        width: 330px;
+    }
 }

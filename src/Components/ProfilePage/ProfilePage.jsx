@@ -1,12 +1,85 @@
 import React, { useEffect, useState } from 'react'
 import './ProfilePage.css'
 import HeapMap from '../../assets/heap map.png'
+import { Bar } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
+import {
+    Chart as ChartJS,
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+    ArcElement,
+} from 'chart.js';
+
+
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend,
+    ArcElement
+);
+
 
 const ProfilePage = () => {
     window.scrollTo(0, 0);
 
     const [userData, setUserData] = useState([]);
-    const [testPerformance, setTestPerformance] = useState([]);
+    const [totalTests, setTotalTests] = useState({
+        datasets: [{
+            label: 'Total Tests',
+            data: [],
+            backgroundColor: [
+                '#e6e6fa', 
+                '#4e18ce',
+                '#ee82ee'
+              ]
+        }]
+    })
+    const [testPerformance, setTestPerformance] = useState(
+        {
+            labels: [],
+            datasets: [
+                {
+                    label: 'Test Data',
+                    data: [],
+                },
+            ],
+        }
+    );
+    const options = {
+        indexAxis: 'x',
+        elements: {
+            bar: {
+                borderWidth: 2,
+            },
+        },
+        responsive: true,
+        plugins: {
+            title: {
+                display: true,
+                text: 'Test Analysis',
+            },
+        },
+    };
+
+    const donutOptions = {
+        responsive: true,
+        plugins: {
+            legend:false,
+            title: {
+                display: true,
+                text: 'Total Test Count'
+            }
+        }
+    };
+
+
 
     useEffect(() => {
         const userLocalInfo = localStorage.getItem('user');
@@ -26,8 +99,45 @@ const ProfilePage = () => {
                         testName: test.category,
                         testScore: test.score
                     }))
-                    setTestPerformance(performance)
+                    const totalTestCount = jsonData.tests.length
+                    setTotalTests({
+                        labels: ['Solved', 'Remaining' ,'Total'],
+                        datasets: [{
+                            label: 'Total Tests',
+                            data: [totalTestCount, 100 - totalTestCount , 100],
+                        }],
+                    })
+                    setTestPerformance(
+                        {
+                            labels: performance.map(item => item.testName),
+                            datasets: [
+                                {
+                                    label: 'Test Scores',
+                                    data: performance.map(item => item.testScore),
+                                    backgroundColor: [
+                                        'rgba(255, 99, 132, 0.2)',
+                                        'rgba(255, 159, 64, 0.2)',
+                                        'rgba(255, 205, 86, 0.2)',
+                                        'rgba(75, 192, 192, 0.2)',
+                                        'rgba(54, 162, 235, 0.2)',
+                                        'rgba(153, 102, 255, 0.2)',
+                                        'rgba(201, 203, 207, 0.2)'
+                                    ],
+                                    borderColor: [
+                                        'rgb(255, 99, 132)',
+                                        'rgb(255, 159, 64)',
+                                        'rgb(255, 205, 86)',
+                                        'rgb(75, 192, 192)',
+                                        'rgb(54, 162, 235)',
+                                        'rgb(153, 102, 255)',
+                                        'rgb(201, 203, 207)'
+                                    ],
+                                }
+                            ]
+                        }
+                    )
                 }
+
             } catch (error) {
                 console.log(error);
             }
@@ -60,7 +170,7 @@ const ProfilePage = () => {
                     <div className='Profile_dashboard_container'>
                         <div className="Profile_dashboard_stats_badges_container">
                             <div className='Profile_dashboard_stats_container'>
-
+                                <Doughnut data={totalTests} options={donutOptions} />
                             </div>
                             <div className='Profile_dashboard_Badge_container'>
 
@@ -70,6 +180,7 @@ const ProfilePage = () => {
                             {/* <img src={HeapMap} alt="" /> */}
                         </div>
                         <div className="graph_performance_container">
+                            <Bar data={testPerformance} options={options} />
                         </div>
                     </div>
                 </div>
