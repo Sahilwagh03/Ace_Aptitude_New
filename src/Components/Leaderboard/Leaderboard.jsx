@@ -7,9 +7,11 @@ const Leaderboard = () => {
 
     const [topLeaderboardData, setTopLeaderboardData] = useState([]);
     const [remainingLeaderboardData, setRemainingLeaderboardData] = useState([]);
+    const [allUserData, setAllUserData] = useState([])
     const [userId, setuserId] = useState('')
     const [userProfile, setuserProfile] = useState('')
     const [isLoading, setisLoading] = useState(true)
+
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -32,12 +34,22 @@ const Leaderboard = () => {
                 coinsMap[item.userId] = item.coins;
             });
 
+
             // Sort AllUserData based on coins using the map
             AllUserData.sort((a, b) => {
                 const coinsA = coinsMap[a._id] || 0; // Default to 0 if coins not found
                 const coinsB = coinsMap[b._id] || 0; // Default to 0 if coins not found
                 return coinsB - coinsA;
             });
+
+            setAllUserData(AllUserData)
+
+            AllUserData.forEach((user, index) => {
+                if(user._id === userId) {
+                  const rank = index + 1;  
+                  localStorage.setItem('rank', rank);
+                }
+            })
 
             // Now AllUserData is sorted according to the coins in AnalyzingData
             // Split the sorted data into top 3 and the rest, including coins
@@ -60,10 +72,20 @@ const Leaderboard = () => {
             if (AnalyzingData && AllUserData) {
                 setisLoading(false)
             }
-        };
+            
 
+        };
         handleLeaderboard();
     }, []);
+
+    useEffect(()=>{
+        allUserData.forEach((user, index) => {
+            if(user._id === userId) {
+              const rank = index + 1;  
+              localStorage.setItem('rank', rank);
+            }
+        })
+    },[isLoading])
 
     return (
         <>
@@ -90,7 +112,7 @@ const Leaderboard = () => {
                             </div>
                             <div className="leaderboard_mobile_top">
                                 {topLeaderboardData.map((data, index) => (
-                                    <div className={`profile_circle ${index == 0 ? "profile_translate_2":"" ||index == 2 ? "profile_translate_3":"" } `} key={index}>
+                                    <div className={`profile_circle ${index == 0 ? "profile_translate_2" : "" || index == 2 ? "profile_translate_3" : ""} `} key={index}>
                                         <img src={data._id == userId ? userProfile : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoPczo_vgoWlnlzBDeqS-pne-zeV3UZ3j0UA&usqp=CAU'} alt={`Profile ${index + 1}`} />
                                         <span>{data.name}</span>
                                         <span>{index == 0 ? 2 : '' || index == 1 ? 1 : '' || index == 2 ? 3 : ""}</span>
@@ -98,7 +120,7 @@ const Leaderboard = () => {
                                 ))}
                             </div>
                             <div className='Rank_stand_img'>
-                                <img src={Rank_stand} alt=""  />
+                                <img src={Rank_stand} alt="" />
                             </div>
                             <div className="leaderboard_list">
                                 <div className="leaderboard_heading">

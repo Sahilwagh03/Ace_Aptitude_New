@@ -30,10 +30,11 @@ const ProfilePage = () => {
     window.scrollTo(0, 0);
 
     const [userData, setUserData] = useState([]);
+    const [rank,setRank]=useState('0')
     const [totalTests, setTotalTests] = useState({
         datasets: [{
             label: 'Total Tests',
-            data: [],
+            data: [0,100],
             backgroundColor: [
                 '#e6e6fa',
                 '#4e18ce',
@@ -92,7 +93,6 @@ const ProfilePage = () => {
                     throw new Error('Network response was not ok');
                 }
                 const jsonData = await response.json();
-                console.log(jsonData.tests)
                 if (jsonData) {
                     const performance = jsonData.tests.map((test) => ({
                         testName: test.category,
@@ -142,6 +142,9 @@ const ProfilePage = () => {
             }
         };
 
+        const rankData = localStorage.getItem('rank')
+        const rank = JSON.parse(rankData)
+        setRank(rank)
         getUserTestData();
     }, []);
 
@@ -158,7 +161,7 @@ const ProfilePage = () => {
                                     <p>{userData.email}</p>
                                 </div>
                                 <div className="Profile_user_rank">
-                                    <span>Rank 1</span>
+                                    <span>Rank {rank}</span>
                                 </div>
                             </div>
                         </div>
