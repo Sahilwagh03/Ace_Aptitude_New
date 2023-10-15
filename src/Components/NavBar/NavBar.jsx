@@ -67,6 +67,7 @@ const NavBar = () => {
     const handleLogout = () => {
         // Clear localStorage and update isLoggedIn
         localStorage.removeItem('user');
+        localStorage.removeItem('rank');
         setIsLoggedIn(false);
         // Close the profile popup
         setisPopProfile(false);
