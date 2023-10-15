@@ -82,6 +82,10 @@ const NavBar = () => {
         setisPopProfile(!isPopProfile)
     }
 
+    const handleNavigateHome = ()=>{
+        navigate('/')
+    }
+
     return (
         <>
             <motion.div className='Nav_div'
@@ -93,9 +97,9 @@ const NavBar = () => {
                 <nav className='navbar'>
 
                     <div className='Navbar_logo_flex'>
-                        <img src={NavLogo} alt="" className='logo' />
-                        <span className="logo-text">Ace</span>
-                        <span className="logo-subtext">Aptitude</span>
+                        <img src={NavLogo} alt="" className='logo' onClick={handleNavigateHome} />
+                        <span className="logo-text" onClick={handleNavigateHome}>Ace</span>
+                        <span className="logo-subtext"  onClick={handleNavigateHome}>Aptitude</span>
                     </div>
                     <div className='nav_menu'>
                         <ul className='nav_lists'>

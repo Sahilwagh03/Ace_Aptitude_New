@@ -68,6 +68,7 @@
 
 .Profile_dashboard_stats_container{
     background-color: #fff;
+    padding: 20px;
     height: 200px;
     display: flex;
     justify-content: center;
@@ -77,6 +78,7 @@
 
 .Profile_dashboard_Badge_container{
     background-color: #fff;
+    padding: 20px;
     height: 200px;
     border-radius: 0.5rem;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.04), 0px 4px 8px rgba(0, 0, 0, 0.02), 0px 6px 12px rgba(0, 0, 0, 0.02); 
@@ -103,11 +105,43 @@
     font-size: 0.8rem;
 }
 
+.Profile_Badge{
+    display: flex;
+    justify-content: center;
+}
+
+.badge-details {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+  
+  .badge-details div:first-child {
+    margin-right: 10px; 
+  }
+
+  .badge_level{
+    font-size: 2.5rem;
+    font-weight: 900;
+  }
+
+  .badge_name{
+    font-size: 1.2rem;
+    font-weight: 200;
+  }
+  
+  .badge_img {
+    width: 150px;
+  }
+
+  
+  
+
 /*=============== BREAKPOINTS ===============*/
 /* For large devices */
 @media screen and (max-width: 992px) {
     .Profile_Container{
-        grid-template-columns: repeat(1,1fr);
+        grid-template-columns: repeat(1,100%);
     }
     .Profile_dashboard_stats_badges_container{
         grid-template-columns: repeat(1,1fr);
@@ -120,13 +154,13 @@
         padding: 20px;
     }
     .graph_performance_container{
-        width: 375px;
+        width: 100%;
     }
 }
 
 /* For small devices */
 @media screen and (max-width: 375px) {
     .graph_performance_container{
-        width: 330px;
+        width: 100%;
     }
 }
