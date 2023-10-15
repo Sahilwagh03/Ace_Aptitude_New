@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './ProfilePage.css'
-import HeapMap from '../../assets/heap map.png'
+import Badge from '../../assets/badge.svg'
 import { Bar } from 'react-chartjs-2';
 import { Doughnut } from 'react-chartjs-2';
 import {
@@ -35,10 +35,9 @@ const ProfilePage = () => {
             label: 'Total Tests',
             data: [],
             backgroundColor: [
-                '#e6e6fa', 
+                '#e6e6fa',
                 '#4e18ce',
-                '#ee82ee'
-              ]
+            ]
         }]
     })
     const [testPerformance, setTestPerformance] = useState(
@@ -71,7 +70,7 @@ const ProfilePage = () => {
     const donutOptions = {
         responsive: true,
         plugins: {
-            legend:false,
+            legend: false,
             title: {
                 display: true,
                 text: 'Total Test Count'
@@ -101,10 +100,10 @@ const ProfilePage = () => {
                     }))
                     const totalTestCount = jsonData.tests.length
                     setTotalTests({
-                        labels: ['Solved', 'Remaining' ,'Total'],
+                        labels: ['Solved', 'Remaining'],
                         datasets: [{
                             label: 'Total Tests',
-                            data: [totalTestCount, 100 - totalTestCount , 100],
+                            data: [totalTestCount, 100 - totalTestCount],
                         }],
                     })
                     setTestPerformance(
@@ -173,12 +172,27 @@ const ProfilePage = () => {
                                 <Doughnut data={totalTests} options={donutOptions} />
                             </div>
                             <div className='Profile_dashboard_Badge_container'>
-
+                            <h3>Badge</h3>
+                                <div className="Profile_Badge">
+                                    <div className="badge-details">
+                                        <div>
+                                            <img
+                                                src={Badge}
+                                                alt="Achievement Badge"
+                                                className='badge_img'
+                                            />
+                                        </div>
+                                        <div>
+                                            <p className='badge_level'>2</p>
+                                            <p className='badge_name'>Ronin</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div className="heapmap_container">
-                            {/* <img src={HeapMap} alt="" /> */}
-                        </div>
+                        {/* <div className="heapmap_container">
+                            <img src={HeapMap} alt="" />
+                        </div> */}
                         <div className="graph_performance_container">
                             <Bar data={testPerformance} options={options} />
                         </div>
