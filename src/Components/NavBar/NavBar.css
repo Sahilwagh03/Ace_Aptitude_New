@@ -28,6 +28,14 @@
     justify-content: center;
 }
 
+.Navbar_logo_flex>img{
+  cursor: pointer;
+}
+
+.Navbar_logo_flex>span{
+  cursor: pointer;
+}
+
 .logo-subtext{
     color: rgb(102 116 204);
 }
