@@ -172,10 +172,40 @@ const postLogin = async (req, res) => {
   }
 }
 
-const getRandomQuestions = async(req,res)=>{
+const updateUserDetails = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const updateFields = {};
+
+    // Check if request body contains fields to update
+    if (req.body.Name) {
+      updateFields.Name = req.body.Name;
+    }
+    if (req.body.email) {
+      updateFields.email = req.body.email;
+    }
+
+    if (Object.keys(updateFields).length === 0) {
+      return res.status(400).json({ error: 'No fields to update' });
+    }
+
+    const user = await User.findByIdAndUpdate(id, updateFields, { new: true });
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json(user); // Send the updated user details in the response
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred while updating' });
+  }
+};
+
+const getRandomQuestions = async (req, res) => {
   try {
     const { numberOfQuestions, category } = req.params;
-    
+
     // Calculate the number of easy, medium, and hard questions based on percentages
     const totalQuestions = parseInt(numberOfQuestions, 10);
     const easyCount = Math.ceil(totalQuestions * 0.3);
@@ -220,13 +250,13 @@ const postTestData = async (req, res) => {
       // If no tests exist for the user, create a new user and test
       const newUserTests = new Test(req.body);
       await newUserTests.save();
-      res.send({message:"Saved successfully"})
+      res.send({ message: "Saved successfully" })
     } else {
       // If tests exist for the user, append the new test to the existing tests array
       existingUserTests.tests.push(...req.body.tests);
       existingUserTests.coins += req.body.coins;
       await existingUserTests.save();
-      res.send({message:"Saved successfully"})
+      res.send({ message: "Saved successfully" })
     }
   } catch (error) {
     console.error('Error creating/updating test:', error);
@@ -246,7 +276,7 @@ const getAlltestsData = async (req, res) => {
   }
 }
 
-const getAllusers = async(req,res)=>{
+const getAllusers = async (req, res) => {
   try {
     const UserData = await User.find();
     const users = UserData.map(user => ({
@@ -281,7 +311,7 @@ const getUserTestData = async (req, res) => {
   }
 }
 
-const getUserCoins = async(req,res)=>{
+const getUserCoins = async (req, res) => {
   try {
     const userId = req.params.userId;
 
@@ -362,5 +392,6 @@ module.exports = {
   postTestData,
   getAlltestsData,
   getUserTestData,
-  getUserCoins
+  getUserCoins,
+  updateUserDetails
 };
