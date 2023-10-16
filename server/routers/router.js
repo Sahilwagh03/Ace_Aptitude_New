@@ -14,7 +14,8 @@ const {
   postTestData,
   getAlltestsData,
   getUserTestData,
-  getUserCoins
+  getUserCoins,
+  updateUserDetails
 
 } = require("../controllers/controller"); // Import both controller functions
 const router = express.Router();
@@ -28,6 +29,7 @@ router.get('/FilterData/:category?/:level?', getFilteredData);
 router.get("/Search/:topic", getSearchTopic);
 router.post('/signup', postSignUp);
 router.post('/login', postLogin);
+router.put('/editProfile',updateUserDetails)
 router.get('/getRandomQuestions/:numberOfQuestions/:category',getRandomQuestions);
 router.post('/tests',postTestData);
 router.get('/Alltests',getAlltestsData);

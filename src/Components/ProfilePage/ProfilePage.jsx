@@ -13,6 +13,7 @@ import {
     Legend,
     ArcElement,
 } from 'chart.js';
+import Edit_Profile_Form from '../Edit_Profile_popup/Edit_Profile_Form';
 
 
 ChartJS.register(
@@ -30,11 +31,12 @@ const ProfilePage = () => {
     window.scrollTo(0, 0);
 
     const [userData, setUserData] = useState([]);
-    const [rank,setRank]=useState('0')
+    const [rank, setRank] = useState('0')
+    const [isEditPopupVisible, setIsEditPopupVisible] = useState(false);
     const [totalTests, setTotalTests] = useState({
         datasets: [{
             label: 'Total Tests',
-            data: [0,100],
+            data: [0, 100],
             backgroundColor: [
                 '#e6e6fa',
                 '#4e18ce',
@@ -80,6 +82,11 @@ const ProfilePage = () => {
     };
 
 
+    useEffect(()=>{
+        const userLocalInfo = localStorage.getItem('user');
+        const data = JSON.parse(userLocalInfo);
+        setUserData(data);
+    },[isEditPopupVisible])
 
     useEffect(() => {
         const userLocalInfo = localStorage.getItem('user');
@@ -148,6 +155,10 @@ const ProfilePage = () => {
         getUserTestData();
     }, []);
 
+    const handleEditPop = () => {
+        setIsEditPopupVisible(!isEditPopupVisible);
+    }
+
     return (
         <section className='Profile_section'>
             <div className="Profile_Main_Container">
@@ -166,7 +177,7 @@ const ProfilePage = () => {
                             </div>
                         </div>
                         <div className='Profile_user_edit'>
-                            <button>Edit Profile</button>
+                            <button onClick={handleEditPop}>Edit Profile</button>
                         </div>
                     </div>
                     <div className='Profile_dashboard_container'>
@@ -175,7 +186,7 @@ const ProfilePage = () => {
                                 <Doughnut data={totalTests} options={donutOptions} />
                             </div>
                             <div className='Profile_dashboard_Badge_container'>
-                            <h3>Badge</h3>
+                                <h3>Badge</h3>
                                 <div className="Profile_Badge">
                                     <div className="badge-details">
                                         <div>
@@ -202,6 +213,10 @@ const ProfilePage = () => {
                     </div>
                 </div>
             </div>
+
+            {isEditPopupVisible && <Edit_Profile_Form onClose={(data)=>{
+                setIsEditPopupVisible(data)
+            }} />}
         </section>
     )
 }
