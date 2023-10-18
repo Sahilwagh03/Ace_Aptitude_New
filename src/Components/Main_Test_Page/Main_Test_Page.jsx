@@ -21,10 +21,34 @@ const Main_Test_Page = () => {
       questions: 25,
     },
     {
+      testName: 'Programming Test 2',
+      category: 'Programming',
+      time: '50 minutes',
+      questions: 30,
+    },
+    {
+      testName: 'Programming Test 3',
+      category: 'Programming',
+      time: '55 minutes',
+      questions: 35,
+    },
+    {
       testName:'Verbal Test 1',
       category: 'Verbal',
       time: '40 minutes',
       questions: 30,
+    },
+    {
+      testName: 'Verbal Test 2',
+      category: 'Verbal',
+      time: '40 minutes',
+      questions: 20,
+    },
+    {
+      testName: 'Verbal Test 3',
+      category: 'Verbal',
+      time: '35 minutes',
+      questions: 15,
     },
     {
       testName:'Logical Reasoning Test 1',
