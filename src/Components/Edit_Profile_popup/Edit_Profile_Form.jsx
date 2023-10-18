@@ -19,7 +19,7 @@ const Edit_Profile_Form = ({ onClose }) => {
         try {
             const data = { Name:name, email , id}; // Data to be sent in the PUT request
 
-            const response = await fetch('http://localhost:5000/api/editProfile', {
+            const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/editProfile`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
