@@ -113,8 +113,8 @@ const getSearchTopic = async (req, res) => {
 
 const postSignUp = async (req, res) => {
   try {
-    const { Name, email, password } = req.body;
-
+    const { Name, email, password ,profileImage} = req.body;
+    
     // Check if the email is already registered
     const existingUser = await User.findOne({ email });
 
@@ -126,17 +126,33 @@ const postSignUp = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create a new user document
-    const newUser = new User({ Name, email, password: hashedPassword });
+    const newUser = new User({ Name, email, password: hashedPassword,profileImage:profileImage });
 
     // Save the user to the database
     await newUser.save();
 
-    res.status(201).json({ message: 'User registered successfully', success: true });
+    // Create a new test document associated with the user
+    const newTest = new Test({ userId: newUser._id });
+    await newTest.save();
+
+    // Update the user's 'tests' array with the reference to the new test
+    newUser.tests.push(newTest);
+    await newUser.save();
+
+    const userWithoutPassword = {
+      Name: newUser.Name,
+      _id: newUser._id,
+      email: newUser.email,
+      profileImage:newUser.profileImage
+    };
+
+    res.status(201).json({ message: 'User registered successfully', user: userWithoutPassword });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).json({ error: 'Internal server error' });
   }
-}
+};
+
 
 const postLogin = async (req, res) => {
   try {

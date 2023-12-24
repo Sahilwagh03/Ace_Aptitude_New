@@ -6,15 +6,12 @@ const testSchema = new Schema({
     {
       testName: {
         type: String,
-        required: true,
       },
       score: {
         type: Number,
-        required: true,
       },
       dateTaken: {
         type: Date,
-        required: true,
       },
       durationMinutes: {
         type: Number,
@@ -24,10 +21,7 @@ const testSchema = new Schema({
       },
     },
   ],
-  userId: {
-    type: String,
-    required: true,
-  },
+  userId: { type: Schema.Types.ObjectId, ref: 'users', required: true },
   coins: {
     type: Number,
     default: 0,
