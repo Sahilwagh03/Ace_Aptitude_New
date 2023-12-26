@@ -157,7 +157,7 @@ const postSignUp = async (req, res) => {
 const postLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
-
+    
     // Find the user by email
     const user = await User.findOne({ email });
 
@@ -177,6 +177,7 @@ const postLogin = async (req, res) => {
       Name: user.Name,
       _id: user._id,
       email: user.email,
+      profileImage:user.profileImage
       // Add any other user information fields you want to include
     };
 
@@ -205,13 +206,18 @@ const updateUserDetails = async (req, res) => {
       return res.status(400).json({ error: 'No fields to update' });
     }
 
-    const user = await User.findByIdAndUpdate(id, updateFields, { new: true });
+    const user = await User.findByIdAndUpdate(id, updateFields, { new: true , select: '-password' });
 
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
+    
+    const userDetails= {
+      Name:user.Name,
+      email:user.email
+    }
 
-    res.json(user); // Send the updated user details in the response
+    res.json(userDetails); // Send the updated user details in the response
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'An error occurred while updating' });
