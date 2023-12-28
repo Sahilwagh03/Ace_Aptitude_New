@@ -22,7 +22,9 @@ const { uploadProfileImage } = require('../controllers/userController/userProfil
 const { getUserDetails } = require('../controllers/userController/userDetails')
 const multer = require('multer');
 const { deleteProfileCloudnary } = require("../controllers/userController/userDeleteProfile");
-
+const { sendVerificationEmail } = require('../helpers/sendVerificationEmail');
+const { verifyOtp } = require("../controllers/userController/userOtpVerify");
+const { resendOTP } = require("../controllers/userController/resendOtp");
 var uploader = multer({
   storage: multer.diskStorage({}),
   limits: { fileSize: 500000 }
@@ -47,7 +49,9 @@ router.get('/user/tests/:userId', getUserTestData);
 router.get('/user/coins/:userId', getUserCoins)
 router.get('/leaderboard', getLeaderboard)
 router.post('/upload-profile-image/:id', uploadProfileImage)
-router.delete('/delete-profile-cloudnary/:id',deleteProfileCloudnary)
+router.delete('/delete-profile-cloudnary/:id', deleteProfileCloudnary)
+router.post('/verify-otp',verifyOtp)
+router.post('/resend-otp', resendOTP);
 
 router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: 'https://ace-aptitude-psi.vercel.app/SignUp', successRedirect: 'https://ace-aptitude-psi.vercel.app' }), (req, res) => {

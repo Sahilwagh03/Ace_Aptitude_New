@@ -5,6 +5,7 @@ const Test = require("../models/testSchema")
 const User = require('../models/UserSchema')
 const bcrypt = require('bcrypt');
 const passport = require('passport');
+const { sendVerificationEmail } = require("../helpers/sendVerificationEmail");
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
 const getAllQuestions = async (req, res) => {
@@ -113,8 +114,16 @@ const getSearchTopic = async (req, res) => {
 
 const postSignUp = async (req, res) => {
   try {
-    const { Name, email, password ,profileImage} = req.body;
-    
+    const { Name, email, password, profileImage } = req.body;
+
+    // Function to generate a random 4-digit OTP
+    const generateOTP = () => {
+      return Math.floor(1000 + Math.random() * 9000).toString();
+    };
+
+    // Generate OTP
+    const otp = generateOTP();
+
     // Check if the email is already registered
     const existingUser = await User.findOne({ email });
 
@@ -126,10 +135,20 @@ const postSignUp = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create a new user document
-    const newUser = new User({ Name, email, password: hashedPassword,profileImage:profileImage });
+    const newUser = new User({
+      Name,
+      email,
+      password: hashedPassword,
+      profileImage: profileImage,
+      verificationOTP: otp,
+      otpExpiresAt: new Date(Date.now() + 600000),
+      isVerified: false
+    });
 
     // Save the user to the database
     await newUser.save();
+
+    await sendVerificationEmail(newUser.Name, newUser.email, otp);
 
     // Create a new test document associated with the user
     const newTest = new Test({ userId: newUser._id });
@@ -143,7 +162,7 @@ const postSignUp = async (req, res) => {
       Name: newUser.Name,
       _id: newUser._id,
       email: newUser.email,
-      profileImage:newUser.profileImage
+      profileImage: newUser.profileImage
     };
 
     res.status(201).json({ message: 'User registered successfully', user: userWithoutPassword });
@@ -157,7 +176,7 @@ const postSignUp = async (req, res) => {
 const postLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
-    
+
     // Find the user by email
     const user = await User.findOne({ email });
 
@@ -177,7 +196,7 @@ const postLogin = async (req, res) => {
       Name: user.Name,
       _id: user._id,
       email: user.email,
-      profileImage:user.profileImage
+      profileImage: user.profileImage
       // Add any other user information fields you want to include
     };
 
@@ -206,15 +225,14 @@ const updateUserDetails = async (req, res) => {
       return res.status(400).json({ error: 'No fields to update' });
     }
 
-    const user = await User.findByIdAndUpdate(id, updateFields, { new: true , select: '-password' });
+    const user = await User.findByIdAndUpdate(id, updateFields, { new: true, select: '-password' });
 
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
-    
-    const userDetails= {
-      Name:user.Name,
-      email:user.email
+
+    const userDetails = {
+      Name: user.Name,
     }
 
     res.json(userDetails); // Send the updated user details in the response

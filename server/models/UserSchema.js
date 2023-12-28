@@ -21,6 +21,19 @@ const userSchema = new mongoose.Schema({
   },
   tests: [{ type: Schema.Types.ObjectId, ref: 'tests' }],
   // Add any other user information fields here as needed
+
+  verificationOTP: {
+    type: String,
+    default: null
+  },
+  otpExpiresAt: {
+    type: Date,
+    default: null
+  },
+  isVerified: {
+    type: Boolean,
+    default: false // Initially set to false
+  }
 });
 
 const User = mongoose.model('users', userSchema);
