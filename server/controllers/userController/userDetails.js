@@ -8,8 +8,17 @@ const getUserDetails = async (req, res) => {
         if (!user) {
             return res.status(404).send({ success: false, msg: 'User not found' });
         }
+
+
+        const userWithoutPassword = {
+            Name: user.Name,
+            _id: user._id,
+            email: user.email,
+            profileImage: user.profileImage,
+            isVerified:user.isVerified
+        };
         
-        res.send({ success: true, data: user });
+        res.send({ success: true, data: userWithoutPassword });
     } catch (error) {
         res.status(500).json({ error: 'Internal server error', error });
     }

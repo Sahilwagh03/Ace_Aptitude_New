@@ -21,7 +21,8 @@ const userSchema = new mongoose.Schema({
   },
   tests: [{ type: Schema.Types.ObjectId, ref: 'tests' }],
   // Add any other user information fields here as needed
-
+  notifications: { type: mongoose.Schema.Types.ObjectId, ref: 'notifications' },
+  
   verificationOTP: {
     type: String,
     default: null

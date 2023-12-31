@@ -3,6 +3,7 @@ const Question = require("../models/questionSchema");
 const Category = require("../models/categorySchema")
 const Test = require("../models/testSchema")
 const User = require('../models/UserSchema')
+const Notifications = require('../models/notificationSchema')
 const bcrypt = require('bcrypt');
 const passport = require('passport');
 const { sendVerificationEmail } = require("../helpers/sendVerificationEmail");
@@ -157,6 +158,14 @@ const postSignUp = async (req, res) => {
     // Update the user's 'tests' array with the reference to the new test
     newUser.tests.push(newTest);
     await newUser.save();
+
+
+    //Create a new notification object associated with the user
+    const newNotification = new Notifications({userId:newUser._id})
+    await newNotification.save()
+
+    newUser.notifications=newNotification._id
+    await newUser.save()
 
     const userWithoutPassword = {
       Name: newUser.Name,

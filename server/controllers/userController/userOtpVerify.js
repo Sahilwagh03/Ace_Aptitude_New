@@ -1,4 +1,6 @@
+const { addNewNotification } = require('../../helpers/addNewNotification');
 const User = require('../../models/UserSchema'); // Update the path to your User schema/model
+const { postNotification } = require('../notificationsController/notifications');
 
 const verifyOtp = async (req, res) => {
   try {
@@ -6,6 +8,7 @@ const verifyOtp = async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user) {
+      console.log('User not found');
       return res.status(404).json({ success: false, message: 'User not found' });
     }
 
@@ -20,16 +23,35 @@ const verifyOtp = async (req, res) => {
       // Save the updated user in the database
       await user.save();
 
+      const notificationData = {
+        title:'Verification Successful',
+        description:"Your account has been successfully verified.",
+        icon:"https://res.cloudinary.com/dmrjruik5/image/upload/v1703336250/lnuty1txb2nosw82edcf.jpg",
+        sentAt: new Date()
+      }
+
+      addNewNotification(user._id, notificationData)
+      const userWithoutPassword = {
+        Name: user.Name,
+        _id: user._id,
+        email: user.email,
+        profileImage: user.profileImage,
+        isVerified: user.isVerified
+        // Add any other user information fields you want to include
+      };
+
       return res.status(200).json({ success: true, message: 'OTP verified successfully' });
     }
 
     if (user.otpExpiresAt < Date.now()) {
+      console.log('OTP expired');
       return res.status(400).json({ success: false, message: 'OTP expired, please request a new one' });
     }
 
+    console.log('Invalid OTP');
     return res.status(400).json({ success: false, message: 'Invalid OTP' });
   } catch (error) {
-    console.log(error);
+    console.error('Error:', error);
     return res.status(500).json({ success: false, message: 'Internal server error' });
   }
 };
