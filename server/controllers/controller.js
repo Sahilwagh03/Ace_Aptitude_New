@@ -19,7 +19,7 @@ const getAllQuestions = async (req, res) => {
   }
 };
 
-const getFilteredQuestions = async (req, res) => {
+const getPracticeQuestions = async (req, res) => {
   try {
     const { category, level } = req.params;
 
@@ -290,7 +290,7 @@ const getRandomQuestions = async (req, res) => {
 const postTestData = async (req, res) => {
   try {
     const { userId, test } = req.body;
-    console.log(req.body.tests)
+
 
     // Find the user's tests by userId
     const existingUserTests = await Test.findOne({ userId });
@@ -431,7 +431,7 @@ module.exports = {
   getAllusers,
   getAllQuestions,
   getAllCategories,
-  getFilteredQuestions,
+  getPracticeQuestions,
   filterQuestions,
   getFilteredData,
   getSearchTopic,

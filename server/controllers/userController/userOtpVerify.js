@@ -26,7 +26,7 @@ const verifyOtp = async (req, res) => {
       const notificationData = {
         title:'Verification Successful',
         description:"Your account has been successfully verified.",
-        icon:"https://res.cloudinary.com/dmrjruik5/image/upload/v1703336250/lnuty1txb2nosw82edcf.jpg",
+        icon:"https://res.cloudinary.com/dmrjruik5/image/upload/v1703336250/fpdcuvedws7f4mtf4yyr.jpg",
         sentAt: new Date()
       }
 

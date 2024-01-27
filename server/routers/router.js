@@ -4,7 +4,7 @@ const {
   getAllusers,
   getAllQuestions,
   getAllCategories,
-  getFilteredQuestions,
+  getPracticeQuestions,
   filterQuestions,
   getFilteredData,
   getSearchTopic,
@@ -26,6 +26,7 @@ const { sendVerificationEmail } = require('../helpers/sendVerificationEmail');
 const { verifyOtp } = require("../controllers/userController/userOtpVerify");
 const { resendOTP } = require("../controllers/userController/resendOtp");
 const { getNotification, postNotification } = require("../controllers/notificationsController/notifications");
+const { getFilter } = require("../controllers/filtercontroller/filter");
 var uploader = multer({
   storage: multer.diskStorage({}),
   limits: { fileSize: 500000 }
@@ -36,9 +37,10 @@ router.get('/userDetails', getUserDetails)
 router.get('/Allusers', getAllusers)
 router.get('/Allcategory', getAllCategories)
 router.get("/Allquestions", getAllQuestions);
-router.get("/filterQuestions/:category/:level", getFilteredQuestions);
+router.get("/practiceQuetions/:category/:level", getPracticeQuestions);
 router.get("/Filterquestions", filterQuestions); // Add this route for filtering
 router.get('/FilterData/:category?/:level?', getFilteredData);
+router.get('/filter',getFilter)
 router.get("/Search/:topic", getSearchTopic);
 router.post('/signup', postSignUp);
 router.post('/login', postLogin);
