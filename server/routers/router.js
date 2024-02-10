@@ -27,6 +27,7 @@ const { verifyOtp } = require("../controllers/userController/userOtpVerify");
 const { resendOTP } = require("../controllers/userController/resendOtp");
 const { getNotification, postNotification } = require("../controllers/notificationsController/notifications");
 const { getFilter } = require("../controllers/filtercontroller/filter");
+const { forgetPassword, resetPassword } = require("../controllers/userController/forgetPassword");
 var uploader = multer({
   storage: multer.diskStorage({}),
   limits: { fileSize: 500000 }
@@ -41,7 +42,7 @@ router.get("/practiceQuetions/:category/:level", getPracticeQuestions);
 router.get("/Filterquestions", filterQuestions); // Add this route for filtering
 router.get('/FilterData/:category?/:level?', getFilteredData);
 router.get('/filter',getFilter)
-router.get("/Search/:topic", getSearchTopic);
+router.get("/search/:topic", getSearchTopic);
 router.post('/signup', postSignUp);
 router.post('/login', postLogin);
 router.put('/editProfile', updateUserDetails)
@@ -57,6 +58,10 @@ router.post('/verify-otp',verifyOtp)
 router.post('/resend-otp', resendOTP);
 router.get('/notifications/:userId',getNotification)
 router.post('/notifications/:userId',postNotification)
+router.post('/forgetpassword',forgetPassword)
+
+// Route for resetting the password
+router.put('/reset-password', resetPassword);
 
 router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
 router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: 'https://ace-aptitude-psi.vercel.app/SignUp', successRedirect: 'https://ace-aptitude-psi.vercel.app' }), (req, res) => {

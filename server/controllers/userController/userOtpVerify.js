@@ -4,9 +4,9 @@ const { postNotification } = require('../notificationsController/notifications')
 
 const verifyOtp = async (req, res) => {
   try {
-    const { email, otp } = req.body;
+    const { email, otp, purpose } = req.body;
     const user = await User.findOne({ email });
-
+    console.log(purpose)
     if (!user) {
       console.log('User not found');
       return res.status(404).json({ success: false, message: 'User not found' });
@@ -23,22 +23,24 @@ const verifyOtp = async (req, res) => {
       // Save the updated user in the database
       await user.save();
 
-      const notificationData = {
-        title:'Verification Successful',
-        description:"Your account has been successfully verified.",
-        icon:"https://res.cloudinary.com/dmrjruik5/image/upload/v1703336250/fpdcuvedws7f4mtf4yyr.jpg",
-        sentAt: new Date()
+      if (purpose !== 'passwordReset') {
+        const notificationData = {
+          title: 'Verification Successful',
+          description: "Your account has been successfully verified.",
+          icon: "https://res.cloudinary.com/dmrjruik5/image/upload/v1703336250/fpdcuvedws7f4mtf4yyr.jpg",
+          sentAt: new Date()
+        }
+        addNewNotification(user._id, notificationData)
       }
 
-      addNewNotification(user._id, notificationData)
-      const userWithoutPassword = {
-        Name: user.Name,
-        _id: user._id,
-        email: user.email,
-        profileImage: user.profileImage,
-        isVerified: user.isVerified
-        // Add any other user information fields you want to include
-      };
+      // const userWithoutPassword = {
+      //   Name: user.Name,
+      //   _id: user._id,
+      //   email: user.email,
+      //   profileImage: user.profileImage,
+      //   isVerified: user.isVerified
+      //   // Add any other user information fields you want to include
+      // };
 
       return res.status(200).json({ success: true, message: 'OTP verified successfully' });
     }

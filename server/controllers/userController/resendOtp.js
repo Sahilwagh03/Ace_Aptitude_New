@@ -13,9 +13,9 @@ const resendOTP = async (req, res) => {
         }
 
         // Check if the user is already verified
-        if (user.isVerified) {
-            return res.status(400).json({ message: 'User is already verified' });
-        }
+        // if (user.isVerified) {
+        //     return res.status(400).json({ message: 'User is already verified' });
+        // }
 
 
         // Function to generate a random 4-digit OTP
@@ -30,8 +30,9 @@ const resendOTP = async (req, res) => {
         // Save the updated OTP details to the database
         await user.save();
 
+        const purpose = 'Resend otp'
         // Send verification email with new OTP
-        await sendVerificationEmail(user.Name, user.email, otp);
+        await sendVerificationEmail(user.Name, user.email, otp,purpose);
 
         return res.status(200).json({ message: 'OTP resent successfully' });
     } catch (error) {
