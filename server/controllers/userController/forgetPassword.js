@@ -59,6 +59,15 @@ const resetPassword = async (req, res) => {
         user.otpExpiresAt = null;
         await user.save();
 
+        // const userId = user._id;
+        // const notificationData = {
+        //     title:"Password is changed",
+        //     description:'Password changed if any query then please contact',
+        //     icon:'',
+        //     sentAt:Date.now()
+        // }
+        // await addNewNotification(userId ,notificationData)
+
         return res.status(200).json({ message: 'Password reset successfully',user });
     } catch (error) {
         console.error('Error in resetPassword:', error);

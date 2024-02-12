@@ -34,7 +34,7 @@ const resendOTP = async (req, res) => {
         // Send verification email with new OTP
         await sendVerificationEmail(user.Name, user.email, otp,purpose);
 
-        return res.status(200).json({ message: 'OTP resent successfully' });
+        return res.status(200).json({ message: 'OTP sent' });
     } catch (error) {
         console.log(error);
         return res.status(500).json({ error: 'Internal server error' });

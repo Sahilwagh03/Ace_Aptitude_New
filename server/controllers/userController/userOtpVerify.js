@@ -42,7 +42,7 @@ const verifyOtp = async (req, res) => {
       //   // Add any other user information fields you want to include
       // };
 
-      return res.status(200).json({ success: true, message: 'OTP verified successfully' });
+      return res.status(200).json({ success: true, message: 'OTP verified' });
     }
 
     if (user.otpExpiresAt < Date.now()) {
