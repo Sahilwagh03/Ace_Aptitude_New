@@ -3,14 +3,9 @@ const { OAuth2Client } = require('google-auth-library');
 const User = require('../../models/UserSchema');
 const loginWithGoogle = async (req, res) => {
     // Extract the token from the request header
-    const bearerHeader = req.headers["x-auth-google"];
-    console.log(bearerHeader);
-
-    if (bearerHeader) {
-        // Split the token to extract the actual token value
-        const bearer = bearerHeader.split(" ");
-        const bearerToken = bearer[1];
-
+    const { code } = req.query;
+    console.log(code)
+    if (code) {
         const googleClient = new OAuth2Client(
             process.env.GOOGLE_CLIENT_ID,
             process.env.GOOGLE_CLIENT_SECRET
@@ -19,7 +14,7 @@ const loginWithGoogle = async (req, res) => {
         try {
 
             const ticket = new googleClient.verifyIdToken({
-                idToken: bearerToken,
+                idToken: code,
                 audience: process.env.GOOGLE_CLIENT_ID
             })
 
