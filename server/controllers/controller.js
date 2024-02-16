@@ -5,9 +5,8 @@ const Test = require("../models/testSchema")
 const User = require('../models/UserSchema')
 const Notifications = require('../models/notificationSchema')
 const bcrypt = require('bcrypt');
-const passport = require('passport');
 const { sendVerificationEmail } = require("../helpers/sendVerificationEmail");
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
+
 
 const getAllQuestions = async (req, res) => {
   try {
@@ -379,53 +378,6 @@ const getUserCoins = async (req, res) => {
     res.status(500).json({ message: 'Failed to fetch user test data' });
   }
 }
-
-passport.use(new GoogleStrategy({
-  clientID: '919740930128-phrohd0e30q770ueufj7nsg3hk3a1mff.apps.googleusercontent.com',
-  clientSecret: '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',
-  callbackURL: "https://ace-aptitude.onrender.com/api/auth/google/callback",
-  scope: ['profile', 'email']
-},
-  async function (accessToken, refreshToken, profile, done) {
-    // Register user here.
-    console.log(profile);
-    try {
-      // Check if the user exists in your database
-      const existingUser = await User.findOne({ googleId: profile.id });
-
-      if (existingUser) {
-        // User already exists, return the user
-        return done(null, profile);
-      }
-
-      // User doesn't exist, create a new one
-      const newUser = new User({
-        googleId: profile.id,
-        email: profile._json.email,
-      });
-
-      await newUser.save();
-      return done(null, profile);
-    } catch (err) {
-      return done(err);
-    }
-  }
-));
-
-passport.serializeUser((user, done) => {
-  // Serialize the user with only the desired fields
-  const serializedUser = {
-    googleId: user.id,
-    email: user._json.email,
-    picture: user._json.picture,
-    name: user._json.name,
-  };
-  done(null, serializedUser);
-});
-
-passport.deserializeUser((user, done) => {
-  done(null, user);
-})
 
 module.exports = {
   getAllusers,

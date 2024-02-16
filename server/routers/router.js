@@ -28,10 +28,11 @@ const { resendOTP } = require("../controllers/userController/resendOtp");
 const { getNotification, postNotification } = require("../controllers/notificationsController/notifications");
 const { getFilter } = require("../controllers/filtercontroller/filter");
 const { forgetPassword, resetPassword } = require("../controllers/userController/forgetPassword");
-var uploader = multer({
-  storage: multer.diskStorage({}),
-  limits: { fileSize: 500000 }
-});
+const { loginWithGoogle } = require("../controllers/userController/loginWithGoogle");
+// var uploader = multer({
+//   storage: multer.diskStorage({}),
+//   limits: { fileSize: 500000 }
+// });
 const router = express.Router();
 
 router.get('/userDetails', getUserDetails)
@@ -63,23 +64,8 @@ router.post('/forgetpassword',forgetPassword)
 // Route for resetting the password
 router.put('/reset-password', resetPassword);
 
-router.get('/auth/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
-router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: 'https://ace-aptitude-psi.vercel.app/SignUp', successRedirect: 'https://ace-aptitude-psi.vercel.app' }), (req, res) => {
-  res.send('logged in!')
-})
-router.get('/login/success', (req, res) => {
-  try {
-    console.log("Session:", req.session);
-    console.log("User:", req.user);
-    if (req.user) {
-      res.send(req.user)
-    }
-    else {
-      res.send("not generated")
-    }
-  } catch (error) {
-    console.log(error)
-  }
-});
+
+//Google Login Routes
+router.post('/loginWithGoogle',loginWithGoogle)
 
 module.exports = router;
