@@ -105,7 +105,7 @@ const NavBar = () => {
                     <div className='nav_menu'>
                         <ul className='nav_lists'>
                             <Link to='/'><li className='nav_text'>Home</li></Link>
-                            <Link to='/aptitude'><li className='nav_text'>Practice Tests</li></Link>
+                            <Link to='/aptitude'><li className='nav_text'>Practice</li></Link>
                             <Link to='/test'><li className='nav_text'>Test</li></Link>
                             <Link to='/LeaderBoard'><li className='nav_text'>LeaderBoard</li></Link>
                             <Link to='/about'><li className='nav_text'>About us</li></Link>
@@ -156,7 +156,7 @@ const NavBar = () => {
                         <div className={` ${toggle ? 'flex' : 'hidden'} nav_mobile_menu`} >
                             <ul className='nav_lists_mobile'>
                                 <Link to='/'><li className='nav_text' onClick={() => setToggle(!toggle)}>Home</li></Link>
-                                <Link to='/aptitude'><li className='nav_text' onClick={() => setToggle(!toggle)}>Practice Tests</li></Link>
+                                <Link to='/aptitude'><li className='nav_text' onClick={() => setToggle(!toggle)}>Practice</li></Link>
                                 <Link to='/test'><li className='nav_text' onClick={() => setToggle(!toggle)}>Test</li></Link>
                                 <Link to='/LeaderBoard'><li className='nav_text' onClick={() => setToggle(!toggle)}>LeaderBoard</li></Link>
                                 <Link to='/about'><li className='nav_text' onClick={() => setToggle(!toggle)}>About us</li></Link>
