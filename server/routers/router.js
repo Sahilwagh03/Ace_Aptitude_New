@@ -66,6 +66,6 @@ router.put('/reset-password', resetPassword);
 
 
 //Google Login Routes
-router.get('/loginWithGoogle',loginWithGoogle)
+router.get('/googlecallback',loginWithGoogle)
 
 module.exports = router;
