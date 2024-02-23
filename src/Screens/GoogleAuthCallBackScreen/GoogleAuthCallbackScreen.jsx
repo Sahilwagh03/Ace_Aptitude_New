@@ -21,7 +21,7 @@ const GoogleAuthCallbackScreen = () => {
 
             if (idToken) {
                 console.log(idToken)
-                // await googleAuthCallbackHandler(idToken);
+                await googleAuthCallbackHandler(idToken);
             } else {
                 console.error('id_token not found in URL');
             }
