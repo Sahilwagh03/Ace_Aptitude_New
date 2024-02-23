@@ -3,18 +3,23 @@ const { OAuth2Client } = require('google-auth-library');
 const User = require('../../models/UserSchema');
 const loginWithGoogle = async (req, res) => {
     // Extract the token from the request header
-    const { code } = req.query;
+    // const { code } = req.query;
+    const code = req.body
     console.log(code)
     if (code) {
         const googleClient = new OAuth2Client(
             process.env.GOOGLE_CLIENT_ID,
-            process.env.GOOGLE_CLIENT_SECRET
+            process.env.GOOGLE_CLIENT_SECRET,
+            process.env.GOOGLE_REDIRECT_URI
         )
 
         try {
 
+            const response = await googleClient.getToken(code);
+            const { id_token } = response.tokens;
+
             const ticket = new googleClient.verifyIdToken({
-                idToken: code,
+                idToken: id_token,
                 audience: process.env.GOOGLE_CLIENT_ID
             })
 
