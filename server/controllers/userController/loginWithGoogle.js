@@ -34,7 +34,7 @@ const loginWithGoogle = async (req, res) => {
                         const deepLinkURL = `expo://192.168.0.104:8081/?userId=${user._id}&email=${user.email}&name=${encodeURIComponent(user.name)}&picture=${encodeURIComponent(user.picture)}`;
                         
                         // Redirect the user to the deep link URL
-                        return res.redirect(deepLinkURL);
+                        return res.send(user);
                     } else {
                         const newUser = new User({
                             googleId: googleUserId,
@@ -50,7 +50,7 @@ const loginWithGoogle = async (req, res) => {
                         const deepLinkURL = `googleauth://login?userId=${savedUser._id}&email=${savedUser.email}&name=${encodeURIComponent(savedUser.name)}&picture=${encodeURIComponent(savedUser.picture)}`;
                         
                         // Redirect the user to the deep link URL
-                        return res.redirect(deepLinkURL);
+                        return res.send(user);
                     }
                 } catch (error) {
                     console.log(error);
