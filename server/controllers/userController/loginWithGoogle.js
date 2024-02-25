@@ -30,7 +30,11 @@ const loginWithGoogle = async (req, res) => {
                     const user = await User.findOne({ email });
 
                     if (user) {
-                        return res.send({ user });
+                        // Construct deep link URL with user data
+                        const deepLinkURL = `expo://192.168.0.104:8081/?userId=${user._id}&email=${user.email}&name=${encodeURIComponent(user.name)}&picture=${encodeURIComponent(user.picture)}`;
+                        
+                        // Redirect the user to the deep link URL
+                        return res.redirect(deepLinkURL);
                     } else {
                         const newUser = new User({
                             googleId: googleUserId,
@@ -42,7 +46,11 @@ const loginWithGoogle = async (req, res) => {
 
                         const savedUser = await newUser.save();
 
-                        return res.send({ user: savedUser });
+                        // Construct deep link URL with user data
+                        const deepLinkURL = `googleauth://login?userId=${savedUser._id}&email=${savedUser.email}&name=${encodeURIComponent(savedUser.name)}&picture=${encodeURIComponent(savedUser.picture)}`;
+                        
+                        // Redirect the user to the deep link URL
+                        return res.redirect(deepLinkURL);
                     }
                 } catch (error) {
                     console.log(error);

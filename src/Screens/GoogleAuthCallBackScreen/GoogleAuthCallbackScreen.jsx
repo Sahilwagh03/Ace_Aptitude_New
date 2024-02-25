@@ -6,24 +6,16 @@ const GoogleAuthCallbackScreen = () => {
 
     useEffect(() => {
         const extractIdTokenFromUrl = async () => {
-            // Get the fragment part of the URL
-            const fragment = window.location.hash.substring(1);
-            // Split the fragment by '&' to get key-value pairs
-            const params = fragment.split('&');
-            let idToken = null;
-            // Iterate over key-value pairs to find the id_token parameter
-            params.forEach(param => {
-                const [key, value] = param.split('=');
-                if (key === 'id_token') {
-                    idToken = value;
-                }
-            });
+            // Parse URL to get query parameters
+            const searchParams = new URLSearchParams(window.location.search);
+            // Get the value of the 'code' parameter
+            const code = searchParams.get('code');
 
-            if (idToken) {
-                console.log(idToken)
-                await googleAuthCallbackHandler(idToken);
+            if (code) {
+                console.log(code);
+                await googleAuthCallbackHandler(code);
             } else {
-                console.error('id_token not found in URL');
+                console.error('code not found in URL');
             }
         };
 
@@ -38,7 +30,9 @@ const GoogleAuthCallbackScreen = () => {
                         <span className="loader"></span>
                     </div>
                     :
-                    <></>
+                    <div style={{height:'100vh'}}>
+
+                    </div>
             }
         </>
     );
