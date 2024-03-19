@@ -44,9 +44,9 @@ const LoginPage = () => {
         const userInfo = {
           email: data.user.email,
           _id: data.user._id,
-          logined:true,
-          Name:data.user.Name,
-          ProfilePic:randomAvatar
+          logined: true,
+          Name: data.user.Name,
+          ProfilePic: randomAvatar
         };
 
         // Store the user object as a JSON string in local storage
@@ -54,9 +54,9 @@ const LoginPage = () => {
         // Show a success toast
         toast.success('Login successful');
 
-        setTimeout(()=>{
+        setTimeout(() => {
           navigate('/')
-        },3200)
+        }, 3200)
 
         // You can now redirect the user to a protected route or perform other actions
       } else {
@@ -77,13 +77,17 @@ const LoginPage = () => {
   };
 
 
-  const handleGoogleSignUP = ()=>{
-    window.location.href = "https://ace-aptitude.onrender.com/api/auth/google";
-    // const isgoogle={
-    //   google:true
-    // }
-    // localStorage.setItem('isgoogleLogin',JSON.stringify(isgoogle))
-  }
+  const handleGoogleLogin = async () => {
+    // Define your Google OAuth details
+    const clientId = process.env.REACT_APP_API_GOOGLE_CLIENT_ID;
+    const redirectUri = process.env.REACT_APP_API_GOOGLE_REDIRECT_URI; // Make sure this matches the URI you've registered with Google
+
+    // Construct the URL for Google OAuth
+    const url = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${encodeURIComponent(redirectUri)}&response_type=code&scope=email%20profile`;
+
+    // Redirect the user to Google OAuth endpoint
+    window.location.href = url;
+  };
   return (
     <section className="custom-container forms">
       <div className="custom-form login">
@@ -119,13 +123,13 @@ const LoginPage = () => {
             </span>
           </div>
         </div>
-        {/* <div className="line login"></div> */}
-        {/* <div className="media-options login" onClick={handleGoogleSignUP}>
+        <div className="line login"></div>
+        <div className="media-options login" onClick={handleGoogleLogin}>
           <Link className="field google login">
             <i className='bx bxl-google'></i>
             <span>Login with Google</span>
           </Link>
-        </div> */}
+        </div>
         {/* <div className="media-options login">
           <Link className="field facebook login">
             <i className="bx bxl-github facebook-icon login"></i>

@@ -5,16 +5,16 @@ const useGoogleAuthCallback = () => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
-    const googleAuthCallbackHandler = async (id_token) => {
+    const googleAuthCallbackHandler = async (code) => {
         setIsLoading(true);
         try {
             // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint for user registration
-            const response = await fetch(`https://ace-aptitude-v1.onrender.com/api/googlecallback`, {
+            const response = await fetch(`http://localhost:5000/api/googlecallback`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({id_token}),
+                body: JSON.stringify({code}),
             });
 
             if (!response.ok) {

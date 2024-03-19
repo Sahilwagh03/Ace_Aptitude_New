@@ -3,8 +3,7 @@ const axios = require('axios');
 const User = require('../../models/UserSchema');
 
 const loginWithGoogle = async (req, res) => {
-    const { code } = req.query;
-
+    const code = req.body.code
     if (code) {
         try {
             // Exchange authorization code for tokens
@@ -30,10 +29,6 @@ const loginWithGoogle = async (req, res) => {
                     const user = await User.findOne({ email });
 
                     if (user) {
-                        // Construct deep link URL with user data
-                        const deepLinkURL = `expo://192.168.0.104:8081/?userId=${user._id}&email=${user.email}&name=${encodeURIComponent(user.name)}&picture=${encodeURIComponent(user.picture)}`;
-                        
-                        // Redirect the user to the deep link URL
                         return res.send(user);
                     } else {
                         const newUser = new User({
@@ -45,12 +40,7 @@ const loginWithGoogle = async (req, res) => {
                         });
 
                         const savedUser = await newUser.save();
-
-                        // Construct deep link URL with user data
-                        const deepLinkURL = `googleauth://login?userId=${savedUser._id}&email=${savedUser.email}&name=${encodeURIComponent(savedUser.name)}&picture=${encodeURIComponent(savedUser.picture)}`;
-                        
-                        // Redirect the user to the deep link URL
-                        return res.send(user);
+                        return res.send(savedUser);
                     }
                 } catch (error) {
                     console.log(error);
