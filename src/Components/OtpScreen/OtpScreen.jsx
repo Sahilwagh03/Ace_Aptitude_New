@@ -1,16 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './OtpScreen.css';
 import { Link, useNavigate } from 'react-router-dom'
 import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify'; // Import toast
 import Toast from '../Toast/Toast';
+import { useResendOtp } from '../../Hooks/userAuthHooks/resendOtp';
+
 
 
 const OtpScreen = () => {
   const [pins, setPins] = useState(['', '', '', '']); // Array to store each digit of the OTP
   const {email} = useParams(); 
-
+  const {loading, error, responseData, resendOTP} = useResendOtp();
   const navigate = useNavigate();
+
+  console.log(responseData);
 
   // const handleOtpChange = (index, value) => {
   //   // Validate input to be a number
@@ -118,6 +122,7 @@ const OtpScreen = () => {
         ))}
       </div>
       <button className="custom-verify-button" onClick={(event) => handleVerifyOTP(event)}>Verify OTP</button>
+      <button onClick={async()=>{ await resendOTP(email)}}>Resend</button>
     </div>
   );
   
