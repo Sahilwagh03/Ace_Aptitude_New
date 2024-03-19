@@ -7,8 +7,11 @@ const sendVerificationEmail = async (name, email, otp, purpose) => {
             port: 587,
             secure: false, // true for 465, false for other ports
             auth: {
-                user: 'aceaptitude79@gmail.com', // Your Gmail email address
-                pass: 'uitd ugst wyoo uozn' // Your Gmail password or app-specific password
+                user: 'aceaptitude79@gmail.com',
+                pass: 'rsom jbsf cnkk uufe'
+            },
+            tls: {
+                rejectUnauthorized: false
             }
         });
 
@@ -71,6 +74,7 @@ const sendVerificationEmail = async (name, email, otp, purpose) => {
 
 
         const info = await transporter.sendMail(mailOptions);
+        console.log(info.messageId);
         console.log('Email sent: ' + info.response);
     } catch (error) {
         console.log(error);
