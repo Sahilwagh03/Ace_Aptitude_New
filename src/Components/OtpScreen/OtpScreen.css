@@ -1,69 +1,120 @@
-   .custom-otp-container {
-    text-align: center;
-    margin: 5% auto 10%;
-    width: 90%;
-    max-width: 400px;
-    background-color: #ffffff;
-    border: 2px solid #e5e5e5;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-  }
+.custom-otp-container {
+  text-align: center;
+  margin: 5% auto 10%;
+  width: 90%;
+  max-width: 400px;
+  background-color: #ffffff;
+  border: 2px solid #e5e5e5;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+}
 
-  .custom-otp-container h2{
-    padding-bottom: 25px;
-  }
+.custom-otp-container h2{
+  padding-bottom: 25px;
+}
 
-  
-  .custom-otp-input-container {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-  
-  .custom-otp-input {
-    width: 60px;
-    height: 60px;
-    margin: 0 10px;
-    font-size: 24px;
-    text-align: center;
-    border: 2px solid #ced4da;
-    border-radius: 5px;
-  }
-  
-  .custom-verify-button {
-    padding: 15px 30px;
-    background-color: #6674cc;
-    color: #fff;
+.custom-otp-input-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.custom-otp-input {
+  width: 60px;
+  height: 60px;
+  margin: 0 10px;
+  font-size: 24px;
+  text-align: center;
+  border: 2px solid #ced4da;
+  border-radius: 5px;
+}
+
+.custom-verify-button, button[disabled] {
+  padding: 15px 30px;
+  background-color: #6674cc;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+}
+
+button[disabled] {
+  background-color: #ccc; /* Gray out the button when disabled */
+  cursor: not-allowed; /* Show cursor as not allowed when disabled */
+}
+
+custom-resend-button{
+  padding: 15px 30px;
+  background-color: #6674cc;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+  margin-left: 18px;
+}
+
+/* Responsive Styles */
+
+@media (max-width: 576px) {
+  .custom-otp-container {
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 18px;
-    transition: background-color 0.3s ease;
+    box-shadow: none;
   }
-  
-  /* .custom-verify-button:hover {
-    background-color: #0056b3;
-  } */
-  
-  /* Responsive Styles */
-  
-  @media (max-width: 576px) {
-    .custom-otp-container{
-      border: none;
-      box-shadow: none;
-    }
 
-    .custom-otp-input {
-      width: 50px;
-      height: 50px;
-      font-size: 20px;
-    }
-  
-    .custom-verify-button {
-      padding: 12px 24px;
-      font-size: 16px;
-    }
+  .custom-otp-input {
+    width: 50px;
+    height: 50px;
+    font-size: 20px;
   }
-  
-  
+
+  .custom-verify-button, button[disabled] {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+}
+
+
+.custom-resend-container {
+  margin-top: 20px; /* Add some space between verify and resend buttons */
+}
+
+.custom-resend-button {
+  padding: 15px 30px;
+  background-color: #6674cc;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: background-color 0.3s ease;
+  margin-top: 10px; /* Add margin at the top */
+}
+
+.custom-resend-timer {
+  font-size: 16px;
+  margin-top: 10px; /* Add margin at the top */
+}
+
+/* Responsive Styles */
+
+@media (max-width: 576px) {
+  .custom-resend-container {
+    text-align: center; /* Center the resend button */
+  }
+
+  .custom-resend-button {
+    padding: 12px 24px;
+    font-size: 16px;
+    margin-top: 15px; /* Increase margin for smaller screens */
+  }
+
+  .custom-resend-timer {
+    font-size: 14px;
+    margin-top: 5px; /* Increase margin for smaller screens */
+  }
+}
