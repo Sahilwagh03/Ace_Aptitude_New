@@ -14,6 +14,9 @@ import AboutUs from './Components/AboutUs/AboutUs'
 import ProfilePage from './Components/ProfilePage/ProfilePage'
 import { ProtectedComponent } from './Components/ProtectedComponent/ProtectedComponent'
 import Main_Test_Page from './Components/Main_Test_Page/Main_Test_Page'
+import GoogleAuthCallbackScreen from './Screens/GoogleAuthCallBackScreen/GoogleAuthCallbackScreen'
+import OtpScreen  from './Components/OtpScreen/OtpScreen'
+
 
 const App = () => {
 
@@ -45,7 +48,9 @@ const App = () => {
           <Route path='/score' element={<ScorePage />} />
           <Route path='/Login' element={<LoginPage />} />
           <Route path='/SignUp' element={<SignUp />} />
+          <Route path='/otp-verification/:email' element={<OtpScreen />} />
           <Route path='/Profile/:id' element={<ProfilePage />} />
+          <Route path='/googlecallback' element={<GoogleAuthCallbackScreen/>}/>
           <Route path='*' element={<h1>Not Found</h1>} />
         </Routes>
         <Footer />

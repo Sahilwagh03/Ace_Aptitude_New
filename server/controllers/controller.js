@@ -3,9 +3,10 @@ const Question = require("../models/questionSchema");
 const Category = require("../models/categorySchema")
 const Test = require("../models/testSchema")
 const User = require('../models/UserSchema')
+const Notifications = require('../models/notificationSchema')
 const bcrypt = require('bcrypt');
-const passport = require('passport');
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const { sendVerificationEmail } = require("../helpers/sendVerificationEmail");
+
 
 const getAllQuestions = async (req, res) => {
   try {
@@ -17,7 +18,7 @@ const getAllQuestions = async (req, res) => {
   }
 };
 
-const getFilteredQuestions = async (req, res) => {
+const getPracticeQuestions = async (req, res) => {
   try {
     const { category, level } = req.params;
 
@@ -113,7 +114,15 @@ const getSearchTopic = async (req, res) => {
 
 const postSignUp = async (req, res) => {
   try {
-    const { Name, email, password } = req.body;
+    const { Name, email, password, profileImage } = req.body;
+
+    // Function to generate a random 4-digit OTP
+    const generateOTP = () => {
+      return Math.floor(1000 + Math.random() * 9000).toString();
+    };
+
+    // Generate OTP
+    const otp = generateOTP();
 
     // Check if the email is already registered
     const existingUser = await User.findOne({ email });
@@ -126,17 +135,52 @@ const postSignUp = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // Create a new user document
-    const newUser = new User({ Name, email, password: hashedPassword });
+    const newUser = new User({
+      Name,
+      email,
+      password: hashedPassword,
+      profileImage: profileImage,
+      verificationOTP: otp,
+      otpExpiresAt: new Date(Date.now() + 600000),
+      isVerified: false
+    });
 
     // Save the user to the database
     await newUser.save();
 
-    res.status(201).json({ message: 'User registered successfully', success: true });
+    await sendVerificationEmail(newUser.Name, newUser.email, otp);
+    console.log(otp, newUser.email);
+
+    // Create a new test document associated with the user
+    const newTest = new Test({ userId: newUser._id });
+    await newTest.save();
+
+    // Update the user's 'tests' array with the reference to the new test
+    newUser.tests.push(newTest);
+    await newUser.save();
+
+
+    //Create a new notification object associated with the user
+    const newNotification = new Notifications({userId:newUser._id})
+    await newNotification.save()
+
+    newUser.notifications=newNotification._id
+    await newUser.save()
+
+    const userWithoutPassword = {
+      Name: newUser.Name,
+      _id: newUser._id,
+      email: newUser.email,
+      profileImage: newUser.profileImage
+    };
+
+    res.status(201).json({ message: 'User registered successfully', user: userWithoutPassword });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).json({ error: 'Internal server error' });
   }
-}
+};
+
 
 const postLogin = async (req, res) => {
   try {
@@ -161,6 +205,7 @@ const postLogin = async (req, res) => {
       Name: user.Name,
       _id: user._id,
       email: user.email,
+      profileImage: user.profileImage
       // Add any other user information fields you want to include
     };
 
@@ -189,13 +234,17 @@ const updateUserDetails = async (req, res) => {
       return res.status(400).json({ error: 'No fields to update' });
     }
 
-    const user = await User.findByIdAndUpdate(id, updateFields, { new: true });
+    const user = await User.findByIdAndUpdate(id, updateFields, { new: true, select: '-password' });
 
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
 
-    res.json(user); // Send the updated user details in the response
+    const userDetails = {
+      Name: user.Name,
+    }
+
+    res.json(userDetails); // Send the updated user details in the response
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'An error occurred while updating' });
@@ -241,7 +290,7 @@ const getRandomQuestions = async (req, res) => {
 const postTestData = async (req, res) => {
   try {
     const { userId, test } = req.body;
-    console.log(req.body.tests)
+
 
     // Find the user's tests by userId
     const existingUserTests = await Test.findOne({ userId });
@@ -331,58 +380,11 @@ const getUserCoins = async (req, res) => {
   }
 }
 
-passport.use(new GoogleStrategy({
-  clientID: '919740930128-phrohd0e30q770ueufj7nsg3hk3a1mff.apps.googleusercontent.com',
-  clientSecret: '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',
-  callbackURL: "https://ace-aptitude.onrender.com/api/auth/google/callback",
-  scope: ['profile', 'email']
-},
-  async function (accessToken, refreshToken, profile, done) {
-    // Register user here.
-    console.log(profile);
-    try {
-      // Check if the user exists in your database
-      const existingUser = await User.findOne({ googleId: profile.id });
-
-      if (existingUser) {
-        // User already exists, return the user
-        return done(null, profile);
-      }
-
-      // User doesn't exist, create a new one
-      const newUser = new User({
-        googleId: profile.id,
-        email: profile._json.email,
-      });
-
-      await newUser.save();
-      return done(null, profile);
-    } catch (err) {
-      return done(err);
-    }
-  }
-));
-
-passport.serializeUser((user, done) => {
-  // Serialize the user with only the desired fields
-  const serializedUser = {
-    googleId: user.id,
-    email: user._json.email,
-    picture: user._json.picture,
-    name: user._json.name,
-  };
-  done(null, serializedUser);
-});
-
-passport.deserializeUser((user, done) => {
-  done(null, user);
-})
-
 module.exports = {
   getAllusers,
   getAllQuestions,
   getAllCategories,
-  getFilteredQuestions,
+  getPracticeQuestions,
   filterQuestions,
   getFilteredData,
   getSearchTopic,

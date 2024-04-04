@@ -35,11 +35,22 @@ const SignUp = () => {
         body: JSON.stringify({Name , email, password }), // Send only email and password
       });
 
+
+      const data = await response.json();
       if (response.ok) {
+        const userInfo = {
+          email: data.user.email,
+          _id: data.user._id,
+          Name:data.user.Name,
+          ProfilePic:data.user.profileImage
+        };
+
+        // Store the user object as a JSON string in local storage
+        localStorage.setItem('user', JSON.stringify(userInfo));
         // Registration was successful, you can redirect or show a success message
         toast.success('Registration successful');
         setTimeout(() => {
-          navigate('/login');
+          navigate(`/otp-verification/${email}`);
         }, 500)
       } else {
         // Registration failed, handle the error
