@@ -1,83 +1,63 @@
 require('dotenv').config();
-const { OAuth2Client } = require('google-auth-library');
+const axios = require('axios');
 const User = require('../../models/UserSchema');
+
 const loginWithGoogle = async (req, res) => {
-    // Extract the token from the request header
-    const { code } = req.query;
-    console.log(code)
+    const code = req.body.code
     if (code) {
-        const googleClient = new OAuth2Client(
-            process.env.GOOGLE_CLIENT_ID,
-            process.env.GOOGLE_CLIENT_SECRET
-        )
-
         try {
+            // Exchange authorization code for tokens
+            const tokenResponse = await axios.post('https://oauth2.googleapis.com/token', {
+                code: code,
+                client_id: process.env.GOOGLE_CLIENT_ID,
+                client_secret: process.env.GOOGLE_CLIENT_SECRET,
+                redirect_uri: process.env.GOOGLE_REDIRECT_URI,
+                grant_type: 'authorization_code'
+            });
 
-            const ticket = new googleClient.verifyIdToken({
-                idToken: code,
-                audience: process.env.GOOGLE_CLIENT_ID
-            })
+            const accessToken = tokenResponse.data.access_token;
+            const idToken = tokenResponse.data.id_token;
 
-            const payload = ticket.getPayload();
+            // Verify ID token
+            const idTokenInfo = await axios.get(`https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=${idToken}`);
 
-            const {
-                sub: googleUserId,
-                email,
-                email_verified,
-                picture,
-                name,
-            } = payload
+            const payload = idTokenInfo.data;
+            const { sub: googleUserId, email, email_verified, picture, name } = payload;
 
             if (email_verified) {
                 try {
-
-                    const user = await User.find({ email })
+                    const user = await User.findOne({ email });
 
                     if (user) {
-                        return res.send({
-                            user,
-                        });
-                    }
-                    else {
-
+                        return res.send(user);
+                    } else {
                         const newUser = new User({
                             googleId: googleUserId,
                             email,
                             name: name,
                             profileImage: picture,
-                            isVerified: email_verified
+                            isVerified: email_verified,
                         });
 
-                        // Save the new user to the database
-                        const saveduser = await newUser.save();
-
-                        return res.send({
-                            user: saveduser,
-                        });
+                        const savedUser = await newUser.save();
+                        return res.send(savedUser);
                     }
+                } catch (error) {
+                    console.log(error);
+                    return res.status(500).send({ message: "Internal server error" });
                 }
-                catch (error) {
-                    console.log(error)
-                }
-            }
-            else {
-                // If the email is not verified, return an error message
-                return res.status(401).send({
-                    message: "Email not verified",
-                });
+            } else {
+                return res.status(401).send({ message: "Email not verified" });
             }
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            return res.status(400).send({ message: "Failed to exchange code for token" });
         }
+    } else {
+        return res.status(400).send({ message: "Invalid code" });
     }
-    else {
-        // If the token is invalid or missing, return an error message
-        return res.status(401).send({
-            message: "Invalid token",
-        });
-    }
-}
+};
 
 module.exports = {
     loginWithGoogle
-}
+};

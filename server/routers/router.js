@@ -39,7 +39,7 @@ router.get('/userDetails', getUserDetails)
 router.get('/Allusers', getAllusers)
 router.get('/Allcategory', getAllCategories)
 router.get("/Allquestions", getAllQuestions);
-router.get("/practiceQuetions/:category/:level", getPracticeQuestions);
+router.get("/practiceQuestions/:category/:level", getPracticeQuestions);
 router.get("/Filterquestions", filterQuestions); // Add this route for filtering
 router.get('/FilterData/:category?/:level?', getFilteredData);
 router.get('/filter',getFilter)
@@ -66,6 +66,6 @@ router.put('/reset-password', resetPassword);
 
 
 //Google Login Routes
-router.get('/googlecallback',loginWithGoogle)
+router.post('/googlecallback',loginWithGoogle)
 
 module.exports = router;

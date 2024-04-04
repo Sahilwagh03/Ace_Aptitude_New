@@ -149,6 +149,7 @@ const postSignUp = async (req, res) => {
     await newUser.save();
 
     await sendVerificationEmail(newUser.Name, newUser.email, otp);
+    console.log(otp, newUser.email);
 
     // Create a new test document associated with the user
     const newTest = new Test({ userId: newUser._id });
