@@ -28,7 +28,7 @@ const QuestionPage = () => {
 
                 let apiUrl = ''
                 if (category && level && (!numberOfQuestions && !time)) {
-                    apiUrl = `${process.env.REACT_APP_API_BASE_URL}/api/filterQuestions/${category}/${level}`
+                    apiUrl = `${process.env.REACT_APP_API_BASE_URL}/api/practiceQuestions/${category}/${level}`
                     setroute('/aptitude')
                 }
                 else if (numberOfQuestions && time && category && testName && !level) {
