@@ -181,7 +181,7 @@
   .nav_user_info_flex{
     display: flex;
     align-items: center;
-    gap: 70px;
+    gap: 40px;
   }
   
   .user_coin_count{
