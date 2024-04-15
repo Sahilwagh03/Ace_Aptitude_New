@@ -12,7 +12,38 @@
     z-index: 999;
 }
 
+.editIconContainer{
+    background-color: #6674cc;
+    padding: 4px;
+    border-radius: 100%;
+    position: absolute;
+    right: -5%;
+    bottom: 6%;
+    display: flex;
+    justify-content: center;
+    border: 0px;
+    cursor: pointer;
+}
 
+.editIcon{
+    color: white;
+}
+
+.Profile_Image_Container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.userProfile{
+    height: 100px;
+    width: 100px;
+    border-radius: 100%;
+    display: flex;
+    justify-self: center;
+    align-self:center;
+}
 .header_img_flex{
     display: flex;
     align-items: center;

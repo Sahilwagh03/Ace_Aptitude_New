@@ -39,7 +39,7 @@ const NavBar = () => {
             setIsLoggedIn(true)
             const userProfile = localStorage.getItem('user')
             const data = JSON.parse(userProfile)
-            setuserProfile(data.ProfilePic)
+            setuserProfile(data.profileImage)
         }
         else {
             setIsLoggedIn(false)
@@ -47,8 +47,8 @@ const NavBar = () => {
     }, [location])
 
     useEffect(()=>{
-        const userProfile = localStorage.getItem('user')
-        const data = JSON.parse(userProfile)
+        const userDetails = localStorage.getItem('user')
+        const data = JSON.parse(userDetails)
         const getuserCoin = async()=>{
             try {
                 const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/user/coins/${data._id}`);

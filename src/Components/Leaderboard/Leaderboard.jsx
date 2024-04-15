@@ -19,7 +19,7 @@ const Leaderboard = () => {
         const userProfile = localStorage.getItem('user')
         const userData = JSON.parse(userProfile)
         setuserId(userData._id)
-        setuserProfile(userData.ProfilePic)
+        setuserProfile(userData.profileImage)
 
         const handleLeaderboard = async () => {
             const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/Alltests`);

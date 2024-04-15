@@ -34,11 +34,6 @@ const LoginPage = () => {
         // Login was successful
         const data = await response.json();
 
-        const avatars = [Avatar_1, Avatar_2, Avatar_3, Avatar_4];
-
-        // Randomly select an avatar from the array.
-        const randomAvatar = avatars[Math.floor(Math.random() * avatars.length)];
-
 
         // Create a user object with email and _id
         const userInfo = {
@@ -46,7 +41,7 @@ const LoginPage = () => {
           _id: data.user._id,
           logined: true,
           Name: data.user.Name,
-          ProfilePic: randomAvatar
+          profileImage: data.user.profileImage
         };
 
         // Store the user object as a JSON string in local storage
@@ -56,7 +51,7 @@ const LoginPage = () => {
 
         setTimeout(() => {
           navigate('/')
-        }, 3200)
+        }, 1000)
 
         // You can now redirect the user to a protected route or perform other actions
       } else {

@@ -12,12 +12,12 @@ footer * {
 
 .row.primary {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 2fr;
+    grid-template-columns: 1fr 1fr;
     align-items: stretch;
-    padding-top: 3rem;
-    padding-bottom: 2rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
     font-size: 1rem;
     line-height: 1.5rem;
 }
@@ -27,7 +27,7 @@ footer * {
     display: flex;
     flex-direction: column;
     padding: 0 2em;
-    min-height: 12em;
+    min-height: 5em;
     justify-content: center;
 }
 
@@ -37,7 +37,7 @@ footer * {
 
 .Footer_title {
     width: 100%;
-    text-align: left;
+    text-align: right;
     color: white;
     font-size: 1.4em;
     margin-bottom: 10px;
@@ -79,8 +79,14 @@ div.social {
     color: #bac6d9;
 }
 
+.links{
+    align-items:flex-end
+}
+.footer_logo{
+    align-items: flex-start;
+}
 .copyright {
-    padding: 2rem 2rem;
+    padding: 1rem 1rem;
     background-color: rgb(102 116 204);
     border-top: 1px solid;
     font-size: 1rem;
