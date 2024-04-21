@@ -6,15 +6,13 @@ const getFilter = async (req, res) => {
     let filter = {};
 
     if (difficulty) {
-        filter['difficulty'] = { $regex: difficulty };
+        // Making difficulty case-insensitive
+        filter['difficulty'] = { $regex: difficulty, $options: 'i' };
     }
 
     if (subtopic) {
-        // Split the subtopic string into an array of subtopics
-        const subtopics = subtopic.split(',');
-
-        // Use $in operator to match documents where the subtopic field contains any of the specified values
-        filter['subtopic'] = { $in: subtopics };
+        // Convert to lowercase for consistent matching and apply case-insensitive regex
+        filter['subtopic'] = { $regex: subtopic.toLowerCase(), $options: 'i' };
     }
 
     try {
@@ -24,7 +22,7 @@ const getFilter = async (req, res) => {
             filteredData = filteredData.sort((a, b) => a.category.localeCompare(b.category));
         }
 
-        res.send({ message: 'Filter complete', data:filteredData });
+        res.send({ message: 'Filter complete', data: filteredData });
     } catch (error) {
         console.error("Error filtering data:", error);
         res.status(500).json({ error: "Internal Server Error" });
