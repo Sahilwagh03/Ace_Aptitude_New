@@ -29,6 +29,8 @@ const { getNotification, postNotification } = require("../controllers/notificati
 const { getFilter } = require("../controllers/filtercontroller/filter");
 const { forgetPassword, resetPassword } = require("../controllers/userController/forgetPassword");
 const { loginWithGoogle } = require("../controllers/userController/loginWithGoogle");
+const { getUserDashboardDetails } = require("../controllers/userController/userDashboardDetails");
+const { reportProblem } = require("../controllers/reportproblemcontroller/reportProblem");
 // var uploader = multer({
 //   storage: multer.diskStorage({}),
 //   limits: { fileSize: 500000 }
@@ -60,6 +62,7 @@ router.post('/resend-otp', resendOTP);
 router.get('/notifications/:userId',getNotification)
 router.post('/notifications/:userId',postNotification)
 router.post('/forgetpassword',forgetPassword)
+router.get('/dashboard',getUserDashboardDetails)
 
 // Route for resetting the password
 router.put('/reset-password', resetPassword);
@@ -67,5 +70,8 @@ router.put('/reset-password', resetPassword);
 
 //Google Login Routes
 router.post('/googlecallback',loginWithGoogle)
+
+//Report Problem
+router.post('/report-problem',reportProblem)
 
 module.exports = router;
